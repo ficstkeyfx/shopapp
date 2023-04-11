@@ -21,7 +21,7 @@
         android:id="@+id/nav_category"
         android:name="com.example.shoppingapp.ui.category.CategoryFragment"
         android:label="@string/category"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_category" />
     <fragment
         android:id="@+id/nav_offers"
         android:name="com.example.shoppingapp.OffersFragment"

@@ -7,6 +7,9 @@
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable-v24/ic_baseline_local_offer_24.xml" value="0.137" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable-v24/ic_baseline_search_24.xml" value="0.249" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable-v24/ic_baseline_shopping_cart_24.xml" value="0.137" />
+        <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable-v24/ic_null_new_product.xml" value="0.1375" />
+        <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable-v24/ic_null_order.xml" value="0.1375" />
+        <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable-v24/ic_rating.xml" value="0.1375" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable-v24/search_gb.xml" value="0.249" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/account.xml" value="0.2485" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/add_circle.xml" value="0.1375" />
@@ -25,8 +28,10 @@
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/activity_registration.xml" value="0.2" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/activity_thong_tin_bo_sung.xml" value="0.1265625" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/activity_thong_tin_dinh_danh.xml" value="0.1265625" />
+        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/activity_view_all.xml" value="0.12708333333333333" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/app_bar_home.xml" value="0.264" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/app_bar_main2.xml" value="0.15579710144927536" />
+        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/category_nav_item.xml" value="0.27447916666666666" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/content_home.xml" value="0.15579710144927536" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/content_main2.xml" value="0.15579710144927536" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/fragment_home.xml" value="0.2" />
@@ -37,6 +42,7 @@
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/fragment_profile.xml" value="0.27447916666666666" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/fragment_slideshow.xml" value="0.15579710144927536" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/home_cat_items.xml" value="0.4" />
+        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/item_view_all.xml" value="0.4" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/nav_header_main2.xml" value="0.15579710144927536" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/popular_item.xml" value="0.264" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/recommend_item.xml" value="0.27447916666666666" />
