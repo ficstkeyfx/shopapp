@@ -9,10 +9,15 @@
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable-v24/ic_baseline_shopping_cart_24.xml" value="0.137" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable-v24/search_gb.xml" value="0.249" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/account.xml" value="0.2485" />
+        <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/add_circle.xml" value="0.1375" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/editext_background.xml" value="0.2485" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/ic_baseline_category_24.xml" value="0.137" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.2485" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/menu_person.xml" value="0.137" />
+        <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/remove_circle.xml" value="0.1375" />
+        <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/side_nav_bar.xml" value="0.1375" />
+        <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/text_triker.xml" value="0.1375" />
+        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/activity_detailed.xml" value="0.27447916666666666" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/activity_home.xml" value="0.15579710144927536" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/activity_main.xml" value="0.1265625" />
@@ -35,6 +40,7 @@
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/nav_header_main2.xml" value="0.15579710144927536" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/popular_item.xml" value="0.264" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/recommend_item.xml" value="0.27447916666666666" />
+        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/view_all_item.xml" value="0.27447916666666666" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/menu/activity_main2_drawer.xml" value="0.264" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/menu/activity_main_drawer.xml" value="0.264" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/menu/home.xml" value="0.1265625" />

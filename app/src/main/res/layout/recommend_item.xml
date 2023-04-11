@@ -42,7 +42,8 @@
                 android:layout_marginLeft="-5dp"
                 android:layout_width="70dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ratingbar"/>
+                android:src="@drawable/ratingbar"
+                app:tint="@color/purple_700"/>
             <TextView
                 android:id="@+id/rec_rating"
                 android:layout_width="wrap_content"

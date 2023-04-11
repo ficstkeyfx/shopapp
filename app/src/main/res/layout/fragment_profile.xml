@@ -19,26 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <LinearLayout
-                android:id="@+id/linearLayout1"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="#2761C8"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/in4"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="Thông tin tài khoản"
-                    android:textColor="@color/white"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/linearLayout2"
