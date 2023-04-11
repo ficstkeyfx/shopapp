@@ -10,7 +10,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.shoppingapp.R;
 
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment
+{
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,

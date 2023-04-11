@@ -20,8 +20,10 @@ import com.example.shoppingapp.R;
 import com.example.shoppingapp.adapters.CategoryAdapters;
 import com.example.shoppingapp.adapters.PopularAdapters;
 
+import com.example.shoppingapp.adapters.RecommendAdapters;
 import com.example.shoppingapp.models.HomeCategoryModel;
 import com.example.shoppingapp.models.PopularModel;
+import com.example.shoppingapp.models.RecommendModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -33,7 +35,7 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    RecyclerView popularRec,homeCatRec;
+    RecyclerView popularRec,homeCatRec,recRec;
     // popular items
     List<PopularModel> popularModelList;
     PopularAdapters popularAdapters;
@@ -41,6 +43,11 @@ public class HomeFragment extends Fragment {
     // category
     List<HomeCategoryModel> homeCategoryModelList;
     CategoryAdapters categoryAdapters;
+
+    // recommend
+    List<RecommendModel> recommendModelList;
+    RecommendAdapters recommendAdapters;
+
     FirebaseFirestore db;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -52,6 +59,7 @@ public class HomeFragment extends Fragment {
 
         popularRec = root.findViewById(R.id.pop_rec);
         homeCatRec = root.findViewById(R.id.cat_rec);
+        recRec = root.findViewById(R.id.recommend_rec);
 
         // popular
         popularRec.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
@@ -59,6 +67,19 @@ public class HomeFragment extends Fragment {
         popularAdapters = new PopularAdapters(getActivity(),popularModelList);
         popularRec.setAdapter(popularAdapters);
 
+        // category
+        homeCatRec.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
+        homeCategoryModelList = new ArrayList<>();
+        categoryAdapters = new CategoryAdapters(getActivity(),homeCategoryModelList);
+        homeCatRec.setAdapter(categoryAdapters);
+
+        // recommend
+        recRec.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
+        recommendModelList = new ArrayList<>();
+        recommendAdapters = new RecommendAdapters(getActivity(),recommendModelList);
+        recRec.setAdapter(recommendAdapters);
+
+        // popular
 //         Cloud Firestore
         db.collection("PopularProducts")
                 .get()
@@ -77,12 +98,8 @@ public class HomeFragment extends Fragment {
                     }
                 });
 
-        // category
-        homeCatRec.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
-        homeCategoryModelList = new ArrayList<>();
-        categoryAdapters = new CategoryAdapters(getActivity(),homeCategoryModelList);
-        homeCatRec.setAdapter(categoryAdapters);
 
+        //category
 //         Cloud Firestore
         db.collection("HomeCategory")
                 .get()
@@ -94,6 +111,24 @@ public class HomeFragment extends Fragment {
                                 HomeCategoryModel homeCategoryModel = document.toObject(HomeCategoryModel.class);
                                 homeCategoryModelList.add(homeCategoryModel);
                                 categoryAdapters.notifyDataSetChanged();
+                            }
+                        }else {
+                            Toast.makeText(getActivity(), "Error: " + task.getException(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+        // recommend
+        db.collection("HomeRecommend")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            for(QueryDocumentSnapshot document: task.getResult()){
+                                RecommendModel recommendModel = document.toObject(RecommendModel.class);
+                                recommendModelList.add(recommendModel);
+                                recommendAdapters.notifyDataSetChanged();
                             }
                         }else {
                             Toast.makeText(getActivity(), "Error: " + task.getException(), Toast.LENGTH_SHORT).show();
