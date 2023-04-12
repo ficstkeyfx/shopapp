@@ -1,11 +1,10 @@
-package com.example.shoppingapp;
+package com.example.shoppingapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.shoppingapp.activities.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
@@ -17,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         if(auth.getCurrentUser() != null){
 //            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-            startActivity(new Intent(MainActivity.this,HomeActivity.class));
+            startActivity(new Intent(MainActivity.this, HomeActivity.class));
         }else startActivity(new Intent(MainActivity.this, LoginActivity.class));
 
     }
