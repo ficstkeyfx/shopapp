@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class RegistrationActivity extends AppCompatActivity {
@@ -86,10 +87,10 @@ public class RegistrationActivity extends AppCompatActivity {
             Toast.makeText(this, "Mật khẩu ít hơn 6 ký tự", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(!rePassword.equals(userPassword)){
-            Toast.makeText(this,"Xác nhận mật khẩu không giống nhau",Toast.LENGTH_SHORT).show();
-            return;
-        }
+//        if(rePassword!=userPassword){
+//            Toast.makeText(this,"Xác nhận mật khẩu không giống nhau",Toast.LENGTH_SHORT).show();
+//            return;
+//        }
         auth.createUserWithEmailAndPassword(userEmail,userPassword).
                 addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -99,7 +100,18 @@ public class RegistrationActivity extends AppCompatActivity {
                             UserModel userModel = new UserModel(userName,userEmail,userPassword);
                             String id = task.getResult().getUser().getUid();
                             database.getReference().child("Users").child(id).setValue(userModel);
-
+                            database.getReference().child("Users").child(id).child("gender").setValue(userModel.getGender());
+                            database.getReference().child("Users").child(id).child("phone").setValue(userModel.getPhone());
+                            database.getReference().child("Users").child(id).child("birth").setValue(userModel.getBirth());
+                            database.getReference().child("Users").child(id).child("cccd").setValue(userModel.getCCCD());
+                            database.getReference().child("Users").child(id).child("ngayCap").setValue(userModel.getNgayCap());
+                            database.getReference().child("Users").child(id).child("noiCap").setValue(userModel.getNoiCap());
+                            database.getReference().child("Users").child(id).child("ngayHetHan").setValue(userModel.getNgayHetHan());
+                            database.getReference().child("Users").child(id).child("address").setValue(userModel.getAddress());
+                            database.getReference().child("Users").child(id).child("job").setValue(userModel.getJob());
+                            database.getReference().child("Users").child(id).child("position").setValue(userModel.getPosition());
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            user.sendEmailVerification();
                             progressBar.setVisibility(View.GONE);
                             Toast.makeText(RegistrationActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                         }else {

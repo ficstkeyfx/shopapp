@@ -1,62 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DesignSurface">
-    <option name="filePathToZoomLevelMap">
-      <map>
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable-v24/autorenew.xml" value="0.137" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable-v24/ic_baseline_local_offer_24.xml" value="0.137" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable-v24/ic_baseline_search_24.xml" value="0.249" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable-v24/ic_baseline_shopping_cart_24.xml" value="0.137" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable-v24/ic_null_new_product.xml" value="0.1375" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable-v24/ic_null_order.xml" value="0.1375" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable-v24/ic_rating.xml" value="0.1375" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable-v24/search_gb.xml" value="0.249" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/account.xml" value="0.2485" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/add_circle.xml" value="0.1375" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/editext_background.xml" value="0.2485" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/ic_baseline_category_24.xml" value="0.137" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.2485" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/menu_person.xml" value="0.137" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/remove_circle.xml" value="0.1375" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/side_nav_bar.xml" value="0.1375" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/text_triker.xml" value="0.1375" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/activity_detail.xml" value="0.1265625" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/activity_detailed.xml" value="0.27447916666666666" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/activity_home.xml" value="0.15579710144927536" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/activity_login.xml" value="0.264" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/activity_main.xml" value="0.1265625" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/activity_main2.xml" value="0.15579710144927536" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/activity_registration.xml" value="0.2" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/activity_thong_tin_bo_sung.xml" value="0.1265625" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/activity_thong_tin_dinh_danh.xml" value="0.1265625" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/activity_view_all.xml" value="0.12708333333333333" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/app_bar_home.xml" value="0.264" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/app_bar_main2.xml" value="0.15579710144927536" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/category_nav_item.xml" value="0.27447916666666666" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/content_home.xml" value="0.15579710144927536" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/content_main2.xml" value="0.15579710144927536" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/fragment_category.xml" value="0.20471014492753623" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/fragment_home.xml" value="0.2" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/fragment_my_carts.xml" value="0.1" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/fragment_my_orders.xml" value="0.1265625" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/fragment_new_products.xml" value="0.1265625" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/fragment_offers.xml" value="0.23615160349854228" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/fragment_profile.xml" value="0.27447916666666666" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/fragment_slideshow.xml" value="0.15579710144927536" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/home_cat_items.xml" value="0.4" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/item_view_all.xml" value="0.4" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/nav_header_home.xml" value="0.27447916666666666" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/nav_header_main2.xml" value="0.15579710144927536" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/popular_item.xml" value="0.264" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/recommend_item.xml" value="0.27447916666666666" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/view_all_item.xml" value="0.27447916666666666" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/menu/activity_main2_drawer.xml" value="0.264" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/menu/activity_main_drawer.xml" value="0.264" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/menu/home.xml" value="0.1265625" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/menu/main_activity2.xml" value="0.1265625" />
-      </map>
-    </option>
-  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

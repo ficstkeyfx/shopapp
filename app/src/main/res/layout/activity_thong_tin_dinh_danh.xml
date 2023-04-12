@@ -6,161 +6,196 @@
     android:layout_height="match_parent"
     tools:context=".ui.profile.ThongTinDinhDanh"
     tools:ignore="ExtraText">
-
-    <LinearLayout
-        android:id="@+id/l1"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="@color/black"
-        android:orientation="horizontal"
-        tools:ignore="MissingConstraints">
-
-        <ImageView
-            android:background="#616EB1"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/muiten"/>
-        <TextView
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Thông tin cá nhân"
-            android:textColor="@color/white"
-            android:textSize="18dp"
-            android:gravity="center_vertical"
-            android:layout_marginStart="100dp"/>
-    </LinearLayout>
+            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/l1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/black"
+                android:orientation="horizontal"
+                tools:ignore="MissingConstraints">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/l1"
-        android:layout_marginTop="50dp">
+                <ImageView
+                    android:id="@+id/back"
+                    android:background="#616EB1"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/muiten"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Thông tin cá nhân"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="80dp"/>
+            </LinearLayout>
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
-            android:background="@drawable/editext_background"
-            android:elevation="3dp"
-            android:hint="Tên"
-            android:minHeight="48dp"
-            android:padding="13dp"
-            android:textColor="#888887"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintWidth_percent=".8" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/l1">
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
-            android:background="@drawable/editext_background"
-            android:elevation="3dp"
-            android:hint="Giới tính"
-            android:minHeight="48dp"
-            android:padding="13dp"
-            android:textColor="#888887"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintWidth_percent=".8" />
+                <EditText
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="50dp"
+                    android:background="@drawable/editext_background"
+                    android:elevation="3dp"
+                    android:hint="Tên"
+                    android:minHeight="48dp"
+                    android:padding="13dp"
+                    android:textColor="#888887"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintWidth_percent=".8" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
-            android:background="@drawable/editext_background"
-            android:elevation="3dp"
-            android:hint="Ngày sinh"
-            android:minHeight="48dp"
-            android:padding="13dp"
-            android:textColor="#888887"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintWidth_percent=".8" />
+                <EditText
+                    android:id="@+id/phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="50dp"
+                    android:background="@drawable/editext_background"
+                    android:elevation="3dp"
+                    android:hint="Số điện thoại"
+                    android:minHeight="48dp"
+                    android:padding="13dp"
+                    android:textColor="#888887"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintWidth_percent=".8" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
-            android:background="@drawable/editext_background"
-            android:elevation="3dp"
-            android:hint="CMND/CCCD/Hộ chiếu"
-            android:minHeight="48dp"
-            android:padding="13dp"
-            android:textColor="#888887"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintWidth_percent=".8" />
+                <EditText
+                    android:id="@+id/gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="50dp"
+                    android:background="@drawable/editext_background"
+                    android:elevation="3dp"
+                    android:hint="Giới tính"
+                    android:minHeight="48dp"
+                    android:padding="13dp"
+                    android:textColor="#888887"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintWidth_percent=".8" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
-            android:background="@drawable/editext_background"
-            android:elevation="3dp"
-            android:hint="Ngày cấp giấy tờ"
-            android:minHeight="48dp"
-            android:padding="13dp"
-            android:textColor="#888887"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintWidth_percent=".8" />
+                <EditText
+                    android:id="@+id/birth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="50dp"
+                    android:background="@drawable/editext_background"
+                    android:elevation="3dp"
+                    android:hint="Ngày sinh"
+                    android:minHeight="48dp"
+                    android:padding="13dp"
+                    android:textColor="#888887"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintWidth_percent=".8" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
-            android:background="@drawable/editext_background"
-            android:elevation="3dp"
-            android:hint="Nơi cấp giấy tờ"
-            android:minHeight="48dp"
-            android:padding="13dp"
-            android:textColor="#888887"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintWidth_percent=".8" />
+                <EditText
+                    android:id="@+id/CCCD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="50dp"
+                    android:background="@drawable/editext_background"
+                    android:elevation="3dp"
+                    android:hint="CMND/CCCD/Hộ chiếu"
+                    android:minHeight="48dp"
+                    android:padding="13dp"
+                    android:textColor="#888887"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintWidth_percent=".8" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
-            android:background="@drawable/editext_background"
-            android:elevation="3dp"
-            android:hint="Ngày hết hạn giấy tờ"
-            android:minHeight="48dp"
-            android:padding="13dp"
-            android:textColor="#888887"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintWidth_percent=".8" />
+                <EditText
+                    android:id="@+id/ngayCap"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="50dp"
+                    android:background="@drawable/editext_background"
+                    android:elevation="3dp"
+                    android:hint="Ngày cấp giấy tờ"
+                    android:minHeight="48dp"
+                    android:padding="13dp"
+                    android:textColor="#888887"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintWidth_percent=".8" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp"
-            android:text="Lưu"
-            android:textStyle="bold"
-            android:background="#1D3098"/>
+                <EditText
+                    android:id="@+id/noiCap"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="50dp"
+                    android:background="@drawable/editext_background"
+                    android:elevation="3dp"
+                    android:hint="Nơi cấp giấy tờ"
+                    android:minHeight="48dp"
+                    android:padding="13dp"
+                    android:textColor="#888887"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintWidth_percent=".8" />
 
-    </LinearLayout>
+                <EditText
+                    android:id="@+id/ngayHetHan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="50dp"
+                    android:background="@drawable/editext_background"
+                    android:elevation="3dp"
+                    android:hint="Ngày hết hạn giấy tờ"
+                    android:minHeight="48dp"
+                    android:padding="13dp"
+                    android:textColor="#888887"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintWidth_percent=".8" />
+
+                <Button
+                    android:id="@+id/save_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="50dp"
+                    android:text="Lưu"
+                    android:textStyle="bold"
+                    android:background="#1D3098"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
 
 
 

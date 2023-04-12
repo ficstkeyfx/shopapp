@@ -9,14 +9,15 @@
     <LinearLayout
         android:id="@+id/l3"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="50dp"
         android:background="@color/black"
         android:orientation="horizontal"
         tools:ignore="MissingConstraints">
 
         <ImageView
+            android:id="@+id/back"
             android:background="#616EB1"
-            android:layout_width="30dp"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
             android:src="@drawable/muiten"/>
         <TextView
@@ -24,9 +25,9 @@
             android:layout_height="match_parent"
             android:text="Thông tin bổ sung"
             android:textColor="@color/white"
-            android:textSize="18dp"
+            android:textSize="20dp"
             android:gravity="center_vertical"
-            android:layout_marginStart="100dp"/>
+            android:layout_marginStart="80dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -37,6 +38,7 @@
         android:layout_marginTop="50dp">
 
     <EditText
+        android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -53,6 +55,7 @@
         app:layout_constraintWidth_percent=".8" />
 
     <EditText
+        android:id="@+id/address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -69,6 +72,7 @@
         app:layout_constraintWidth_percent=".8" />
 
     <EditText
+        android:id="@+id/job"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -85,6 +89,7 @@
         app:layout_constraintWidth_percent=".8" />
 
     <EditText
+        android:id="@+id/position"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -102,6 +107,7 @@
 
 
     <Button
+        android:id="@+id/save_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
