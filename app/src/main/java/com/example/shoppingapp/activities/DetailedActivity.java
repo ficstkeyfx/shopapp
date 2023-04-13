@@ -100,10 +100,10 @@ public class DetailedActivity extends AppCompatActivity {
     private void addedToCart() {
         String saveCurrentDate, saveCurrentTime;
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yy");
         saveCurrentDate = currentDate.format(calendar.getTime());
 
-        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm a");
         saveCurrentTime = currentTime.format(calendar.getTime());
 
         final HashMap<String,Object> cartMap = new HashMap<>();
@@ -114,7 +114,7 @@ public class DetailedActivity extends AppCompatActivity {
         cartMap.put("productDate",saveCurrentDate);
         cartMap.put("productTime",saveCurrentTime);
         cartMap.put("totalPrice",totalPrice);
-
+        cartMap.put("img_url",viewAllModel.getImg_url());
         firestore.collection("Cart").document(auth.getCurrentUser().getUid())
                 .collection("CurrentUser").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override

@@ -7,15 +7,19 @@
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable-v24/ic_baseline_local_offer_24.xml" value="0.137" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable-v24/ic_baseline_search_24.xml" value="0.249" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable-v24/ic_baseline_shopping_cart_24.xml" value="0.137" />
+        <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable-v24/ic_cancel.xml" value="0.245" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable-v24/ic_null_new_product.xml" value="0.1375" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable-v24/ic_null_order.xml" value="0.1375" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable-v24/ic_rating.xml" value="0.1375" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable-v24/search_gb.xml" value="0.249" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/account.xml" value="0.2485" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/add_circle.xml" value="0.1375" />
+        <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/bg_button_border_red.xml" value="0.1355" />
+        <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/bg_button_red.xml" value="0.1355" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/editext_background.xml" value="0.2485" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/ic_baseline_category_24.xml" value="0.137" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.2485" />
+        <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/ic_null_cart_llustration.xml" value="0.1355" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/menu_person.xml" value="0.137" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/remove_circle.xml" value="0.1375" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/drawable/side_nav_bar.xml" value="0.1375" />
@@ -37,14 +41,16 @@
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/content_main2.xml" value="0.15579710144927536" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/fragment_category.xml" value="0.20471014492753623" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/fragment_home.xml" value="0.2" />
-        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/fragment_my_carts.xml" value="0.1" />
+        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/fragment_my_carts.xml" value="0.2" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/fragment_my_orders.xml" value="0.1265625" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/fragment_new_products.xml" value="0.1265625" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/fragment_offers.xml" value="0.23615160349854228" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/fragment_profile.xml" value="0.27447916666666666" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/fragment_slideshow.xml" value="0.15579710144927536" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/home_cat_items.xml" value="0.4" />
+        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/item_my_cart.xml" value="0.2713541666666667" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/item_view_all.xml" value="0.4" />
+        <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/my_cart_item.xml" value="0.202734375" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/nav_header_home.xml" value="0.27447916666666666" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/nav_header_main2.xml" value="0.15579710144927536" />
         <entry key="..\:/Android/ShoppingApp/app/src/main/res/layout/popular_item.xml" value="0.264" />

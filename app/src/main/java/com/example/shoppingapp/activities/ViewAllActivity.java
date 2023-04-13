@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toolbar;
 
 import com.example.shoppingapp.R;
@@ -27,14 +29,19 @@ public class ViewAllActivity extends AppCompatActivity {
     ViewAllAdapters viewAllAdapters;
     List<ViewAllModel> viewAllModelList;
     Toolbar toolbar;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_all);
 
+        progressBar = findViewById(R.id.progressbar);
+        progressBar.setVisibility(View.VISIBLE);
+
         String type = getIntent().getStringExtra("type");
         recyclerView = findViewById(R.id.view_all_rec);
+        recyclerView.setVisibility(View.GONE);
 //        toolbar = findViewById(R.id.toolbar);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -55,7 +62,10 @@ public class ViewAllActivity extends AppCompatActivity {
                         viewAllModelList.add(viewAllModel);
                         viewAllAdapters.notifyDataSetChanged();
                     }
+                    progressBar.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
                 }
+
             });
         }
         // Getting vegetable
@@ -68,6 +78,8 @@ public class ViewAllActivity extends AppCompatActivity {
                         viewAllModelList.add(viewAllModel);
                         viewAllAdapters.notifyDataSetChanged();
                     }
+                    progressBar.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
                 }
             });
         }
@@ -81,6 +93,8 @@ public class ViewAllActivity extends AppCompatActivity {
                         viewAllModelList.add(viewAllModel);
                         viewAllAdapters.notifyDataSetChanged();
                     }
+                    progressBar.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
                 }
             });
         }
@@ -94,7 +108,10 @@ public class ViewAllActivity extends AppCompatActivity {
                         viewAllModelList.add(viewAllModel);
                         viewAllAdapters.notifyDataSetChanged();
                     }
+                    progressBar.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
                 }
+
             });
         }
         // Getting fish
@@ -107,8 +124,12 @@ public class ViewAllActivity extends AppCompatActivity {
                         viewAllModelList.add(viewAllModel);
                         viewAllAdapters.notifyDataSetChanged();
                     }
+                    progressBar.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
                 }
             });
         }
+
+
     }
 }

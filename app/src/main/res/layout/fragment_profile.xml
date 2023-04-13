@@ -47,41 +47,34 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/name"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/ten"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:minWidth="48dp"
+                        android:textStyle="bold"
                         android:minHeight="48dp"
+                        android:layout_marginStart="20dp"
                         android:gravity="center_vertical"
-                        android:text="Ten"
-                        android:textSize="13dp"
+                        android:textSize="20dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/avatar"
                         tools:ignore="TextSizeCheck" />
                     <LinearLayout
-                        android:id="@+id/linearLayout4"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/phone"
-                            android:layout_width="150dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            android:text="So dien thoai"
-                            android:textSize="13dp"
-                            tools:ignore="TextSizeCheck" />
-
-                        <TextView
-                            android:id="@+id/changePhone"
+                            android:id="@+id/sdt"
+                            android:textStyle="bold"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="Thay đổi số điện thoại"
-                            android:textColor="#246EA8"
-                            android:textSize="13dp"
+                            android:gravity="center_vertical"
+                            android:layout_marginStart="20dp"
+                            android:textSize="20dp"
                             tools:ignore="TextSizeCheck" />
+
+
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -132,11 +125,34 @@
                         android:textSize="18dp" />
 
                     <TextView
+                        android:id="@+id/name"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:minHeight="48dp"
-                        android:text="Chưa cập nhật"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="200dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:minHeight="48dp"
+                        android:text="Số điện thoại"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:id="@+id/phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:minHeight="48dp"
                         android:textSize="18dp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -155,11 +171,11 @@
                         android:textSize="18dp" />
 
                     <TextView
+                        android:id="@+id/gender"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:minHeight="48dp"
-                        android:text="Chưa cập nhật"
                         android:textSize="18dp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -178,11 +194,11 @@
                         android:textSize="18dp" />
 
                     <TextView
+                        android:id="@+id/birth"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:minHeight="48dp"
-                        android:text="Chưa cập nhật"
                         android:textSize="18dp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -201,11 +217,11 @@
                         android:textSize="18dp" />
 
                     <TextView
+                        android:id="@+id/cmnd"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:minHeight="48dp"
-                        android:text="Chưa cập nhật"
                         android:textSize="18dp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -224,11 +240,11 @@
                         android:textSize="18dp" />
 
                     <TextView
+                        android:id="@+id/ngayCap"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:minHeight="48dp"
-                        android:text="Chưa cập nhật"
                         android:textSize="18dp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -247,11 +263,11 @@
                         android:textSize="18dp" />
 
                     <TextView
+                        android:id="@+id/noiCap"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:minHeight="48dp"
-                        android:text="Chưa cập nhật"
                         android:textSize="18dp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -270,11 +286,11 @@
                         android:textSize="18dp" />
 
                     <TextView
+                        android:id="@+id/ngayHetHan"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:minHeight="48dp"
-                        android:text="Chưa cập nhật"
                         android:textSize="18dp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -317,7 +333,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="200dp"
+                        android:layout_width="100dp"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:layout_marginStart="10dp"
@@ -326,11 +342,12 @@
                         android:textSize="18dp" />
 
                     <TextView
+                        android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
+                        android:gravity="center_vertical|right
+"
                         android:minHeight="48dp"
-                        android:text="Chưa cập nhật"
                         android:textSize="18dp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -349,11 +366,11 @@
                         android:textSize="18dp" />
 
                     <TextView
+                        android:id="@+id/address"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:minHeight="48dp"
-                        android:text="Chưa cập nhật"
                         android:textSize="18dp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -372,11 +389,11 @@
                         android:textSize="18dp" />
 
                     <TextView
+                        android:id="@+id/job"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:minHeight="48dp"
-                        android:text="Chưa cập nhật"
                         android:textSize="18dp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -395,11 +412,11 @@
                         android:textSize="18dp" />
 
                     <TextView
+                        android:id="@+id/position"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:minHeight="48dp"
-                        android:text="Chưa cập nhật"
                         android:textSize="18dp"
                         android:textStyle="bold" />
                 </LinearLayout>

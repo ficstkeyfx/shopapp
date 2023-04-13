@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="5dp"
+    android:layout_margin="3dp"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/img_cart"
+            android:src="@drawable/ic_null_new_product"
+            android:scaleType="centerCrop"
+            android:layout_width="70dp"
+            android:layout_height="70dp"/>
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/ProductName_cart"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:textSize="17dp"
+                    android:text="Thịt ba rọi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <ImageButton
+                    android:id="@+id/imgbtn_delete"
+                    android:elevation="4dp"
+                    android:layout_marginRight="7dp"
+                    android:background="@null"
+                    android:src="@drawable/ic_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="Số lượng: 2"
+                    android:textSize="14dp"
+                    android:id="@+id/tvTotalQuantity_Cart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:text="30.000đ"
+                    android:textSize="14dp"
+                    android:id="@+id/tvPrice_cart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <LinearLayout
+                    android:paddingBottom="3dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="Ngày: 20/5/22 "
+                        android:id="@+id/tvDate"
+                        android:textSize="13dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text="10:01:00"
+                        android:id="@+id/tvTime"
+                        android:textSize="13dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:gravity="center"
+                        android:layout_marginRight="15dp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:id="@+id/tvtotalPrice_cart"
+                        android:text="64.000đ"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>
