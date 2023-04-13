@@ -63,6 +63,7 @@ public class ThongTinDinhDanh extends AppCompatActivity {
             {
                 finish();
                 //startActivity(new Intent(ThongTinDinhDanh.this, HomeActivity.class));
+                startActivity(new Intent(ThongTinDinhDanh.this, HomeActivity.class));
             }
         });
     }

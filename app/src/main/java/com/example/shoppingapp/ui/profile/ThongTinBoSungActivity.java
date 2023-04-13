@@ -51,6 +51,7 @@ public class ThongTinBoSungActivity extends AppCompatActivity
             {
                 finish();
                 //startActivity(new Intent(ThongTinBoSungActivity.this, HomeActivity.class));
+                startActivity(new Intent(ThongTinBoSungActivity.this, HomeActivity.class));
             }
         });
     }
