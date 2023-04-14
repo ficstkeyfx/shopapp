@@ -10,22 +10,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/purple_700"
+        android:background="@color/white"
         android:gravity="center_horizontal">
         <ImageView
             android:id="@+id/home_cat_img"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/mycart"
-            app:tint="@color/white" />
+            android:src="@drawable/mycart" />
         <TextView
             android:id="@+id/home_cat_name"
             android:layout_width="65dp"
             android:layout_height="60dp"
             android:text="Category Name"
             android:textStyle="bold"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textAlignment="center"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

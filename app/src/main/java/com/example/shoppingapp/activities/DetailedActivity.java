@@ -26,13 +26,15 @@ import java.util.HashMap;
 
 public class DetailedActivity extends AppCompatActivity {
 
-    TextView quantity;
+    TextView quantity, name;
     int totalQuantity = 1;
     int totalPrice = 0;
     ImageView detailImg,addItem,removeItem;
     TextView salePrice,originPrice,rating, description;
     Button addToCart;
     ViewAllModel viewAllModel = null;
+
+    ImageView back;
 
     FirebaseFirestore firestore;
     FirebaseAuth auth;
@@ -59,14 +61,16 @@ public class DetailedActivity extends AppCompatActivity {
         description = findViewById(R.id.detailed_description);
         addToCart = findViewById(R.id.add_to_cart);
         quantity = findViewById(R.id.quantity);
+        name = findViewById(R.id.productTitle);
+        back = findViewById(R.id.goBack);
 
         if(viewAllModel!=null){
             Glide.with(getApplicationContext()).load(viewAllModel.getImg_url()).into(detailImg);
             rating.setText(viewAllModel.getRating());
             description.setText(viewAllModel.getDescription());
-            salePrice.setText(viewAllModel.getPrice()+"");
-            originPrice.setText((viewAllModel.getPrice()+10)+"");
-
+            salePrice.setText(viewAllModel.getPrice()+"000đ");
+            originPrice.setText((viewAllModel.getPrice()+100)+"000đ");
+            name.setText(viewAllModel.getName());
         }
 
         addItem.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +99,13 @@ public class DetailedActivity extends AppCompatActivity {
             }
         });
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
 
     private void addedToCart() {
@@ -115,11 +126,11 @@ public class DetailedActivity extends AppCompatActivity {
         cartMap.put("productTime",saveCurrentTime);
         cartMap.put("totalPrice",totalPrice);
         cartMap.put("img_url",viewAllModel.getImg_url());
-        firestore.collection("Cart").document(auth.getCurrentUser().getUid())
-                .collection("CurrentUser").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+        firestore.collection("CurrentUser").document(auth.getCurrentUser().getUid())
+                .collection("Cart").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
-                        Toast.makeText(DetailedActivity.this, "Add to cart complete", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DetailedActivity.this, "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 });

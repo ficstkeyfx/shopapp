@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/purple_500"
-        app:title="View All Products"
+        app:title="Sản phẩm"
         tools:ignore="MissingConstraints" />
 
     <ProgressBar

@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:text="Detailed Product"
+            android:text="Chi tiết sản phẩm"
             android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="bold" />
@@ -144,10 +144,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Price: $  "
+                    android:text="Giá:  "
                     android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/detailed_sale_price"
@@ -156,8 +155,7 @@
                     android:layout_weight="1"
                     android:text="30"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/separate"
@@ -189,8 +187,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
-                    android:gravity="center_horizontal"
-                    android:text="Description"
+                    android:text="Mô tả"
                     android:textColor="@color/purple_700"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -201,7 +198,6 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
-                    android:gravity="center"
                     android:text="Vegetable, the edible product of a herbaceous plant-that is, a plant with a soft stem, as distinguished from the edible nuts and fruits produced by plants with woody stems such as shrubs and trees."
                     android:textColor="@color/black"
                     android:textSize="18sp"
@@ -265,6 +261,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/purple_500"
-            android:text="Add to cart" />
+            android:text="Thêm vào giỏ hàng" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

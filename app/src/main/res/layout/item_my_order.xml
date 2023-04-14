@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="5dp"
+    android:elevation="5dp"
+
+    android:layout_margin="5dp"
+    android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:textColor="@color/black"
+                android:id="@+id/tvOrderName"
+                android:text="gdfgsfsfsghd"
+                android:textSize="17dp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:textColor="@color/black"
+                android:id="@+id/tvOrderID"
+                android:text="gdfgsfsfsghd"
+                android:textSize="17dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:id="@+id/tvquantity_order"
+                android:text="Số lượng: 2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:id="@+id/tvdate_order"
+                android:text="20/11/2022"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:maxLines="1"
+                android:id="@+id/tvAddress_order"
+                android:text="Địa chỉ: sư vạn hạnh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_weight="1"
+                    android:textColor="@color/purple_700"
+                    android:id="@+id/tv_payorder"
+                    android:text="Thanh toán: 100.00đ"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:textColor="#08CD57"
+                    android:id="@+id/tvStatus"
+                    android:layout_marginRight="10dp"
+                    android:textSize="16dp"
+                    android:text="Đang vận chuyển"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
+
+</androidx.cardview.widget.CardView>

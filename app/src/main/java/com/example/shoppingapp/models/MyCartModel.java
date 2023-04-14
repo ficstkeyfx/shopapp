@@ -1,9 +1,11 @@
 package com.example.shoppingapp.models;
 
-public class MyCartModel {
+import java.io.Serializable;
+
+public class MyCartModel implements Serializable {
     String productName, productDate, productTime, totalQuantity, img_url;
     int totalPrice,productPrice;
-
+    String documentId;
     public MyCartModel() {
     }
 
@@ -15,6 +17,14 @@ public class MyCartModel {
         this.img_url = img_url;
         this.totalPrice = totalPrice;
         this.productPrice = productPrice;
+    }
+
+    public String getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
     }
 
     public String getImg_url() {

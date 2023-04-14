@@ -8,16 +8,15 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
+    <string name="menu_home">Trang chủ</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="title_activity_home">HomeActivity</string>
-    <string name="profile">Profile</string>
-    <string name="category">Category</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="profile">Thông tin tài khoản</string>
+    <string name="category">Danh mục sản phẩm</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="offers">Offers</string>
-    <string name="new_products">New Products</string>
-    <string name="my_orders">My Orders</string>
-    <string name="my_carts">My Carts</string>
+    <string name="new_products">Sản phẩm mới</string>
+    <string name="my_orders">Đơn hàng</string>
+    <string name="my_carts">Giỏ hàng</string>
 </resources>

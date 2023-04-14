@@ -19,10 +19,13 @@
             android:src="@mipmap/facebook"/>
         <TextView
             android:id="@+id/pop_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Popular Products"
-            android:textSize="19sp"
+            android:textSize="16sp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:singleLine="true"
             android:textStyle="bold"/>
 
         <TextView

@@ -2,17 +2,26 @@ package com.example.shoppingapp.ui.profile;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.example.shoppingapp.R;
+import com.example.shoppingapp.models.UserModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -20,14 +29,22 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment
 {
 
     TextView DinhDanh, BoSung;
     FirebaseDatabase database;
+    FirebaseStorage storage;
+    FirebaseAuth auth;
     TextView ten, name, gender, birth, CCCD, ngayCap, noiCap, ngayHetHan, email, address, job, position, phone, sdt;
 
+    CircleImageView avatar;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -43,6 +60,8 @@ public class ProfileFragment extends Fragment
         BoSung = root.findViewById(R.id.UpdateBoSung);
 
         database = FirebaseDatabase.getInstance();
+        storage = FirebaseStorage.getInstance();
+        auth = FirebaseAuth.getInstance();
 
         email = root.findViewById(R.id.email);
         sdt = root.findViewById(R.id.sdt);
@@ -59,9 +78,30 @@ public class ProfileFragment extends Fragment
         noiCap = root.findViewById(R.id.noiCap);
         ngayHetHan = root.findViewById(R.id.ngayHetHan);
 
+        avatar = root.findViewById(R.id.avatar);
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String id = user.getUid();
         DatabaseReference nameChange = database.getReference().child("Users").child(id).child("name");
+
+        database.getReference().child("Users").child(auth.getCurrentUser().getUid())
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                UserModel userModel = snapshot.getValue(UserModel.class);
+                                if(userModel!=null||userModel.getAvatar()!=null||userModel.getAvatar().length()!=0)  {
+                                    Glide.with(getContext()).load(userModel.getAvatar()).into(avatar);
+                                }else {
+                                    Glide.with(getContext()).load("https://firebasestorage.googleapis.com/v0/b/shoppingapp-3f5b0.appspot.com/o/avatar.png?alt=media&token=0be702f2-aa4e-4a7c-b7a0-768924e21882").into(avatar);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
         nameChange.addValueEventListener(new ValueEventListener()
         {
             @Override
@@ -277,6 +317,43 @@ public class ProfileFragment extends Fragment
                 startActivity(new Intent(getActivity(), ThongTinBoSungActivity.class));
             }
         });
+
+        avatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                startActivityForResult(intent,33);
+
+            }
+        });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(data.getData()!=null){
+            Uri profileUri = data.getData();
+            avatar.setImageURI(profileUri);
+
+            final StorageReference reference = storage.getReference().child("profile_picture")
+                    .child(auth.getCurrentUser().getUid());
+
+            reference.putFile(profileUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Toast.makeText(getContext(),"Uploaded", Toast.LENGTH_SHORT).show();
+                    reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            database.getReference().child("Users").child(auth.getCurrentUser().getUid())
+                                    .child("avatar").setValue(uri.toString());
+                            Toast.makeText(getContext(),"Profile Uploaded", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            });
+        }
+    }
 }

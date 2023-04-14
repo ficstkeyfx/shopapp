@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
 <<<<<<< HEAD
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+=======
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
@@ -64,9 +66,7 @@
       </map>
     </option>
   </component>
-=======
-  <component name="ExternalStorageConfigurationManager" enabled="true" />
->>>>>>> 56cc35846b30aec8d7e6615b2db0591c45a04bae
+>>>>>>> 5ff2eaa (cart)
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

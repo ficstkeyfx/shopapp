@@ -1,5 +1,6 @@
 package com.example.shoppingapp.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -36,11 +37,11 @@ public class ViewAllAdapters extends RecyclerView.Adapter<ViewAllAdapters.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Glide.with(context).load(viewAllModelList.get(position).getImg_url()).into(holder.imgView);
         holder.name.setText(viewAllModelList.get(position).getName());
         holder.description.setText(viewAllModelList.get(position).getDescription());
-        holder.price.setText(viewAllModelList.get(position).getPrice()+"");
+        holder.price.setText(viewAllModelList.get(position).getPrice()+"000đ");
         holder.rating.setText(viewAllModelList.get(position).getRating());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

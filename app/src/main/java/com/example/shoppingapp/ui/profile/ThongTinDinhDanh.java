@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.shoppingapp.activities.HomeActivity;
 import com.example.shoppingapp.R;
@@ -53,6 +54,8 @@ public class ThongTinDinhDanh extends AppCompatActivity {
             public void onClick(View view)
             {
                 updateInformation();
+                Toast.makeText(ThongTinDinhDanh.this,"Cập nhật thành công",Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 
@@ -61,9 +64,9 @@ public class ThongTinDinhDanh extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
+                startActivity(new Intent(ThongTinDinhDanh.this, HomeActivity.class));
                 finish();
                 //startActivity(new Intent(ThongTinDinhDanh.this, HomeActivity.class));
-                startActivity(new Intent(ThongTinDinhDanh.this, HomeActivity.class));
             }
         });
     }

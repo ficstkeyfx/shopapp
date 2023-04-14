@@ -114,6 +114,8 @@ public class RegistrationActivity extends AppCompatActivity {
                             user.sendEmailVerification();
                             progressBar.setVisibility(View.GONE);
                             Toast.makeText(RegistrationActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+
+                            startActivity(new Intent(RegistrationActivity.this,LoginActivity.class));
                         }else {
                             Toast.makeText(RegistrationActivity.this, "Lỗi: " + task.getException(), Toast.LENGTH_SHORT).show();
 

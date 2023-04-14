@@ -1,5 +1,6 @@
 package com.example.shoppingapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,11 +11,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.shoppingapp.activities.PlaceOrderActivity;
 import com.example.shoppingapp.adapters.MyCartAdapters;
 import com.example.shoppingapp.models.MyCartModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,6 +34,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +52,10 @@ public class MyCartsFragment extends Fragment {
 
     TextView userName, userSdt;
     TextView totalPrice;
+
+    EditText address;
+
+    Button buynow;
 
     int price=0;
 
@@ -65,6 +75,8 @@ public class MyCartsFragment extends Fragment {
         totalPrice = root.findViewById(R.id.cart_total);
         progressBar = root.findViewById(R.id.progressbar);
         relativeLayout = root.findViewById(R.id.relativeLayout);
+        buynow = root.findViewById(R.id.btnBuyNow);
+        address = root.findViewById(R.id.edtAddress);
 
         progressBar.setVisibility(View.VISIBLE);
         relativeLayout.setVisibility(View.GONE);
@@ -77,13 +89,19 @@ public class MyCartsFragment extends Fragment {
         myCartAdapters = new MyCartAdapters(myCartModels,getActivity());
 
         recyclerView.setAdapter(myCartAdapters);
-        firestore.collection("Cart").document(auth.getCurrentUser().getUid())
-                .collection("CurrentUser").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        firestore.collection("CurrentUser").document(auth.getCurrentUser().getUid())
+                .collection("Cart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()){
                             for(DocumentSnapshot documentSnapshot: task.getResult().getDocuments()){
+
+                                String documentId = documentSnapshot.getId();
+
                                 MyCartModel myCartModel = documentSnapshot.toObject(MyCartModel.class);
+
+                                myCartModel.setDocumentId(documentId);
+
                                 myCartModels.add(myCartModel);
                                 myCartAdapters.notifyDataSetChanged();
                                 price += myCartModel.getTotalPrice();
@@ -133,6 +151,22 @@ public class MyCartsFragment extends Fragment {
         });
 
         progressBar.setVisibility(View.GONE);
+
+        buynow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(address.getText()!=null&&address.getText().length()>0){
+                    Intent intent = new Intent(getContext(), PlaceOrderActivity.class);
+                    intent.putExtra("itemList", (Serializable) myCartModels);
+                    intent.putExtra("address",String.valueOf(address.getText()));
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(getActivity(),"Hãy nhập địa chỉ",Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
         return root;
     }
 }

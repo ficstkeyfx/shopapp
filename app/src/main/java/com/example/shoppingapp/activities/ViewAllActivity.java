@@ -69,8 +69,8 @@ public class ViewAllActivity extends AppCompatActivity {
             });
         }
         // Getting vegetable
-        if(type != null && type.equalsIgnoreCase("vegetable")){
-            firebaseFirestore.collection("AllProducts").whereEqualTo("type","vegetable").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        if(type != null && type.equalsIgnoreCase("adidas")){
+            firebaseFirestore.collection("AllProducts").whereEqualTo("type","adidas").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     for(DocumentSnapshot documentSnapshot:task.getResult().getDocuments()){
@@ -84,8 +84,8 @@ public class ViewAllActivity extends AppCompatActivity {
             });
         }
         // Getting milk
-        if(type != null && type.equalsIgnoreCase("milk")){
-            firebaseFirestore.collection("AllProducts").whereEqualTo("type","milk").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        if(type != null && type.equalsIgnoreCase("nike")){
+            firebaseFirestore.collection("AllProducts").whereEqualTo("type","nike").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     for(DocumentSnapshot documentSnapshot:task.getResult().getDocuments()){
@@ -99,8 +99,8 @@ public class ViewAllActivity extends AppCompatActivity {
             });
         }
         // Getting egg
-        if(type != null && type.equalsIgnoreCase("egg")){
-            firebaseFirestore.collection("AllProducts").whereEqualTo("type","egg").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        if(type != null && type.equalsIgnoreCase("converse")){
+            firebaseFirestore.collection("AllProducts").whereEqualTo("type","converse").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     for(DocumentSnapshot documentSnapshot:task.getResult().getDocuments()){
@@ -115,8 +115,8 @@ public class ViewAllActivity extends AppCompatActivity {
             });
         }
         // Getting fish
-        if(type != null && type.equalsIgnoreCase("fish")){
-            firebaseFirestore.collection("AllProducts").whereEqualTo("type","fish").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        if(type != null && type.equalsIgnoreCase("newbalance")){
+            firebaseFirestore.collection("AllProducts").whereEqualTo("type","newbalance").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     for(DocumentSnapshot documentSnapshot:task.getResult().getDocuments()){
@@ -129,7 +129,21 @@ public class ViewAllActivity extends AppCompatActivity {
                 }
             });
         }
-
+        // Getting fish
+        if(type != null && type.equalsIgnoreCase("gucci")){
+            firebaseFirestore.collection("AllProducts").whereEqualTo("type","gucci").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    for(DocumentSnapshot documentSnapshot:task.getResult().getDocuments()){
+                        ViewAllModel viewAllModel = documentSnapshot.toObject(ViewAllModel.class);
+                        viewAllModelList.add(viewAllModel);
+                        viewAllAdapters.notifyDataSetChanged();
+                    }
+                    progressBar.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                }
+            });
+        }
 
     }
 }

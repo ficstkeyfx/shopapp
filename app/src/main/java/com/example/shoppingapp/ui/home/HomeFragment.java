@@ -3,10 +3,13 @@ package com.example.shoppingapp.ui.home;
 import static android.content.ContentValues.TAG;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -19,15 +22,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shoppingapp.R;
+import com.example.shoppingapp.activities.HomeActivity;
 import com.example.shoppingapp.adapters.CategoryAdapters;
 import com.example.shoppingapp.adapters.PopularAdapters;
 
 import com.example.shoppingapp.adapters.RecommendAdapters;
+import com.example.shoppingapp.adapters.ViewAllAdapters;
 import com.example.shoppingapp.models.HomeCategoryModel;
 import com.example.shoppingapp.models.PopularModel;
 import com.example.shoppingapp.models.RecommendModel;
+import com.example.shoppingapp.models.ViewAllModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -43,6 +50,13 @@ public class HomeFragment extends Fragment {
     // popular items
     List<PopularModel> popularModelList;
     PopularAdapters popularAdapters;
+
+    /// Search View
+    EditText searchBox;
+    private List<ViewAllModel> viewAllModelList;
+    private RecyclerView recyclerViewSearch;
+    private ViewAllAdapters viewAllAdapters;
+
 
     // category
     List<HomeCategoryModel> homeCategoryModelList;
@@ -148,7 +162,59 @@ public class HomeFragment extends Fragment {
                         }
                     }
                 });
+
+
+        /// Search View
+        searchBox = root.findViewById(R.id.search_box);
+        recyclerViewSearch = root.findViewById(R.id.search_rec);
+
+        viewAllModelList = new ArrayList<>();
+        viewAllAdapters = new ViewAllAdapters(getContext(),viewAllModelList);
+        recyclerViewSearch.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewSearch.setAdapter(viewAllAdapters);
+        recyclerViewSearch.setHasFixedSize(true);
+        searchBox.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.toString().isEmpty()){
+                    viewAllModelList.clear();
+                    viewAllAdapters.notifyDataSetChanged();
+                }else{
+                    searchProducts(s.toString());
+                }
+            }
+        });
         return root;
+    }
+
+    private void searchProducts(String type) {
+        if(!type.isEmpty()){
+            db.collection("AllProducts").whereEqualTo("type",type.toLowerCase()).get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()&&task.getResult()!=null){
+                                viewAllModelList.clear();
+                                viewAllAdapters.notifyDataSetChanged();
+                                for(DocumentSnapshot documentSnapshot: task.getResult().getDocuments()){
+                                    ViewAllModel viewAllModel = documentSnapshot.toObject(ViewAllModel.class);
+                                    viewAllModelList.add(viewAllModel);
+                                    viewAllAdapters.notifyDataSetChanged();
+                                }
+                            }
+                        }
+                    });
+        }
     }
 
 }

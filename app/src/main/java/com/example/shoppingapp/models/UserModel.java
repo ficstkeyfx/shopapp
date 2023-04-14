@@ -2,7 +2,7 @@ package com.example.shoppingapp.models;
 
 public class UserModel {
     private String name, email, password, gender, birth, CCCD, ngayCap, noiCap, ngayHetHan, address, job, position, phone;
-
+    private String avatar;
     public UserModel()
     {
         this.name = "Chưa cập nhật";
@@ -20,6 +20,23 @@ public class UserModel {
         this.phone = "Chưa cập nhật";
     }
 
+    public UserModel(String name, String email, String password, String gender, String birth, String CCCD, String ngayCap, String noiCap, String ngayHetHan, String address, String job, String position, String phone, String avatar) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.gender = gender;
+        this.birth = birth;
+        this.CCCD = CCCD;
+        this.ngayCap = ngayCap;
+        this.noiCap = noiCap;
+        this.ngayHetHan = ngayHetHan;
+        this.address = address;
+        this.job = job;
+        this.position = position;
+        this.phone = phone;
+        this.avatar = avatar;
+    }
+
     public UserModel(String name, String email, String password)
     {
         this.name = name;
@@ -35,6 +52,14 @@ public class UserModel {
         this.job = "Chưa cập nhật";
         this.position = "Chưa cập nhật";
         this.phone = "Chưa cập nhật";
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getName()

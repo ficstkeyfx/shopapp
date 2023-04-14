@@ -15,8 +15,8 @@
 
         <ImageView
             android:id="@+id/view_all_img"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
             app:srcCompat="@drawable/grocery"
             android:scaleType="centerCrop"/>
 
@@ -54,18 +54,15 @@
                     android:id="@+id/textView7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Price: $ "
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
+                    android:text="Giá:  "
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/view_all_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="30"
-                    android:textColor="@color/black"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <LinearLayout
@@ -78,7 +75,7 @@
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Rating: "
+                    android:text="Đánh giá: "
                     android:textColor="@color/black"
                     android:textStyle="bold" />
 

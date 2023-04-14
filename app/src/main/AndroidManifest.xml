@@ -5,6 +5,7 @@
 
     <application
         android:allowBackup="true"
+        android:usesCleartextTraffic="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -14,11 +15,14 @@
         android:theme="@style/Theme.ShoppingApp"
         tools:targetApi="31">
         <activity
+            android:name=".activities.PlaceOrderActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.DetailedActivity"
             android:exported="false" />
         <activity
             android:name=".activities.ViewAllActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".activities.RegistrationActivity"
             android:exported="true" />
@@ -39,13 +43,10 @@
             android:exported="true" />
         <activity
             android:name=".ui.profile.ThongTinDinhDanh"
-            android:exported="true">
-        </activity>
-
+            android:exported="true"></activity>
         <activity
             android:name=".ui.profile.ThongTinBoSungActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>
