@@ -50,8 +50,8 @@ public class MyCartAdapters extends RecyclerView.Adapter<MyCartAdapters.ViewHold
         holder.cartName.setText(myCartModels.get(position).getProductName());
         holder.cartTime.setText(myCartModels.get(position).getProductTime());
         holder.cartDate.setText("Ngày: " + myCartModels.get(position).getProductDate());
-        holder.cartPrice.setText("Giá: " + myCartModels.get(position).getProductPrice()+"vnđ");
-        holder.cartTotalPrice.setText(myCartModels.get(position).getTotalPrice()+"vnđ");
+        holder.cartPrice.setText("Giá: " + myCartModels.get(position).getProductPrice()+"000đ");
+        holder.cartTotalPrice.setText(myCartModels.get(position).getTotalPrice()+"000đ");
         holder.cartTotalQuantity.setText("Số lượng: " + myCartModels.get(position).getTotalQuantity());
 
         holder.deleteItem.setOnClickListener(new View.OnClickListener() {

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shoppingapp.R;
+import com.example.shoppingapp.ui.admin.MenuAdminActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -76,9 +77,18 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            progressBar.setVisibility(View.GONE);
-                            Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                            if (userEmail.equals("shopapp216@gmail.com"))
+                            {
+                                progressBar.setVisibility(View.GONE);
+                                Toast.makeText(LoginActivity.this, "Bạn là admin", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(LoginActivity.this, MenuAdminActivity.class));
+                            }
+                            else
+                            {
+                                progressBar.setVisibility(View.GONE);
+                                Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                            }
                         }else {
                             Toast.makeText(LoginActivity.this, "Lỗi: " + task.getException(), Toast.LENGTH_SHORT).show();
                         }

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toolbar;
 
@@ -31,6 +32,8 @@ public class ViewAllActivity extends AppCompatActivity {
     Toolbar toolbar;
     ProgressBar progressBar;
 
+    ImageView back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +44,8 @@ public class ViewAllActivity extends AppCompatActivity {
 
         String type = getIntent().getStringExtra("type");
         recyclerView = findViewById(R.id.view_all_rec);
+        back = findViewById(R.id.goBack);
+
         recyclerView.setVisibility(View.GONE);
 //        toolbar = findViewById(R.id.toolbar);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -115,8 +120,8 @@ public class ViewAllActivity extends AppCompatActivity {
             });
         }
         // Getting fish
-        if(type != null && type.equalsIgnoreCase("newbalance")){
-            firebaseFirestore.collection("AllProducts").whereEqualTo("type","newbalance").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        if(type != null && type.equalsIgnoreCase("new balance")){
+            firebaseFirestore.collection("AllProducts").whereEqualTo("type","new balance").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     for(DocumentSnapshot documentSnapshot:task.getResult().getDocuments()){
@@ -144,6 +149,12 @@ public class ViewAllActivity extends AppCompatActivity {
                 }
             });
         }
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
 }

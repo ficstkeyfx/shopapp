@@ -1,6 +1,8 @@
 package com.example.shoppingapp.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.shoppingapp.R;
+import com.example.shoppingapp.activities.DetailedActivity;
+import com.example.shoppingapp.activities.ViewAllActivity;
 import com.example.shoppingapp.models.RecommendModel;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class RecommendAdapters extends RecyclerView.Adapter<RecommendAdapters.ViewHolder> {
@@ -34,11 +39,12 @@ public class RecommendAdapters extends RecyclerView.Adapter<RecommendAdapters.Vi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Glide.with(context).load(recommendModelList.get(position).getImg_url()).into(holder.recImg);
         holder.name.setText(recommendModelList.get(position).getName());
         holder.description.setText(recommendModelList.get(position).getDescription());
         holder.rating.setText(recommendModelList.get(position).getRating());
+
     }
 
     @Override

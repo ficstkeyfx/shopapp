@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.admin.manageAccount.ManageAccountActivity"
+    android:background="@drawable/anhnen">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        tools:ignore="MissingConstraints"
+        android:background="@color/black">
+        <ImageView
+            android:id="@+id/goBack"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/muiten"/>
+        <TextView
+            android:layout_marginEnd="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="QUẢN LÝ TÀI KHOẢN"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="25dp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="100dp">
+
+        <ListView
+            android:id="@+id/lstView"
+            android:layout_width="290dp"
+            android:layout_height="match_parent"
+            tools:ignore="MissingConstraints"/>
+
+        <Button
+            android:id="@+id/delete"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Xoá"
+            android:layout_gravity="center"
+            />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
