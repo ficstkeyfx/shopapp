@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.admin.updateProduct.searchProduct">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints"
+            android:background="@color/black">
+            <ImageView
+                android:id="@+id/goBack"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/muiten"/>
+            <TextView
+                android:layout_marginEnd="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="CẬP NHẬT SẢN PHẨM"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:textSize="25dp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/editext_background"
+            android:drawableLeft="@drawable/baseline_search_24"
+            android:drawablePadding="10dp"
+            android:elevation="3dp"
+            android:layout_marginTop="20sp"
+            android:hint="Search"
+            android:minHeight="48dp"
+            android:padding="13dp"
+            android:textColor="#888887"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent=".8"
+            android:layout_marginStart="50sp"
+            android:layout_marginEnd="50sp"/>
+
+
+        <ListView
+            android:id="@+id/lstView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"/>
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

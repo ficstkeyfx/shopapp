@@ -325,7 +325,6 @@ public class ProfileFragment extends Fragment
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 intent.setType("image/*");
                 startActivityForResult(intent,33);
-
             }
         });
     }

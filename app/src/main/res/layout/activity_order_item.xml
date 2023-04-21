@@ -6,7 +6,7 @@
     android:layout_height="200dp"
     android:orientation="horizontal">
     <LinearLayout
-        android:layout_width="150dp"
+        android:layout_width="100dp"
         android:layout_height="match_parent"
         android:orientation="vertical">
         <ImageView
@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:gravity="center"
             android:textStyle="bold"
-            android:textSize="18dp"
+            android:textSize="15dp"
             android:layout_height="25dp"/>
         <TextView
             android:text="Địa chỉ"
@@ -29,7 +29,7 @@
             android:layout_height="25dp"
             android:gravity="center"
             android:textStyle="bold"
-            android:textSize="18dp"
+            android:textSize="15dp"
             android:id="@+id/address"/>
         <TextView
             android:text="Phone"
@@ -37,36 +37,103 @@
             android:layout_height="25dp"
             android:gravity="center"
             android:textStyle="bold"
-            android:textSize="18dp"
+            android:textSize="15dp"
             android:id="@+id/phone"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        
-        <ListView
-            android:id="@+id/product"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="10dp"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"/>
+            android:layout_height="75dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/productAva"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:src="@drawable/avatar"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/productName"
+                    android:layout_width="match_parent"
+                    android:layout_height="21dp"
+                    android:layout_marginStart="10dp"
+                    android:gravity="left"
+                    android:text="name product"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    tools:ignore="TextSizeCheck" />
+
+                <TextView
+                    android:id="@+id/productTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="18dp"
+                    android:layout_marginStart="10dp"
+                    android:gravity="left"
+                    android:text="ngay mua"
+                    android:textColor="@color/black"
+                    android:textSize="12dp"
+                    tools:ignore="TextSizeCheck" />
+
+                <TextView
+                    android:id="@+id/productPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="18dp"
+                    android:layout_marginStart="10dp"
+                    android:gravity="left"
+                    android:text="gia"
+                    android:textColor="@color/black"
+                    android:textSize="12dp"
+                    tools:ignore="TextSizeCheck,TextSizeCheck" />
+
+                <TextView
+                    android:id="@+id/productQuantity"
+                    android:layout_width="match_parent"
+                    android:layout_height="18dp"
+                    android:layout_marginStart="10dp"
+                    android:gravity="left"
+                    android:text="so luong"
+                    android:textColor="@color/black"
+                    android:textSize="12dp"
+                    tools:ignore="TextSizeCheck" />
+            </LinearLayout>
+        </LinearLayout>
+
+
         <TextView
             android:layout_marginTop="10dp"
             android:id="@+id/TotalPrice"
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="30dp"
             android:text="Thanh toán: 100.000đ"
             android:textColor="#3F51B5"/>
 
         <TextView
             android:id="@+id/statusOrder"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="30dp"
             android:textColor="#F44336"
             android:gravity="center_vertical|left"
             android:text="Đang giao hàng"/>
 
-        
+        <Button
+            android:id="@+id/xacNhan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="XÁC NHẬN"
+            android:layout_gravity="center"/>
+
+
     </LinearLayout>
 
 </LinearLayout>

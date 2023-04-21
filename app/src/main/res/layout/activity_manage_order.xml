@@ -29,10 +29,12 @@
     </LinearLayout>
 
     <ListView
-        android:id="@+id/lstView"
+        android:id="@+id/view_order"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="50dp">
+
+    </ListView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

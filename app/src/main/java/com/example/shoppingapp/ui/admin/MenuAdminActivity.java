@@ -10,7 +10,10 @@ import android.widget.TextView;
 
 import com.example.shoppingapp.R;
 import com.example.shoppingapp.activities.LoginActivity;
+import com.example.shoppingapp.ui.admin.addProduct.AddProduct;
 import com.example.shoppingapp.ui.admin.manageAccount.ManageAccountActivity;
+import com.example.shoppingapp.ui.admin.manageOrder.ManageOrderActivity;
+import com.example.shoppingapp.ui.admin.updateProduct.searchProduct;
 
 public class MenuAdminActivity extends AppCompatActivity {
 
@@ -37,6 +40,33 @@ public class MenuAdminActivity extends AppCompatActivity {
             }
         });
 
+        manageOrder.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                startActivity(new Intent(MenuAdminActivity.this, ManageOrderActivity.class));
+            }
+        });
+
+        addProduct.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                startActivity(new Intent(MenuAdminActivity.this, AddProduct.class));
+            }
+        });
+
+        updateProduct.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                startActivity(new Intent(MenuAdminActivity.this, searchProduct.class));
+            }
+        });
+
         logout.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -45,5 +75,6 @@ public class MenuAdminActivity extends AppCompatActivity {
                 startActivity(new Intent(MenuAdminActivity.this, LoginActivity.class));
             }
         });
+
     }
 }

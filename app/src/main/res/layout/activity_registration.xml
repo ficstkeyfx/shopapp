@@ -78,7 +78,7 @@
         android:id="@+id/login_btn"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="SIGN UP"
+        android:text="ĐĂNG KÝ"
         android:textAllCaps="false"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

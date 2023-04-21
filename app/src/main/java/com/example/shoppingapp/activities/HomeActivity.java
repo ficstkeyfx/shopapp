@@ -1,15 +1,16 @@
 package com.example.shoppingapp.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.shoppingapp.R;
 import com.example.shoppingapp.models.UserModel;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
@@ -67,6 +68,7 @@ public class HomeActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         View headerView = navigationView.getHeaderView(0);
+        MenuItem logout = navigationView.getMenu().findItem(R.id.action_logout);
         TextView headerName = headerView.findViewById(R.id.nav_header_name);
         TextView headerEmail = headerView.findViewById(R.id.nav_header_email);
         CircleImageView headerImg = headerView.findViewById(R.id.nav_header_img);
@@ -87,12 +89,30 @@ public class HomeActivity extends AppCompatActivity {
 
                     }
                 });
+//        logout.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(@NonNull MenuItem item) {
+//                auth.signOut();
+//                startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+//                return false;
+//            }
+//        });
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        // Inflate the menu; this adds items to the action bar if it is present
         getMenuInflater().inflate(R.menu.home, menu);
+        MenuItem item = menu.findItem(R.id.action_logout);
+        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+                auth.signOut();
+                startActivity(new Intent(HomeActivity.this,LoginActivity.class));
+                return true;
+            }
+        });
         return true;
     }
 

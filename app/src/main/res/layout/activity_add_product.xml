@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.admin.addProduct.AddProduct"
+    android:background="@drawable/addsp">
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:orientation="horizontal"
+    tools:ignore="MissingConstraints"
+    android:background="@color/black">
+    <ImageView
+        android:id="@+id/goBack"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:src="@drawable/muiten"/>
+    <TextView
+        android:layout_marginEnd="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="THÊM SẢN PHẨM"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:textSize="25dp"
+        android:textStyle="bold"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="75sp">
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="150sp"
+                android:layout_height="150sp"
+                android:src="@drawable/grocery"
+                android:layout_gravity="center"/>
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/editext_background"
+                android:drawablePadding="10dp"
+                android:elevation="3dp"
+                android:layout_marginTop="50sp"
+                android:hint="Tên sản phẩm"
+                android:minHeight="48dp"
+                android:padding="13dp"
+                android:textColor="#888887"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintWidth_percent=".8"
+                android:layout_marginStart="50sp"
+                android:layout_marginEnd="50sp"/>
+
+            <EditText
+                android:id="@+id/price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/editext_background"
+                android:drawablePadding="10dp"
+                android:elevation="3dp"
+                android:layout_marginTop="30sp"
+                android:hint="Giá"
+                android:minHeight="48dp"
+                android:padding="13dp"
+                android:textColor="#888887"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintWidth_percent=".8"
+                android:layout_marginStart="50sp"
+                android:layout_marginEnd="50sp"/>
+
+            <EditText
+                android:id="@+id/type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/editext_background"
+                android:drawablePadding="10dp"
+                android:elevation="3dp"
+                android:layout_marginTop="30sp"
+                android:hint="Loại giày"
+                android:minHeight="48dp"
+                android:padding="13dp"
+                android:textColor="#888887"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintWidth_percent=".8"
+                android:layout_marginStart="50sp"
+                android:layout_marginEnd="50sp"/>
+
+            <EditText
+                android:id="@+id/decrip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/editext_background"
+                android:drawablePadding="10dp"
+                android:elevation="3dp"
+                android:layout_marginTop="30sp"
+                android:hint="Mô tả"
+                android:minHeight="48dp"
+                android:padding="13dp"
+                android:textColor="#888887"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintWidth_percent=".8"
+                android:layout_marginStart="50sp"
+                android:layout_marginEnd="50sp"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="30sp"
+                android:layout_gravity="center_horizontal">
+                <Button
+                    android:layout_width="100sp"
+                    android:layout_height="50sp"
+                    android:text="lƯU"
+                    android:textStyle="bold"
+                    android:id="@+id/save_btn"
+                    android:layout_marginEnd="20sp"/>
+
+                <Button
+                    android:layout_width="100sp"
+                    android:layout_height="50sp"
+                    android:text="XOÁ"
+                    android:textStyle="bold"
+                    android:id="@+id/clear_btn" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

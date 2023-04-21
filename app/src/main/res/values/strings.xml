@@ -19,4 +19,5 @@
     <string name="new_products">Sản phẩm mới</string>
     <string name="my_orders">Đơn hàng</string>
     <string name="my_carts">Giỏ hàng</string>
+    <string name="logout">Đăng xuất</string>
 </resources>

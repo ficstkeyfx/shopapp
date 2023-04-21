@@ -1,19 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="30dp"
-    android:orientation="horizontal"
-    android:padding="20dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="5dp"
+    android:layout_margin="3dp"
+    android:layout_height="wrap_content">
 
-    <TextView
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        android:id="@+id/email"
-        android:text="asdasd"/>
-
-
-</LinearLayout>
+        android:layout_height="wrap_content">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/img_account"
+            android:src="@drawable/ic_null_new_product"
+            android:scaleType="centerCrop"
+            android:layout_width="70dp"
+            android:layout_height="70dp"/>
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/account_name"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:textSize="17dp"
+                    android:text="Họ tên"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <ImageButton
+                    android:id="@+id/delete_account"
+                    android:elevation="4dp"
+                    android:layout_marginRight="7dp"
+                    android:background="@null"
+                    android:src="@drawable/ic_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="email@gmail.com"
+                    android:textSize="14dp"
+                    android:id="@+id/email_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:text=""
+                    android:textSize="14dp"
+                    android:id="@+id/tvPrice_cart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

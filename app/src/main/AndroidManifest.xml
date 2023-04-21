@@ -42,6 +42,18 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.admin.addProduct.AddProduct"
+            android:exported="true" />
+        <activity
+            android:name=".ui.admin.manageOrder.ManageOrderActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.admin.updateProduct.searchProduct"
+            android:exported="true" />
+        <activity
+            android:name=".ui.admin.updateProduct.updateProduct"
+            android:exported="true" />
+        <activity
             android:name=".activities.HomeActivity"
             android:exported="true" />
         <activity
