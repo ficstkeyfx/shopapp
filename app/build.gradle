@@ -47,9 +47,13 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore-ktx:24.4.5'
     implementation 'com.google.firebase:firebase-storage-ktx:20.1.0'
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation fileTree(dir: 'D:\\Android\\Report', include: ['*.aar', '*.jar'], exclude: [])
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+
+    implementation 'com.google.android.gms:play-services-auth:20.5.0'
 
     // Circle Image View
     implementation 'de.hdodenhof:circleimageview:3.1.0'
@@ -58,4 +62,13 @@ dependencies {
     implementation 'com.makeramen:roundedimageview:2.3.0'
     // Glide android
     implementation 'com.github.bumptech.glide:glide:4.15.1'
+
+    //Zalo
+    implementation "com.squareup.okhttp3:okhttp:4.6.0"
+    implementation "commons-codec:commons-codec:1.14"
+
+    // Facebook
+    implementation 'com.facebook.android:facebook-android-sdk:[8,9)'
+
+    //AAR
 }

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.LoginActivity">
+    tools:context=".activities.LoginActivity"
+    tools:ignore="ExtraText">
     android:background = "@color/white">
 
     <ImageView
@@ -34,40 +35,62 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/log_img"
-        app:layout_constraintWidth_percent=".8" />
+        app:layout_constraintWidth_percent=".8"        />
 
 
-    <EditText
-        android:id="@+id/password_log"
-        android:layout_width="0dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/editext_background"
-        android:drawableLeft="@drawable/keylog"
-        android:drawablePadding="10dp"
-        android:elevation="3dp"
-        android:inputType="textPassword"
-        android:hint="Password"
-        android:minHeight="48dp"
-        android:padding="13dp"
-        android:textColor="#888887"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email_log"
-        app:layout_constraintWidth_percent=".8" />
+        app:passwordToggleEnabled="true"
+        app:hintEnabled="false">
+
+        <EditText
+            android:id="@+id/password_log"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/editext_background"
+            android:drawableStart="@drawable/keylog"
+            android:drawablePadding="6dp"
+            android:hint="Password"
+            android:textColor="#888887"
+            android:paddingBottom="12dp"
+            android:paddingTop="12dp"
+            android:textSize="18sp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="50sp"
+        android:gravity="center"
+        android:text="Quên mật khẩu"
+        android:textStyle="italic"
+        android:textColor="#F44336"
+        tools:ignore="MissingConstraints"
+        android:id="@+id/forgot_password"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="50sp"
+        />
 
     <Button
         android:id="@+id/login_btn"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="ĐĂNG NHẬP"
-        android:textColor="@color/white"
         android:textAllCaps="false"
+        android:textColor="@color/white"
         android:textStyle="bold"
+        android:layout_marginTop="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password_log"
-        android:layout_marginTop="30dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/forgot_password" />
 
     <TextView
         android:id="@+id/question"
@@ -83,18 +106,18 @@
         app:layout_constraintVertical_bias=".2" />
 
     <TextView
-    android:id="@+id/sign_up"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Đăng ký"
-    android:textSize="16dp"
-    android:textStyle="bold"
-    android:textColor="@color/purple_700"
-    app:layout_constraintHorizontal_bias="0"
-    app:layout_constraintBottom_toBottomOf="@+id/question"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toEndOf="@+id/question"
-    app:layout_constraintTop_toTopOf="@+id/question" />
+        android:id="@+id/sign_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Đăng ký"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:textColor="@color/purple_700"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintBottom_toBottomOf="@+id/question"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/question"
+        app:layout_constraintTop_toTopOf="@+id/question" />
 
     <ProgressBar
         android:id="@+id/progressbar"
@@ -121,8 +144,9 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:layout_alignParentBottom="true"
+        android:background="@color/purple_200"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -130,18 +154,26 @@
         app:layout_constraintVertical_bias="0.811"
         tools:layout_editor_absoluteX="0dp">
 
-        <ImageView
-            android:id="@+id/fb_btn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_margin="20dp"
-            android:src="@mipmap/facebook" />
+        <LinearLayout
+            android:layout_marginRight="20dp"
+            android:layout_width="100dp"
+            android:layout_height="32dp"
+            android:gravity = "center"
+            android:background="#1877F2"
+            >
+            <com.facebook.login.widget.LoginButton
+                xmlns:fb="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/fb_btn"
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                />
+        </LinearLayout>
 
-        <ImageView
+
+        <com.google.android.gms.common.SignInButton
             android:id="@+id/gg_btn"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:layout_margin="20dp"
-            android:src="@mipmap/google_logo" />
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

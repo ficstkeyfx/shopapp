@@ -20,4 +20,10 @@
     <string name="my_orders">Đơn hàng</string>
     <string name="my_carts">Giỏ hàng</string>
     <string name="logout">Đăng xuất</string>
+
+
+    <string name="facebook_app_id">775498007185509</string>
+    <string name="fb_login_protocol_scheme">fb775498007185509</string>
+    <string name="facebook_client_token">4d26b06b33c7b82c437d545cf3c69105</string>
+
 </resources>

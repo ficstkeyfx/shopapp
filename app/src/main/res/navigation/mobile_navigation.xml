@@ -7,39 +7,39 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.shoppingapp.ui.home.HomeFragment"
+        android:name="com.example.shoppingapp.user.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_profile"
-        android:name="com.example.shoppingapp.ui.profile.ProfileFragment"
+        android:name="com.example.shoppingapp.user.ui.profile.ProfileFragment"
         android:label="@string/profile"
         tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/nav_category"
-        android:name="com.example.shoppingapp.ui.category.CategoryFragment"
+        android:name="com.example.shoppingapp.user.ui.category.CategoryFragment"
         android:label="@string/category"
         tools:layout="@layout/fragment_category" />
     <fragment
         android:id="@+id/nav_offers"
-        android:name="com.example.shoppingapp.OffersFragment"
+        android:name="com.example.shoppingapp.user.OffersFragment"
         android:label="@string/offers"
         tools:layout="@layout/fragment_offers" />
     <fragment
         android:id="@+id/nav_new_products"
-        android:name="com.example.shoppingapp.NewProductsFragment"
+        android:name="com.example.shoppingapp.user.ui.newproducts.NewProductsFragment"
         android:label="@string/new_products"
         tools:layout="@layout/fragment_new_products" />
     <fragment
         android:id="@+id/nav_my_orders"
-        android:name="com.example.shoppingapp.MyOrdersFragment"
+        android:name="com.example.shoppingapp.user.ui.order.MyOrdersFragment"
         android:label="@string/my_orders"
         tools:layout="@layout/fragment_my_orders" />
     <fragment
         android:id="@+id/nav_my_carts"
-        android:name="com.example.shoppingapp.MyCartsFragment"
+        android:name="com.example.shoppingapp.user.ui.cart.MyCartsFragment"
         android:label="@string/my_carts"
         tools:layout="@layout/fragment_my_carts" />
 </navigation>

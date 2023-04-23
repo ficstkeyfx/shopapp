@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.ViewAllActivity">
+    tools:context=".user.activities.ViewAllActivity">
 
     <LinearLayout
         android:id="@+id/toolBar"
