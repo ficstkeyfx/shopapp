@@ -1,16 +1,15 @@
 package com.example.shoppingapp.user.models;
 
 public class PopularModel {
-    String name, description, rating, discount, img_url, type;
+    String name, description, rating, img_url, type;
 
     public PopularModel() {
     }
 
-    public PopularModel(String name, String description, String rating, String discount, String img_url, String type) {
+    public PopularModel(String name, String description, String rating, String img_url, String type) {
         this.name = name;
         this.description = description;
         this.rating = rating;
-        this.discount = discount;
         this.img_url = img_url;
         this.type = type;
     }
@@ -45,14 +44,6 @@ public class PopularModel {
 
     public void setRating(String rating) {
         this.rating = rating;
-    }
-
-    public String getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(String discount) {
-        this.discount = discount;
     }
 
     public String getImg_url() {

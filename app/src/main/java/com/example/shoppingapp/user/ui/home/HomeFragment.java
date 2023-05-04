@@ -42,7 +42,7 @@ public class HomeFragment extends Fragment {
     ProgressBar progressBar;
     RecyclerView popularRec,homeCatRec,recRec;
     // popular items
-    List<PopularModel> popularModelList;
+    List<ViewAllModel> popularModelList;
     PopularAdapters popularAdapters;
 
     /// Search View
@@ -57,7 +57,7 @@ public class HomeFragment extends Fragment {
     CategoryAdapters categoryAdapters;
 
     // recommend
-    List<RecommendModel> recommendModelList;
+    List<ViewAllModel> recommendModelList;
     RecommendAdapters recommendAdapters;
 
     FirebaseFirestore db;
@@ -100,18 +100,20 @@ public class HomeFragment extends Fragment {
 
         // popular
 //         Cloud Firestore
-        db.collection("PopularProducts")
+        db.collection("AllProducts")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()){
                             for(QueryDocumentSnapshot document: task.getResult()){
-                                PopularModel popularModel = document.toObject(PopularModel.class);
-                                popularModelList.add(popularModel);
-                                popularAdapters.notifyDataSetChanged();
-                                progressBar.setVisibility(View.GONE);
-                                scrollView.setVisibility(View.VISIBLE);
+                                if(document.get("collection")!=null&&((String)document.get("collection")).equals("popular")){
+                                    ViewAllModel popularModel = document.toObject(ViewAllModel.class);
+                                    popularModelList.add(popularModel);
+                                    popularAdapters.notifyDataSetChanged();
+                                    progressBar.setVisibility(View.GONE);
+                                    scrollView.setVisibility(View.VISIBLE);
+                                }
                             }
                         }else {
                             Toast.makeText(getActivity(), "Error: " + task.getException(), Toast.LENGTH_SHORT).show();
@@ -140,16 +142,20 @@ public class HomeFragment extends Fragment {
                 });
 
         // recommend
-        db.collection("HomeRecommend")
+        db.collection("AllProducts")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()){
                             for(QueryDocumentSnapshot document: task.getResult()){
-                                RecommendModel recommendModel = document.toObject(RecommendModel.class);
-                                recommendModelList.add(recommendModel);
-                                recommendAdapters.notifyDataSetChanged();
+
+                                if(document.get("collection")!=null&&((String)document.get("collection")).equals("recommend")){
+                                    System.out.println("---");
+                                    ViewAllModel recommendModel = document.toObject(ViewAllModel.class);
+                                    recommendModelList.add(recommendModel);
+                                    recommendAdapters.notifyDataSetChanged();
+                                }
                             }
                         }else {
                             Toast.makeText(getActivity(), "Error: " + task.getException(), Toast.LENGTH_SHORT).show();

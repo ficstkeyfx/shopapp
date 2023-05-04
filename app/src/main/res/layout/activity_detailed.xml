@@ -98,6 +98,7 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginLeft="4dp"
+
                         app:srcCompat="@android:drawable/star_big_on" />
 
                     <ImageView
@@ -112,14 +113,14 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginLeft="4dp"
-                        app:srcCompat="@android:drawable/star_big_off" />
+                        app:srcCompat="@android:drawable/star_big_on" />
 
                     <ImageView
                         android:id="@+id/star5"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginLeft="4dp"
-                        app:srcCompat="@android:drawable/star_big_off" />
+                        app:srcCompat="@android:drawable/star_big_on" />
 
                     <TextView
                         android:id="@+id/detailed_rating"
@@ -141,6 +142,7 @@
 
                 <TextView
                     android:id="@+id/price"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

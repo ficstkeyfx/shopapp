@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +40,8 @@ public class ProfileFragment extends Fragment
     FirebaseStorage storage;
     FirebaseAuth auth;
     TextView ten, name, gender, birth, CCCD, ngayCap, noiCap, ngayHetHan, email, address, job, position, phone, sdt;
-
+    ScrollView scrollView;
+    ProgressBar progressBar;
     CircleImageView avatar;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -74,6 +77,12 @@ public class ProfileFragment extends Fragment
         ngayHetHan = root.findViewById(R.id.ngayHetHan);
 
         avatar = root.findViewById(R.id.avatar);
+
+        scrollView = root.findViewById(R.id.scrollView3);
+        progressBar = root.findViewById(R.id.progressbar);
+
+        progressBar.setVisibility(View.VISIBLE);
+        scrollView.setVisibility(View.GONE);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String id = user.getUid();
@@ -282,6 +291,8 @@ public class ProfileFragment extends Fragment
             {
                 String dataPosition = snapshot.getValue().toString();
                 position.setText(dataPosition);
+                progressBar.setVisibility(View.GONE);
+                scrollView.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -330,20 +341,24 @@ public class ProfileFragment extends Fragment
         if(data.getData()!=null){
             Uri profileUri = data.getData();
             avatar.setImageURI(profileUri);
-
+            progressBar.setVisibility(View.VISIBLE);
+            scrollView.setVisibility(View.GONE);
+            Toast.makeText(getContext(),"Đang tải ảnh lên", Toast.LENGTH_SHORT).show();
             final StorageReference reference = storage.getReference().child("profile_picture")
                     .child(auth.getCurrentUser().getUid());
 
             reference.putFile(profileUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(getContext(),"Uploaded", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+                    scrollView.setVisibility(View.VISIBLE);
+                    Toast.makeText(getContext(),"Đã tải xong", Toast.LENGTH_SHORT).show();
                     reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
                             database.getReference().child("Users").child(auth.getCurrentUser().getUid())
                                     .child("avatar").setValue(uri.toString());
-                            Toast.makeText(getContext(),"Profile Uploaded", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(),"Cập nhật thành công", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

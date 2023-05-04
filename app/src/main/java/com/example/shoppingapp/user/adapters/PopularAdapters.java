@@ -14,16 +14,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.shoppingapp.R;
+import com.example.shoppingapp.user.activities.DetailedActivity;
 import com.example.shoppingapp.user.activities.ViewAllActivity;
 import com.example.shoppingapp.user.models.PopularModel;
+import com.example.shoppingapp.user.models.ViewAllModel;
 
 import java.util.List;
 
 public class PopularAdapters extends RecyclerView.Adapter<PopularAdapters.ViewHolder> {
     private Context context;
-    private List<PopularModel> popularModelList;
+    private List<ViewAllModel> popularModelList;
 
-    public PopularAdapters(Context context, List<PopularModel> popularModelList) {
+    public PopularAdapters(Context context, List<ViewAllModel> popularModelList) {
         this.context = context;
         this.popularModelList = popularModelList;
     }
@@ -40,13 +42,13 @@ public class PopularAdapters extends RecyclerView.Adapter<PopularAdapters.ViewHo
         holder.name.setText(popularModelList.get(position).getName());
         holder.description.setText(popularModelList.get(position).getDescription());
         holder.rating.setText(popularModelList.get(position).getRating());
-        holder.discount.setText(popularModelList.get(position).getDiscount());
+//        holder.discount.setText(popularModelList.get(position).getDiscount());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, ViewAllActivity.class);
-                intent.putExtra("type",popularModelList.get(position).getType());
+                Intent intent = new Intent(context, DetailedActivity.class);
+                intent.putExtra("detail",popularModelList.get(position));
                 context.startActivity(intent);
             }
         });

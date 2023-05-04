@@ -8,6 +8,7 @@
 
 
     <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,8 +25,8 @@
                 android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:background="#FFFFFF"
                 android:layout_marginTop="20dp"
+                android:background="#FFFFFF"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -50,15 +51,16 @@
                         android:id="@+id/ten"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:minWidth="48dp"
-                        android:textStyle="bold"
-                        android:minHeight="48dp"
                         android:layout_marginStart="20dp"
                         android:gravity="center_vertical"
+                        android:minWidth="48dp"
+                        android:minHeight="48dp"
                         android:textSize="20dp"
+                        android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/avatar"
                         tools:ignore="TextSizeCheck" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -66,12 +68,12 @@
 
                         <TextView
                             android:id="@+id/sdt"
-                            android:textStyle="bold"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:gravity="center_vertical"
                             android:layout_marginStart="20dp"
+                            android:gravity="center_vertical"
                             android:textSize="20dp"
+                            android:textStyle="bold"
                             tools:ignore="TextSizeCheck" />
 
 
@@ -80,36 +82,39 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linearLayout5"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/linearLayout5"
-                android:orientation="horizontal"
                 android:layout_marginTop="10dp"
-                android:background="#C7ECF1">
+                android:background="#C7ECF1"
+                android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="270dp"
                     android:layout_height="match_parent"
-                    android:text="Thông tin định danh"
-                    android:textSize="20dp"
                     android:layout_marginStart="20dp"
                     android:gravity="center_vertical"
-                    android:textColor="@color/black"/>
+                    android:text="Thông tin định danh"
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
+
                 <TextView
                     android:id="@+id/UpdateDinhDanh"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:textSize="18dp"
+                    android:text="Cập nhật"
                     android:textColor="#673AB7"
-                    android:text="Cập nhật"/>
+                    android:textSize="18dp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/linearLayout6"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:background="@color/white">
+                android:background="@color/white"
+                android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -118,8 +123,8 @@
                     <TextView
                         android:layout_width="200dp"
                         android:layout_height="match_parent"
-                        android:gravity="center_vertical"
                         android:layout_marginStart="10dp"
+                        android:gravity="center_vertical"
                         android:minHeight="48dp"
                         android:text="Tên"
                         android:textSize="18dp" />
@@ -133,6 +138,7 @@
                         android:textSize="18dp"
                         android:textStyle="bold" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -141,8 +147,8 @@
                     <TextView
                         android:layout_width="200dp"
                         android:layout_height="match_parent"
-                        android:gravity="center_vertical"
                         android:layout_marginStart="10dp"
+                        android:gravity="center_vertical"
                         android:minHeight="48dp"
                         android:text="Số điện thoại"
                         android:textSize="18dp" />
@@ -156,6 +162,7 @@
                         android:textSize="18dp"
                         android:textStyle="bold" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -164,8 +171,8 @@
                     <TextView
                         android:layout_width="200dp"
                         android:layout_height="match_parent"
-                        android:gravity="center_vertical"
                         android:layout_marginStart="10dp"
+                        android:gravity="center_vertical"
                         android:minHeight="48dp"
                         android:text="Giới tính"
                         android:textSize="18dp" />
@@ -179,6 +186,7 @@
                         android:textSize="18dp"
                         android:textStyle="bold" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -187,8 +195,8 @@
                     <TextView
                         android:layout_width="200dp"
                         android:layout_height="match_parent"
-                        android:gravity="center_vertical"
                         android:layout_marginStart="10dp"
+                        android:gravity="center_vertical"
                         android:minHeight="48dp"
                         android:text="Ngày sinh"
                         android:textSize="18dp" />
@@ -202,6 +210,7 @@
                         android:textSize="18dp"
                         android:textStyle="bold" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -210,8 +219,8 @@
                     <TextView
                         android:layout_width="200dp"
                         android:layout_height="match_parent"
-                        android:gravity="center_vertical"
                         android:layout_marginStart="10dp"
+                        android:gravity="center_vertical"
                         android:minHeight="48dp"
                         android:text="CMND/CCCD/Hộ chiếu"
                         android:textSize="18dp" />
@@ -225,6 +234,7 @@
                         android:textSize="18dp"
                         android:textStyle="bold" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -233,8 +243,8 @@
                     <TextView
                         android:layout_width="200dp"
                         android:layout_height="match_parent"
-                        android:gravity="center_vertical"
                         android:layout_marginStart="10dp"
+                        android:gravity="center_vertical"
                         android:minHeight="48dp"
                         android:text="Ngày cấp giấy tờ"
                         android:textSize="18dp" />
@@ -248,6 +258,7 @@
                         android:textSize="18dp"
                         android:textStyle="bold" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -256,8 +267,8 @@
                     <TextView
                         android:layout_width="200dp"
                         android:layout_height="match_parent"
-                        android:gravity="center_vertical"
                         android:layout_marginStart="10dp"
+                        android:gravity="center_vertical"
                         android:minHeight="48dp"
                         android:text="Nơi cấp giấy tờ"
                         android:textSize="18dp" />
@@ -271,6 +282,7 @@
                         android:textSize="18dp"
                         android:textStyle="bold" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -279,8 +291,8 @@
                     <TextView
                         android:layout_width="200dp"
                         android:layout_height="match_parent"
-                        android:gravity="center_vertical"
                         android:layout_marginStart="10dp"
+                        android:gravity="center_vertical"
                         android:minHeight="48dp"
                         android:text="Ngày hết hạn giấy tờ"
                         android:textSize="18dp" />
@@ -297,36 +309,39 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linearLayout7"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/linearLayout7"
-                android:orientation="horizontal"
                 android:layout_marginTop="10dp"
-                android:background="#C7ECF1">
+                android:background="#C7ECF1"
+                android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="270dp"
                     android:layout_height="match_parent"
-                    android:text="Thông tin bổ sung"
-                    android:textSize="20dp"
                     android:layout_marginStart="20dp"
                     android:gravity="center_vertical"
-                    android:textColor="@color/black"/>
+                    android:text="Thông tin bổ sung"
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
+
                 <TextView
                     android:id="@+id/UpdateBoSung"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:textSize="18dp"
+                    android:text="Cập nhật"
                     android:textColor="#673AB7"
-                    android:text="Cập nhật"/>
+                    android:textSize="18dp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/linearLayout8"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:background="@color/white">
+                android:background="@color/white"
+                android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -335,8 +350,8 @@
                     <TextView
                         android:layout_width="100dp"
                         android:layout_height="match_parent"
-                        android:gravity="center_vertical"
                         android:layout_marginStart="10dp"
+                        android:gravity="center_vertical"
                         android:minHeight="48dp"
                         android:text="Email"
                         android:textSize="18dp" />
@@ -351,6 +366,7 @@
                         android:textSize="18dp"
                         android:textStyle="bold" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -359,8 +375,8 @@
                     <TextView
                         android:layout_width="200dp"
                         android:layout_height="match_parent"
-                        android:gravity="center_vertical"
                         android:layout_marginStart="10dp"
+                        android:gravity="center_vertical"
                         android:minHeight="48dp"
                         android:text="Địa chỉ"
                         android:textSize="18dp" />
@@ -374,6 +390,7 @@
                         android:textSize="18dp"
                         android:textStyle="bold" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -382,8 +399,8 @@
                     <TextView
                         android:layout_width="200dp"
                         android:layout_height="match_parent"
-                        android:gravity="center_vertical"
                         android:layout_marginStart="10dp"
+                        android:gravity="center_vertical"
                         android:minHeight="48dp"
                         android:text="Nghề nghiệp"
                         android:textSize="18dp" />
@@ -397,6 +414,7 @@
                         android:textSize="18dp"
                         android:textStyle="bold" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -405,8 +423,8 @@
                     <TextView
                         android:layout_width="200dp"
                         android:layout_height="match_parent"
-                        android:gravity="center_vertical"
                         android:layout_marginStart="10dp"
+                        android:gravity="center_vertical"
                         android:minHeight="48dp"
                         android:text="Chức vụ"
                         android:textSize="18dp" />
@@ -425,6 +443,17 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

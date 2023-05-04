@@ -77,7 +77,6 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         UserModel userModel = snapshot.getValue(UserModel.class);
-
                         headerName.setText(userModel.getName());
                         headerEmail.setText(userModel.getEmail());
                         if(userModel!=null||userModel.getAvatar()!=null||userModel.getAvatar().length()!=0)  Glide.with(HomeActivity.this).load(userModel.getAvatar()).into(headerImg);
