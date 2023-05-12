@@ -101,13 +101,13 @@
                     android:id="@+id/imageView11"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    app:srcCompat="@android:drawable/star_big_off" />
+                    app:srcCompat="@android:drawable/star_big_on" />
 
                 <ImageView
                     android:id="@+id/imageView12"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    app:srcCompat="@android:drawable/star_big_off" />
+                    app:srcCompat="@android:drawable/star_big_on" />
 
                 <TextView
                     android:id="@+id/view_all_rating"

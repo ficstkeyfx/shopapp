@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,6 +43,7 @@ public class ViewAllAdapters extends RecyclerView.Adapter<ViewAllAdapters.ViewHo
         holder.description.setText(viewAllModelList.get(position).getDescription());
         holder.price.setText(viewAllModelList.get(position).getPrice()+"000đ");
         holder.rating.setText(viewAllModelList.get(position).getRating());
+        holder.ratingBar.setRating(Float.parseFloat(viewAllModelList.get(position).getRating()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +64,7 @@ public class ViewAllAdapters extends RecyclerView.Adapter<ViewAllAdapters.ViewHo
 
         ImageView imgView;
         TextView name,description,price,rating;
+        RatingBar ratingBar;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imgView = itemView.findViewById(R.id.view_all_img);
@@ -69,6 +72,7 @@ public class ViewAllAdapters extends RecyclerView.Adapter<ViewAllAdapters.ViewHo
             description = itemView.findViewById(R.id.view_all_des);
             price = itemView.findViewById(R.id.view_all_price);
             rating = itemView.findViewById(R.id.view_all_rating);
+            ratingBar = itemView.findViewById(R.id.rating);
         }
     }
 }

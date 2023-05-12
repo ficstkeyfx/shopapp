@@ -13,13 +13,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/dialogBox"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/purple_700">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/forgotTitle"
-            android:text="Forgot Password"
+            android:text="Quên mật khẩu"
             android:padding="10dp"
             android:textSize="17sp"
             android:background="@color/purple_500"
@@ -32,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/desc"
-            android:text="Enter your email address:"
+            android:text="Nhập địa chỉ email của bạn:"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="8dp"
@@ -59,12 +60,12 @@
             tools:ignore="SpeakableTextPresentCheck" />
 
         <Button
-            android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/btnCancel"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="10dp"
-            android:text="Cancel"
+            android:text="Hủy bỏ"
             android:textColor="@color/white"
             android:textSize="14sp"
             app:cornerRadius = "20dp"
@@ -76,15 +77,16 @@
             app:layout_constraintEnd_toStartOf="@id/btnReset"/>
 
         <Button
-            android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/btnReset"
-            android:text="Enter"
+            android:text="Tiếp tục"
             android:layout_marginStart="10dp"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="40dp"
             android:textColor="@color/white"
+            android:maxLines="1"
             android:textSize="14sp"
             app:cornerRadius = "20dp"
             app:layout_constraintEnd_toEndOf="parent"

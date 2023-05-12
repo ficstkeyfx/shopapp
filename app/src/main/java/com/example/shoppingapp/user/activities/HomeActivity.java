@@ -46,6 +46,7 @@ public class HomeActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
 
+
         setSupportActionBar(binding.appBarHome.toolbar);
 //        binding.appBarHome.fab.setOnClickListener(new View.OnClickListener() {
 //            @Override

@@ -1,25 +1,37 @@
 package com.example.shoppingapp.user.activities;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.shoppingapp.R;
+import com.example.shoppingapp.user.adapters.CommentAdapters;
+import com.example.shoppingapp.user.models.CommentModel;
 import com.example.shoppingapp.user.models.ViewAllModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
@@ -28,15 +40,18 @@ public class DetailedActivity extends AppCompatActivity {
     TextView quantity, name;
     int totalQuantity = 1;
     int totalPrice = 0;
-    ImageView detailImg,addItem,removeItem;
-    TextView salePrice,originPrice,rating, description;
+    ImageView detailImg,addItem,removeItem, addComment;
+    TextView salePrice,originPrice,rating, description, binhLuan, detailed_rating;
     Button addToCart;
     ViewAllModel viewAllModel = null;
-
+    ListView lstView;
     ImageView back;
-
+    RatingBar ratingBar;
+    String id = "";
     FirebaseFirestore firestore;
     FirebaseAuth auth;
+    FirebaseDatabase database;
+    float sum = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +62,14 @@ public class DetailedActivity extends AppCompatActivity {
         if(object instanceof ViewAllModel){
             viewAllModel = (ViewAllModel) object;
         }
-
+        database = FirebaseDatabase.getInstance();
         firestore = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
 
+        detailed_rating = findViewById(R.id.detailed_rating);
+        ratingBar = findViewById(R.id.rating);
+        addComment = findViewById(R.id.addComment);
+        binhLuan = findViewById(R.id.binhLuan);
         detailImg = findViewById(R.id.detailed_img);
         addItem = findViewById(R.id.add_item);
         removeItem = findViewById(R.id.remove_item);
@@ -62,6 +81,8 @@ public class DetailedActivity extends AppCompatActivity {
         quantity = findViewById(R.id.quantity);
         name = findViewById(R.id.productTitle);
         back = findViewById(R.id.goBack);
+
+        lstView = findViewById(R.id.lstComment);
 
         if(viewAllModel!=null){
             Glide.with(getApplicationContext()).load(viewAllModel.getImg_url()).into(detailImg);
@@ -105,6 +126,85 @@ public class DetailedActivity extends AppCompatActivity {
             }
         });
 
+        addComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DetailedActivity.this, AddCommentActivity.class);
+                intent.putExtra("key", id);
+                startActivity(intent);
+            }
+        });
+
+        ArrayList<CommentModel> lstComment = new ArrayList<CommentModel>();
+        CommentAdapters commentAdapters;
+        commentAdapters = new CommentAdapters(lstComment);
+        firestore.collection("AllProducts").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                for (DocumentSnapshot doc: task.getResult())
+                {
+                    String nameP = doc.getString("name");
+                    if (viewAllModel.getName().equalsIgnoreCase(nameP))
+                    {
+                        id = doc.getId();
+                        System.out.println(id);
+                        firestore.collection("AllProducts").document(id).collection("Comments").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            for (DocumentSnapshot doc: task.getResult())
+                            {
+                                String name = doc.getString("name");
+                                String ava = doc.getString("avatar");
+                                String date = doc.getString("date");
+                                String comment = doc.getString("comment");
+
+                                float rating = Float.parseFloat( doc.get("rating").toString());
+                                sum += rating;
+                                CommentModel commentModel = new CommentModel(ava, name, date, comment, rating);
+                                lstComment.add(commentModel);
+                                commentAdapters.notifyDataSetChanged();
+                                binhLuan.setText("Bình luận (" + lstComment.size() + ")");
+                            }
+                            if (lstComment.size() != 0)
+                            {
+                                float danhgia = sum / lstComment.size();
+                                ratingBar.setRating(danhgia);
+                                detailed_rating.setText(String.valueOf(danhgia));
+
+                            }
+                            else
+                            {
+                                ratingBar.setRating(5);
+                                detailed_rating.setText("5.0");
+                            }
+                        }
+
+                    });
+                        break;
+                    }
+                }
+            }
+        });
+
+//        firestore.collection("AllProducts").document(id).collection("Comments").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                for (DocumentSnapshot doc: task.getResult())
+//                {
+//                    String name = doc.getString("name");
+//                    String ava = doc.getString("img_url");
+//                    String date = doc.getString("date");
+//                    String comment = doc.getString("comment");
+//                    float rating = Float.parseFloat( doc.getString("rating"));
+//                    CommentModel commentModel = new CommentModel(ava, name, date, comment, rating);
+//                    lstComment.add(commentModel);
+//                }
+//            }
+//        });
+
+
+        lstView.setAdapter(commentAdapters);
+
     }
 
     private void addedToCart() {
@@ -135,4 +235,6 @@ public class DetailedActivity extends AppCompatActivity {
                 });
 
     }
+
+
 }

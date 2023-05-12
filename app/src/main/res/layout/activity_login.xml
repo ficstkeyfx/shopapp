@@ -59,6 +59,7 @@
             android:drawableStart="@drawable/keylog"
             android:drawablePadding="6dp"
             android:hint="Password"
+            android:inputType="textPassword"
             android:textColor="#888887"
             android:paddingBottom="12dp"
             android:paddingTop="12dp"
