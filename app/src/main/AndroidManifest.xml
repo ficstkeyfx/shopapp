@@ -3,13 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.shoppingapp">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <application
         android:allowBackup="true"
-        android:usesCleartextTraffic="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/icon"
@@ -17,44 +16,87 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.ShoppingApp"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyBmKusBrcGbviJVOsOcut7n7RZgPUpYaZI"/>
+        <activity
+            android:name=".StatAccountActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StatSoldProductActivity"
+            android:exported="false" />
+        <!--
+             TODO: Before you run your application, you need a Google Maps API key.
 
+             To get one, follow the directions here:
+
+                https://developers.google.com/maps/documentation/android-sdk/get-api-key
+
+             Once you have your API key (it starts with "AIza"), define a new property in your
+             project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
+             "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDY6IXw1UWd6msutiPu2vgxt2Z44ZhibeQ" />
+
+        <activity
+            android:name=".admin.activities.statistic.StatisticActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.activities.statistic.StatSoldProductActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.activities.statistic.StatCountProductActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.activities.statistic.StatRevenueActivity"
+            android:exported="false" />
         <activity
             android:name=".user.activities.PayActivity"
             android:exported="true"
             android:launchMode="singleTask">
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="demozpdk" android:host="app" />
+
+                <data
+                    android:host="app"
+                    android:scheme="demozpdk" />
             </intent-filter>
         </activity>
 
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-        <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="com.facebook.sdk.ClientToken"
+            android:value="@string/facebook_client_token" />
 
-
-        <activity android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
         <activity
             android:name="com.facebook.CustomTabActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".user.activities.PlaceOrderActivity"
             android:exported="false" />
+        <activity
+            android:name=".admin.activities.statistic.StatisticActivity"
+            android:exported="false"
+            tools:ignore="DuplicateActivity" />
         <activity
             android:name=".user.activities.AddCommentActivity"
             android:exported="false" />
@@ -96,16 +138,16 @@
             android:exported="true" />
         <activity
             android:name=".user.ui.profile.ThongTinDinhDanh"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".user.ui.profile.ThongTinBoSungActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".admin.activities.MenuAdminActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".admin.activities.manageAccount.ManageAccountActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>

@@ -79,35 +79,13 @@
                     android:textColor="@color/black"
                     android:textStyle="bold" />
 
-                <ImageView
-                    android:id="@+id/imageView8"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    app:srcCompat="@android:drawable/star_big_on" />
-
-                <ImageView
-                    android:id="@+id/imageView9"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    app:srcCompat="@android:drawable/star_big_on" />
-
-                <ImageView
-                    android:id="@+id/imageView10"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    app:srcCompat="@android:drawable/star_big_on" />
-
-                <ImageView
-                    android:id="@+id/imageView11"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    app:srcCompat="@android:drawable/star_big_on" />
-
-                <ImageView
-                    android:id="@+id/imageView12"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    app:srcCompat="@android:drawable/star_big_on" />
+                <RatingBar
+                    android:id="@+id/rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:isIndicator="true"
+                    style="@android:style/Widget.DeviceDefault.Light.RatingBar.Small"/>
 
                 <TextView
                     android:id="@+id/view_all_rating"
@@ -116,7 +94,7 @@
                     android:layout_marginLeft="8dp"
                     android:text="3.0"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="15dp"
                     android:textStyle="italic" />
             </LinearLayout>
 

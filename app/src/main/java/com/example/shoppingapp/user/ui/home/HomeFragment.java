@@ -150,8 +150,7 @@ public class HomeFragment extends Fragment {
                         if(task.isSuccessful()){
                             for(QueryDocumentSnapshot document: task.getResult()){
 
-                                if(document.get("collection")!=null&&((String)document.get("collection")).equals("recommend")){
-                                    System.out.println("---");
+                                if(Float.parseFloat(document.get("rating").toString()) >= 4.5){
                                     ViewAllModel recommendModel = document.toObject(ViewAllModel.class);
                                     recommendModelList.add(recommendModel);
                                     recommendAdapters.notifyDataSetChanged();

@@ -186,6 +186,79 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:text="Size giày"
+                        android:textColor="@color/purple_700"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:text="39"
+                                android:id="@+id/size39"
+                                android:background="@drawable/back"
+                                android:gravity="center"/>
+                            <TextView
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:text="40"
+                                android:layout_marginLeft="10dp"
+                                android:id="@+id/size40"
+                                android:background="@drawable/back"
+                                android:gravity="center"/>
+                            <TextView
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:text="41"
+                                android:layout_marginLeft="10dp"
+                                android:id="@+id/size41"
+                                android:background="@drawable/back"
+                                android:gravity="center"/>
+                            <TextView
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:text="42"
+                                android:layout_marginLeft="10dp"
+                                android:id="@+id/size42"
+                                android:background="@drawable/back"
+                                android:gravity="center"/>
+                            <TextView
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:text="43"
+                                android:layout_marginLeft="10dp"
+                                android:id="@+id/size43"
+                                android:background="@drawable/back"
+                                android:gravity="center"/>
+                            <TextView
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:text="44"
+                                android:layout_marginLeft="10dp"
+                                android:id="@+id/size44"
+                                android:background="@drawable/back"
+                                android:gravity="center"/>
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:layout_marginTop="10dp"
                     android:layout_gravity="right">
                     <TextView
@@ -194,6 +267,7 @@
                         android:layout_marginLeft="8dp"
                         android:text="Đánh giá"
                         android:id="@+id/binhLuan"
+
                         android:textColor="@color/purple_700"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -215,59 +289,59 @@
 
         </LinearLayout>
     </ScrollView>
-
-    <LinearLayout
-        android:id="@+id/lnbtn"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:elevation="5dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
         <LinearLayout
+            android:id="@+id/lnbtn"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#EFEDED"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_height="55dp"
+            android:elevation="5dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-            <ImageView
-                android:id="@+id/remove_item"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:elevation="5dp"
-                app:srcCompat="@drawable/remove_circle" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#EFEDED"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/quantity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:gravity="center_horizontal"
-                android:text="1"
+                <ImageView
+                    android:id="@+id/remove_item"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:elevation="5dp"
+                    app:srcCompat="@drawable/remove_circle" />
 
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:gravity="center_horizontal"
+                    android:text="1"
 
-            <ImageView
-                android:id="@+id/add_item"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:elevation="5dp"
-                app:srcCompat="@drawable/add_circle" />
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/add_item"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:elevation="5dp"
+                    app:srcCompat="@drawable/add_circle" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/add_to_cart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/purple_500"
+                android:text="Thêm vào giỏ hàng" />
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/add_to_cart"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/purple_500"
-            android:text="Thêm vào giỏ hàng" />
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

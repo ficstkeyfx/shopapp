@@ -83,6 +83,16 @@
                 android:textSize="17dp"
                 android:text="QUẢN LÝ ĐƠN HÀNG"/>
 
+            <Button
+                android:id="@+id/statistic"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="50dp"
+                android:text="THỐNG KÊ"
+                android:textSize="17dp" />
+
         </LinearLayout>
     </ScrollView>
 

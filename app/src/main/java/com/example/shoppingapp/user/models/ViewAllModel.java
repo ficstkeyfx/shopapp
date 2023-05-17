@@ -3,13 +3,14 @@ package com.example.shoppingapp.user.models;
 import java.io.Serializable;
 
 public class ViewAllModel implements Serializable {
-    String name,description,rating,img_url,type;
+    float rating;
+    String name,description,img_url,type;
     int price;
 
     public ViewAllModel() {
     }
 
-    public ViewAllModel(String name, String description, String rating, String img_url,String type, int price) {
+    public ViewAllModel(String name, String description, float rating, String img_url,String type, int price) {
         this.name = name;
         this.description = description;
         this.rating = rating;
@@ -42,11 +43,11 @@ public class ViewAllModel implements Serializable {
         this.description = description;
     }
 
-    public String getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 

@@ -40,6 +40,8 @@
         app:layout_constraintTop_toBottomOf="@id/imgnull"
         app:layout_constraintVertical_bias="0.074" />
 
+
+
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
@@ -50,94 +52,101 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <fragment
-            android:id="@+id/fragMaps"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="200dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical"
-            android:layout_below="@+id/fragMaps">
-<!--            -->
-
-
-            <TextView
-                android:id="@+id/cart_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Họ và tên:"
-                android:textColor="@color/purple_700"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/cart_mobile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Số điện thoại:"
-                android:textColor="@color/purple_700"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/cart_total"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Tổng tiền:"
-                    android:textColor="@color/purple_700"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:textColor="@color/purple_700"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/edtAddress"
+                <fragment
+                    android:id="@+id/fragMaps"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp" />
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_button_border_red"
-                    android:ellipsize="end"
-                    android:hint="Địa chỉ"
-                    android:maxLines="1"
-                    android:padding="10dp"
-                    android:singleLine="true"
-                    android:textSize="18dp" />
+                    android:layout_below="@+id/fragMaps"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+                    <!--            -->
 
-                <ImageView
-                    android:id="@+id/imgGetAddress"
-                    android:layout_width="wrap_content"
+
+                    <TextView
+                        android:id="@+id/cart_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Họ và tên:"
+                        android:textColor="@color/purple_700"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/cart_mobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Số điện thoại:"
+                        android:textColor="@color/purple_700"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/cart_total"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Tổng tiền:"
+                            android:textColor="@color/purple_700"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:textColor="@color/purple_700"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="6dp"
-                    android:src="@drawable/ic_map" />
-            </LinearLayout>
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/edtAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_button_border_red"
+                        android:ellipsize="end"
+                        android:hint="Địa chỉ"
+                        android:maxLines="1"
+                        android:padding="10dp"
+                        android:singleLine="true"
+                        android:textSize="18dp" />
+
+                    <ImageView
+                        android:id="@+id/imgGetAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="6dp"
+                        android:src="@drawable/ic_map" />
+                </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcMyCart"
@@ -147,19 +156,23 @@
                 android:layout_marginBottom="50dp" />
         </LinearLayout>
 
+            </LinearLayout>
+        </ScrollView>
+
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnBuyNow"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="bottom"
-            android:background="@drawable/bg_button_red"
-            android:padding="10dp"
-            android:text="Mua Ngay"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+        android:id="@+id/btnBuyNow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:background="@drawable/bg_button_red"
+        android:padding="10dp"
+        android:text="Mua Ngay"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
     </RelativeLayout>
+
     <ProgressBar
         android:id="@+id/progressbar"
         android:layout_width="wrap_content"

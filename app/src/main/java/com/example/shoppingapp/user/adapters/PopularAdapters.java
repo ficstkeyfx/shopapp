@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,7 +42,8 @@ public class PopularAdapters extends RecyclerView.Adapter<PopularAdapters.ViewHo
         Glide.with(context).load(popularModelList.get(position).getImg_url()).into(holder.popImg);
         holder.name.setText(popularModelList.get(position).getName());
         holder.description.setText(popularModelList.get(position).getDescription());
-        holder.rating.setText(popularModelList.get(position).getRating());
+        holder.rating.setText(String.valueOf(popularModelList.get(position).getRating()));
+        holder.ratingBar.setRating(popularModelList.get(position).getRating());
 //        holder.discount.setText(popularModelList.get(position).getDiscount());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +63,7 @@ public class PopularAdapters extends RecyclerView.Adapter<PopularAdapters.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView popImg;
+        RatingBar ratingBar;
         TextView name,description,rating,discount;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -69,6 +72,7 @@ public class PopularAdapters extends RecyclerView.Adapter<PopularAdapters.ViewHo
             description = itemView.findViewById(R.id.pop_des);
             rating = itemView.findViewById(R.id.pop_rating);
             discount = itemView.findViewById(R.id.pop_discount);
+            ratingBar = itemView.findViewById(R.id.rating);
         }
     }
 }

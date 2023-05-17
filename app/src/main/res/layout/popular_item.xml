@@ -40,12 +40,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ratingbar"
-                app:tint="@color/purple_700"/>
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+            <RatingBar
+                android:id="@+id/rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:isIndicator="true"
+                style="@android:style/Widget.DeviceDefault.Light.RatingBar.Small"/>
             <TextView
                 android:id="@+id/pop_rating"
                 android:layout_width="wrap_content"

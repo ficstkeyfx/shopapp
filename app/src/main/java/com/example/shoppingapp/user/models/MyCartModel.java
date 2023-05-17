@@ -6,17 +6,28 @@ public class MyCartModel implements Serializable {
     String productName, productDate, productTime, totalQuantity, img_url;
     int totalPrice,productPrice;
     String documentId;
+    String productType;
     public MyCartModel() {
     }
 
-    public MyCartModel(String productName, String productDate, String productTime, String totalQuantity, String img_url, int totalPrice, int productPrice) {
+    public MyCartModel(String productName, String productDate, String productTime, String totalQuantity, String img_url, int totalPrice, int productPrice, String documentId, String productType) {
         this.productName = productName;
-        this.productTime = productTime;
         this.productDate = productDate;
+        this.productTime = productTime;
         this.totalQuantity = totalQuantity;
         this.img_url = img_url;
         this.totalPrice = totalPrice;
         this.productPrice = productPrice;
+        this.documentId = documentId;
+        this.productType = productType;
+    }
+
+    public String getProductType() {
+        return productType;
+    }
+
+    public void setProductType(String productType) {
+        this.productType = productType;
     }
 
     public String getDocumentId() {

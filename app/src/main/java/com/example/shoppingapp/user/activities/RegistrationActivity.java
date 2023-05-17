@@ -87,7 +87,7 @@ public class RegistrationActivity extends AppCompatActivity {
             Toast.makeText(this, "Mật khẩu ít hơn 6 ký tự", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(rePassword!=userPassword){
+        if(!rePassword.equals(userPassword)){
             Toast.makeText(this,"Xác nhận mật khẩu không giống nhau",Toast.LENGTH_SHORT).show();
             return;
         }

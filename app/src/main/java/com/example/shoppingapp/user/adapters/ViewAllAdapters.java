@@ -42,9 +42,12 @@ public class ViewAllAdapters extends RecyclerView.Adapter<ViewAllAdapters.ViewHo
         holder.name.setText(viewAllModelList.get(position).getName());
         holder.description.setText(viewAllModelList.get(position).getDescription());
         holder.price.setText(viewAllModelList.get(position).getPrice()+"000đ");
-        holder.rating.setText(viewAllModelList.get(position).getRating());
-        holder.ratingBar.setRating(Float.parseFloat(viewAllModelList.get(position).getRating()));
+        holder.rating.setText(String.valueOf(viewAllModelList.get(position).getRating()));
+        try {
+            holder.ratingBar.setRating(viewAllModelList.get(position).getRating());
+        }catch (Exception e){
 
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

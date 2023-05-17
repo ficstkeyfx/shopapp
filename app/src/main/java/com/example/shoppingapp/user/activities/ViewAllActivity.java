@@ -146,7 +146,10 @@ public class ViewAllActivity extends AppCompatActivity {
                     }
                     progressBar.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.VISIBLE);
+                    int n = task.getResult().getDocuments().size();
+                    System.out.println(n);
                 }
+
             });
         }
         back.setOnClickListener(new View.OnClickListener() {

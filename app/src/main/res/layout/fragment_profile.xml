@@ -348,7 +348,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="100dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginStart="10dp"
                         android:gravity="center_vertical"
@@ -360,8 +360,7 @@
                         android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center_vertical|right
-"
+                        android:gravity="center_vertical|right"
                         android:minHeight="48dp"
                         android:textSize="18dp"
                         android:textStyle="bold" />

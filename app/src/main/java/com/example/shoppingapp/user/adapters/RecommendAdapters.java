@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -43,7 +44,8 @@ public class RecommendAdapters extends RecyclerView.Adapter<RecommendAdapters.Vi
         Glide.with(context).load(recommendModelList.get(position).getImg_url()).into(holder.recImg);
         holder.name.setText(recommendModelList.get(position).getName());
         holder.description.setText(recommendModelList.get(position).getDescription());
-        holder.rating.setText(recommendModelList.get(position).getRating());
+        holder.rating.setText(String.valueOf(recommendModelList.get(position).getRating()));
+        holder.ratingBar.setRating(recommendModelList.get(position).getRating());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,12 +65,14 @@ public class RecommendAdapters extends RecyclerView.Adapter<RecommendAdapters.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView recImg;
         TextView description, name, rating;
+        RatingBar ratingBar;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             description = itemView.findViewById(R.id.rec_des);
             name = itemView.findViewById(R.id.rec_name);
             recImg = itemView.findViewById(R.id.rec_img);
             rating = itemView.findViewById(R.id.rec_rating);
+            ratingBar = itemView.findViewById(R.id.rating);
         }
     }
 }

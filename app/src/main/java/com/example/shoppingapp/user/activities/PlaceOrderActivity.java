@@ -3,6 +3,7 @@ package com.example.shoppingapp.user.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -63,7 +64,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                startActivity(new Intent(PlaceOrderActivity.this, HomeActivity.class));
             }
         });
     }

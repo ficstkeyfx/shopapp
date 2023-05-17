@@ -133,7 +133,7 @@ public class AddProduct extends AppCompatActivity {
                     Toast.makeText(AddProduct.this, "Ảnh sản phẩm trống", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                fireStore.collection("AllProducts").add(new ViewAllModel(tenSp ,moTa, "", urlImg, loaiSp, giaSp));
+                fireStore.collection("AllProducts").add(new ViewAllModel(tenSp ,moTa, 5, urlImg, loaiSp, giaSp));
                 Toast.makeText(AddProduct.this, "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
             }
         });

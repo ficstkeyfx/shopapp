@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".admin.activities.statistic.StatisticActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints"
+            android:background="@color/black">
+            <ImageView
+                android:id="@+id/goBack"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/muiten"/>
+
+            <TextView
+                android:layout_marginEnd="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="THỐNG KÊ"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:textSize="25dp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/statAccount"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="50dp"
+            android:text="Tài khoản"
+            android:textSize="17dp" />
+
+        <Button
+            android:id="@+id/statCount"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginStart="50dp"
+            android:textSize="17dp"
+            android:text="Loại giày"/>
+
+
+
+        <Button
+            android:id="@+id/statCountSold"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginStart="50dp"
+            android:text="Sản phẩm đã bán"
+            android:textSize="17dp"/>
+
+        <Button
+            android:id="@+id/revenueStat"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="50dp"
+            android:text="Doanh thu"
+            android:textSize="17dp" />
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

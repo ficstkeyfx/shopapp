@@ -15,7 +15,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,7 +33,6 @@ import android.widget.Toast;
 import com.example.shoppingapp.R;
 import com.example.shoppingapp.user.activities.HomeActivity;
 import com.example.shoppingapp.user.activities.PayActivity;
-import com.example.shoppingapp.user.activities.PlaceOrderActivity;
 import com.example.shoppingapp.user.adapters.MyCartAdapters;
 import com.example.shoppingapp.user.models.MyCartModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -62,7 +60,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class MyCartsFragment extends Fragment implements LocationListener{
+
+public class MyCartsFragment extends Fragment implements OnMapReadyCallback ,LocationListener{
 
     FirebaseFirestore firestore;
     FirebaseAuth auth;
@@ -89,9 +88,7 @@ public class MyCartsFragment extends Fragment implements LocationListener{
     final int REQUEST_CODE_LOCATION = 124;
     public double latitude ,longtitude;
     GoogleMap Map ;
-
     private HomeActivity activity;
-
 
     int price=0;
 
@@ -216,46 +213,43 @@ public class MyCartsFragment extends Fragment implements LocationListener{
         locationPermission = new String[]{Manifest.permission.ACCESS_FINE_LOCATION};
 
         SupportMapFragment supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.fragMaps);
-        supportMapFragment.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(@NonNull GoogleMap googleMap) {
 
-                //When mapp is loaded
-                Map = googleMap ;
 
-             /*   googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-                    @Override
-                    public void onMapClick(@NonNull LatLng latLng) {
-                        //When click on mapp
-
-                        MarkerOptions markerOptions =new MarkerOptions();
-                        //Set postion
-                        markerOptions.position(latLng);
-                        markerOptions.title(edtAddress.getText().toString());
-                        googleMap.clear();
-                        //zoom
-                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                                latLng,13
-                        ));
-                        //add market
-                        googleMap.addMarker(markerOptions);
-
-                    }
-                });*/
-            }
-        });
 
         imgGetAddres.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (checkLocationPermission()) {
-                    detectLocation();
-                } else {
-                    //không cho phép
-                    requestLocationPermission();
+//                startActivity(new Intent(getActivity(), MapsActivity.class));
+//                if (checkLocationPermission()) {
+//
+//                    System.out.println("ok9k");
+//                    detectLocation();
+//                } else {
+//                    //không cho phép
+//                    System.out.println("okk");
+//                    requestLocationPermission();
+//                }
+                String addressUser = address.getText().toString();
+                List<Address> addressList = null;
+                if (!addressUser.isEmpty() || !addressUser.equals("")) {
+                    Geocoder geocoder  = new Geocoder(getActivity());
+                    try {
+                        addressList = geocoder.getFromLocationName(addressUser ,1);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    Address add = addressList.get(0);
+                    LatLng latLng = new LatLng(add.getLatitude(), add.getLongitude());
+                    Map.addMarker(new MarkerOptions().position(latLng).title(addressUser));
+                    Map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
                 }
             }
         });
+        supportMapFragment.getMapAsync(this);
+
+
+
         return root;
     }
 
@@ -266,8 +260,6 @@ public class MyCartsFragment extends Fragment implements LocationListener{
         }
         getCurrentAdress();
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-
-
     }
     private void requestLocationPermission() {
         ActivityCompat.requestPermissions(getActivity(), locationPermission, REQUEST_CODE_LOCATION);
@@ -300,7 +292,7 @@ public class MyCartsFragment extends Fragment implements LocationListener{
     public void onLocationChanged(@NonNull Location location) {
         //location detected
         latitude = location.getLatitude();
-        longtitude =location.getLongitude();
+        longtitude = location.getLongitude();
         getCurrentAdress();
 
 
@@ -312,7 +304,7 @@ public class MyCartsFragment extends Fragment implements LocationListener{
         if(getContext()!=null){
             geocoder = new Geocoder(getContext(), Locale.getDefault());
             //Set postion
-            LatLng latLngUser =new LatLng(latitude ,longtitude);
+            LatLng latLngUser = new LatLng(latitude ,longtitude);
             MarkerOptions markerOptions = new MarkerOptions().position(latLngUser);
             markerOptions.icon(BitmapDescriptorFactory.fromBitmap(
                     BitmapFactory.decodeResource(getResources(),
@@ -329,6 +321,8 @@ public class MyCartsFragment extends Fragment implements LocationListener{
 
         try {
             System.out.println(geocoder);
+            System.out.println(latitude);
+            System.out.println(longtitude);
             addresses = geocoder.getFromLocation(latitude ,longtitude,1);
             System.out.println(addresses);
             String addresss = addresses.get(0).getAddressLine(0);
@@ -361,4 +355,10 @@ public class MyCartsFragment extends Fragment implements LocationListener{
         this.activity= (HomeActivity) activity;
 
     }
+
+    @Override
+    public void onMapReady(@NonNull GoogleMap googleMap) {
+        Map = googleMap;
+    }
+
 }

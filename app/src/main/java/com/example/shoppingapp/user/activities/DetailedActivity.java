@@ -41,7 +41,7 @@ public class DetailedActivity extends AppCompatActivity {
     int totalQuantity = 1;
     int totalPrice = 0;
     ImageView detailImg,addItem,removeItem, addComment;
-    TextView salePrice,originPrice,rating, description, binhLuan, detailed_rating;
+    TextView salePrice,originPrice,rating, description, binhLuan, detailed_rating, size39, size40,size41 ,size42 ,size43 ,size44;
     Button addToCart;
     ViewAllModel viewAllModel = null;
     ListView lstView;
@@ -52,7 +52,7 @@ public class DetailedActivity extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseDatabase database;
     float sum = 0;
-
+    int s39, s40, s41, s42, s43, s44;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +66,12 @@ public class DetailedActivity extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
 
+        size39 = findViewById(R.id.size39);
+        size40 = findViewById(R.id.size40);
+        size41 = findViewById(R.id.size41);
+        size42 = findViewById(R.id.size42);
+        size43 = findViewById(R.id.size43);
+        size44 = findViewById(R.id.size44);
         detailed_rating = findViewById(R.id.detailed_rating);
         ratingBar = findViewById(R.id.rating);
         addComment = findViewById(R.id.addComment);
@@ -86,7 +92,7 @@ public class DetailedActivity extends AppCompatActivity {
 
         if(viewAllModel!=null){
             Glide.with(getApplicationContext()).load(viewAllModel.getImg_url()).into(detailImg);
-            rating.setText(viewAllModel.getRating());
+            rating.setText(String.valueOf(viewAllModel.getRating()));
             description.setText(viewAllModel.getDescription());
             salePrice.setText(viewAllModel.getPrice()+"000đ");
             originPrice.setText((viewAllModel.getPrice()+100)+"000đ");
@@ -115,6 +121,11 @@ public class DetailedActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 totalPrice = totalQuantity * viewAllModel.getPrice();
+                if (s39 == 0 && s40 == 0 && s41 == 0 && s42 == 0 && s43 == 0 && s44 == 0)
+                {
+                    Toast.makeText(DetailedActivity.this, "Bạn chưa chọn size giày", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 addedToCart();
             }
         });
@@ -170,12 +181,13 @@ public class DetailedActivity extends AppCompatActivity {
                                 float danhgia = sum / lstComment.size();
                                 ratingBar.setRating(danhgia);
                                 detailed_rating.setText(String.valueOf(danhgia));
-
+                                firestore.collection("AllProducts").document(id).update("rating", danhgia);
                             }
                             else
                             {
                                 ratingBar.setRating(5);
                                 detailed_rating.setText("5.0");
+                                firestore.collection("AllProducts").document(id).update("rating", 5);
                             }
                         }
 
@@ -186,25 +198,90 @@ public class DetailedActivity extends AppCompatActivity {
             }
         });
 
-//        firestore.collection("AllProducts").document(id).collection("Comments").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                for (DocumentSnapshot doc: task.getResult())
-//                {
-//                    String name = doc.getString("name");
-//                    String ava = doc.getString("img_url");
-//                    String date = doc.getString("date");
-//                    String comment = doc.getString("comment");
-//                    float rating = Float.parseFloat( doc.getString("rating"));
-//                    CommentModel commentModel = new CommentModel(ava, name, date, comment, rating);
-//                    lstComment.add(commentModel);
-//                }
-//            }
-//        });
-
-
         lstView.setAdapter(commentAdapters);
+        size39.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                size39.setBackgroundResource(R.drawable.backsizegiay);
+                size40.setBackgroundResource(R.drawable.back);
+                size41.setBackgroundResource(R.drawable.back);
+                size42.setBackgroundResource(R.drawable.back);
+                size43.setBackgroundResource(R.drawable.back);
+                size44.setBackgroundResource(R.drawable.back);
+                s39 = 1;
+                s40 = s41 = s42 = s43 = s44 = 0;
+            }
+        });
 
+        size40.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                size39.setBackgroundResource(R.drawable.back);
+                size40.setBackgroundResource(R.drawable.backsizegiay);
+                size41.setBackgroundResource(R.drawable.back);
+                size42.setBackgroundResource(R.drawable.back);
+                size43.setBackgroundResource(R.drawable.back);
+                size44.setBackgroundResource(R.drawable.back);
+                s40 = 1;
+                s39 = s41 = s42 = s43 = s44 = 0;
+            }
+        });
+
+        size41.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                size39.setBackgroundResource(R.drawable.back);
+                size40.setBackgroundResource(R.drawable.back);
+                size41.setBackgroundResource(R.drawable.backsizegiay);
+                size42.setBackgroundResource(R.drawable.back);
+                size43.setBackgroundResource(R.drawable.back);
+                size44.setBackgroundResource(R.drawable.back);
+                s41 = 1;
+                s39 = s40 = s42 = s43 = s44 = 0;
+            }
+        });
+
+        size42.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                size39.setBackgroundResource(R.drawable.back);
+                size40.setBackgroundResource(R.drawable.back);
+                size41.setBackgroundResource(R.drawable.back);
+                size42.setBackgroundResource(R.drawable.backsizegiay);
+                size43.setBackgroundResource(R.drawable.back);
+                size44.setBackgroundResource(R.drawable.back);
+                s42 = 1;
+                s39 = s40 = s41 = s43 = s44 = 0;
+            }
+        });
+        size43.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                size39.setBackgroundResource(R.drawable.back);
+                size40.setBackgroundResource(R.drawable.back);
+                size41.setBackgroundResource(R.drawable.back);
+                size42.setBackgroundResource(R.drawable.back);
+                size43.setBackgroundResource(R.drawable.backsizegiay);
+                size44.setBackgroundResource(R.drawable.back);
+                s43 = 1;
+                s39 = s40 = s41 = s42 = s44 = 0;
+            }
+        });
+
+
+        size44.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                size39.setBackgroundResource(R.drawable.back);
+                size40.setBackgroundResource(R.drawable.back);
+                size41.setBackgroundResource(R.drawable.back);
+                size42.setBackgroundResource(R.drawable.back);
+                size43.setBackgroundResource(R.drawable.back);
+                size44.setBackgroundResource(R.drawable.backsizegiay);
+                s44 = 1;
+                s39 = s40 = s41 = s42 = s43 = 0;
+            }
+        });
     }
 
     private void addedToCart() {
