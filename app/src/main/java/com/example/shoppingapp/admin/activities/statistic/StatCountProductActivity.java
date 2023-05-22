@@ -9,6 +9,8 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.example.shoppingapp.R;
 import com.example.shoppingapp.user.models.ViewAllModel;
@@ -48,11 +50,18 @@ public class StatCountProductActivity extends AppCompatActivity {
     ImageView goBack;
     FirebaseFirestore firebaseFirestore;
     int adidas,nike,converse,newbalance,gucci;
+    LinearLayout layout;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stat_count_product);
         bar = findViewById(R.id.barChart);
+        layout = findViewById(R.id.layout);
+        progressBar = findViewById(R.id.progressbar);
+
+        layout.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
 
         YearMonth thisMonth = YearMonth.now();
         DateTimeFormatter monthYearFormatter = DateTimeFormatter.ofPattern("MMM", Locale.ENGLISH);
@@ -118,7 +127,7 @@ public class StatCountProductActivity extends AppCompatActivity {
                                                         pieDataSet.setValueTextSize(22f);
                                                         ValueFormatter formatter = new ValueFormatter() {
                                                             @Override
-                                                            public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+                                                            public String getFormattedValue(float value) {
                                                                 return String.valueOf((int) value);
                                                             }
                                                         };
@@ -145,6 +154,8 @@ public class StatCountProductActivity extends AppCompatActivity {
                                                         bar.setData(barData);
                                                         bar.getDescription().setText("");
                                                         bar.invalidate();
+                                                        layout.setVisibility(View.VISIBLE);
+                                                        progressBar.setVisibility(View.GONE);
                                                     }
                                                 });
                                             }

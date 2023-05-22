@@ -4,13 +4,14 @@ import java.io.Serializable;
 
 public class MyCartModel implements Serializable {
     String productName, productDate, productTime, totalQuantity, img_url;
+    int size;
     int totalPrice,productPrice;
     String documentId;
     String productType;
     public MyCartModel() {
     }
 
-    public MyCartModel(String productName, String productDate, String productTime, String totalQuantity, String img_url, int totalPrice, int productPrice, String documentId, String productType) {
+    public MyCartModel(String productName, String productDate, String productTime, String totalQuantity, String img_url, int totalPrice, int productPrice, String documentId, String productType, int size) {
         this.productName = productName;
         this.productDate = productDate;
         this.productTime = productTime;
@@ -20,6 +21,7 @@ public class MyCartModel implements Serializable {
         this.productPrice = productPrice;
         this.documentId = documentId;
         this.productType = productType;
+        this.size = size;
     }
 
     public String getProductType() {
@@ -94,4 +96,11 @@ public class MyCartModel implements Serializable {
         this.totalPrice = totalPrice;
     }
 
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
 }

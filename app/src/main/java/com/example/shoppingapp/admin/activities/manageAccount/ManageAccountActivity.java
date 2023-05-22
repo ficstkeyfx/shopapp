@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.shoppingapp.R;
@@ -28,6 +29,7 @@ public class ManageAccountActivity extends AppCompatActivity {
 
     ListView lstView;
     FirebaseDatabase database;
+    ProgressBar progressBar;
     FirebaseAuth auth;
     ImageView goBack;
     @Override
@@ -35,6 +37,8 @@ public class ManageAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_account);
 
+        progressBar = findViewById(R.id.progressbar);
+        progressBar.setVisibility(View.VISIBLE);
         goBack = findViewById(R.id.goBack);
         lstView = findViewById(R.id.view_account);
         auth = FirebaseAuth.getInstance();
@@ -70,7 +74,7 @@ public class ManageAccountActivity extends AppCompatActivity {
 //                for (int i = 0; i < lst.size(); i++) {
 //                    System.out.println(lst.get(i).getEmail());
 //                }
-
+                progressBar.setVisibility(View.GONE);
                 lstView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

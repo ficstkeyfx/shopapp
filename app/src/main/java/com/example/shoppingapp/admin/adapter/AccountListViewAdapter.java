@@ -1,5 +1,6 @@
 package com.example.shoppingapp.admin.adapter;
 
+import android.content.DialogInterface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -7,6 +8,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 import com.bumptech.glide.Glide;
 import com.example.shoppingapp.R;
@@ -76,32 +78,55 @@ public class AccountListViewAdapter extends BaseAdapter
 
         email.setText(acc.getEmail());
         name.setText(acc.getName());
-        Glide.with(viewProduct).load(acc.getUrl_img()).into(img);
+        if(acc.getUrl_img()!=null&&!acc.getUrl_img().equals("")) Glide.with(viewProduct).load(acc.getUrl_img()).into(img);
 
         delete.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                ref.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot childSnapshot : snapshot.getChildren())
-                        {
-                            String id = childSnapshot.getKey();
-                            System.out.println(childSnapshot.child("email").getValue());
-                            if (childSnapshot.child("email").getValue().toString().equals(acc.getEmail()))
-                            {
-                                DatabaseReference ref = database.getReference("Users").child(id);
-                                ref.removeValue();
-                            }
-                        }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(delete.getContext());
+                builder1.setMessage("Bạn chắc chắn muốn xóa tài khoản này.");
+                builder1.setCancelable(true);
 
-                    }
-                });
+                builder1.setPositiveButton(
+                        "Đồng ý",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                ref.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        for (DataSnapshot childSnapshot : snapshot.getChildren())
+                                        {
+                                            String id = childSnapshot.getKey();
+                                            System.out.println(childSnapshot.child("email").getValue());
+                                            if (childSnapshot.child("email").getValue().toString().equals(acc.getEmail()))
+                                            {
+                                                DatabaseReference ref = database.getReference("Users").child(id);
+                                                ref.removeValue();
+                                            }
+                                        }
+                                    }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+                                dialog.cancel();
+                            }
+                        });
+
+                builder1.setNegativeButton(
+                        "Hủy bỏ",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+
             }
         });
 

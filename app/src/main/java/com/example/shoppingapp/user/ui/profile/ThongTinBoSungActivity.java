@@ -1,7 +1,9 @@
 package com.example.shoppingapp.user.ui.profile;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -29,7 +31,6 @@ public class ThongTinBoSungActivity extends AppCompatActivity
         setContentView(R.layout.activity_thong_tin_bo_sung);
 
         database = FirebaseDatabase.getInstance();
-        email = findViewById(R.id.email);
         address = findViewById(R.id.address);
         job = findViewById(R.id.job);
         position = findViewById(R.id.position);
@@ -41,10 +42,31 @@ public class ThongTinBoSungActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(save.getContext());
+                builder1.setMessage("Bạn có chắc chắn muốn cập nhật thông tin.");
+                builder1.setCancelable(true);
 
-                updateInformation();
-                Toast.makeText(ThongTinBoSungActivity.this,"Cập nhật thành công",Toast.LENGTH_SHORT).show();
-                finish();
+                builder1.setPositiveButton(
+                        "Đồng ý",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                updateInformation();
+                                Toast.makeText(ThongTinBoSungActivity.this,"Cập nhật thành công",Toast.LENGTH_SHORT).show();
+                                finish();
+                                dialog.cancel();
+                            }
+                        });
+
+                builder1.setNegativeButton(
+                        "Hủy bỏ",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+
             }
         });
 
@@ -53,7 +75,6 @@ public class ThongTinBoSungActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                startActivity(new Intent(ThongTinBoSungActivity.this, HomeActivity.class));
                 finish();
                 //startActivity(new Intent(ThongTinBoSungActivity.this, HomeActivity.class));
             }

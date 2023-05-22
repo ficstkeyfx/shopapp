@@ -5,29 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".admin.activities.updateProduct.updateProduct">
+
     <LinearLayout
+
+        android:id="@+id/linearLayout10"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@color/black"
         android:orientation="horizontal"
-        tools:ignore="MissingConstraints"
-        android:background="@color/black">
+        tools:ignore="MissingConstraints">
+
         <ImageView
             android:id="@+id/goBack"
             android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:src="@drawable/muiten"/>
+            android:src="@drawable/muiten" />
+
         <TextView
-            android:layout_marginEnd="25dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginEnd="25dp"
+            android:gravity="center"
             android:text="CẬP NHẬT SẢN PHẨM"
             android:textColor="@color/white"
-            android:gravity="center"
             android:textSize="25dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="50dp"        >
@@ -131,4 +137,14 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/layout"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout10"
+        app:layout_constraintStart_toStartOf="@+id/layout"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout10"
+        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

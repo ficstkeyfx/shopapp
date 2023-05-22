@@ -147,7 +147,6 @@
                         android:padding="6dp"
                         android:src="@drawable/ic_map" />
                 </LinearLayout>
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcMyCart"
                 android:layout_width="match_parent"

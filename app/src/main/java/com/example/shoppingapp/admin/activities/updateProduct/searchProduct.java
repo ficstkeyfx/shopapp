@@ -12,7 +12,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.example.shoppingapp.R;
 import com.example.shoppingapp.admin.activities.MenuAdminActivity;
@@ -33,6 +35,8 @@ public class searchProduct extends AppCompatActivity {
     ImageView goBack;
     EditText search;
     ManageProductListViewAdapter productListViewAdapter;
+    LinearLayout layout;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,11 @@ public class searchProduct extends AppCompatActivity {
         lstView = findViewById(R.id.lstView);
         fireStore = FirebaseFirestore.getInstance();
 
+        layout = findViewById(R.id.layout);
+        progressBar = findViewById(R.id.progressbar);
+
+        layout.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
 
         goBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +77,8 @@ public class searchProduct extends AppCompatActivity {
                 }
                 productListViewAdapter = new ManageProductListViewAdapter(lst);
                 lstView.setAdapter(productListViewAdapter);
+                layout.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
             }
 
         });

@@ -1,8 +1,10 @@
 package com.example.shoppingapp.admin.activities.addProduct;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -105,7 +107,7 @@ public class AddProduct extends AppCompatActivity {
                     }
                 }
                 else
-                     giaSp = 0;
+                    giaSp = 0;
                 loaiSp = type.getText().toString();
                 moTa = decrip.getText().toString();
 
@@ -133,8 +135,33 @@ public class AddProduct extends AppCompatActivity {
                     Toast.makeText(AddProduct.this, "Ảnh sản phẩm trống", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                fireStore.collection("AllProducts").add(new ViewAllModel(tenSp ,moTa, 5, urlImg, loaiSp, giaSp));
-                Toast.makeText(AddProduct.this, "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
+
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(save_btn.getContext());
+                builder1.setMessage("Bạn chắc chắn muốn thêm sản phẩm này.");
+                builder1.setCancelable(true);
+
+                builder1.setPositiveButton(
+                        "Đồng ý",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                fireStore.collection("AllProducts").add(new ViewAllModel(tenSp ,moTa, 5, urlImg, loaiSp, giaSp));
+                                Toast.makeText(AddProduct.this, "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
+                                dialog.cancel();
+                            }
+                        });
+
+                builder1.setNegativeButton(
+                        "Hủy bỏ",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+
+
             }
         });
     }
@@ -150,15 +177,16 @@ public class AddProduct extends AppCompatActivity {
             img.setImageURI(profileUri);
             final StorageReference reference = storage.getReference().child("product_picture")
                     .child(idProduct);
+            Toast.makeText(AddProduct.this,"Đang tải ảnh lên", Toast.LENGTH_SHORT).show();
             reference.putFile(profileUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(AddProduct.this,"Uploaded", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddProduct.this,"Tải thành công", Toast.LENGTH_SHORT).show();
                     reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
                             urlImg = uri.toString();
-                            Toast.makeText(AddProduct.this,"Image Uploaded", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddProduct.this,"Cập nhật ảnh thành công", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

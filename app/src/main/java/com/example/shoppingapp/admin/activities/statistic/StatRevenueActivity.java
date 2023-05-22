@@ -7,6 +7,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.example.shoppingapp.R;
 import com.github.mikephil.charting.charts.BarChart;
@@ -40,6 +42,8 @@ public class StatRevenueActivity extends AppCompatActivity {
     ImageView goBack;
     BarChart bar;
     FirebaseFirestore firestore;
+    LinearLayout layout;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +52,13 @@ public class StatRevenueActivity extends AppCompatActivity {
 
         firestore = FirebaseFirestore.getInstance();
         bar = findViewById(R.id.barChart);
+
+        layout = findViewById(R.id.layout);
+        progressBar = findViewById(R.id.progressbar);
+
+        layout.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+
         PieChart pieChart = findViewById(R.id.piechart);
         ArrayList<PieEntry> records = new ArrayList<>();
 
@@ -116,7 +127,7 @@ public class StatRevenueActivity extends AppCompatActivity {
                                         pieDataSet.setValueTextSize(22f);
                                         ValueFormatter formatter = new ValueFormatter() {
                                             @Override
-                                            public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+                                            public String getFormattedValue(float value) {
                                                 return String.valueOf((int) value);
                                             }
                                         };
@@ -127,6 +138,10 @@ public class StatRevenueActivity extends AppCompatActivity {
                                         pieChart.getDescription().setText("");
                                         pieChart.invalidate();
                                         pieChart.animate();
+
+                                        layout.setVisibility(View.VISIBLE);
+                                        progressBar.setVisibility(View.GONE);
+
                                     }
                                 });
                     }

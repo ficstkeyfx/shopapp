@@ -126,7 +126,18 @@ public class DetailedActivity extends AppCompatActivity {
                     Toast.makeText(DetailedActivity.this, "Bạn chưa chọn size giày", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                addedToCart();
+                if (s39 == 1)
+                    addedToCart(39);
+                else if (s40 == 1)
+                    addedToCart(40);
+                else if (s41 == 1)
+                    addedToCart(41);
+                else if (s42 == 1)
+                    addedToCart(42);
+                else if (s43 == 1)
+                    addedToCart(43);
+                else if (s44 == 1)
+                    addedToCart(44);
             }
         });
 
@@ -284,7 +295,7 @@ public class DetailedActivity extends AppCompatActivity {
         });
     }
 
-    private void addedToCart() {
+    private void addedToCart(int size) {
         String saveCurrentDate, saveCurrentTime;
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yy");
@@ -302,6 +313,7 @@ public class DetailedActivity extends AppCompatActivity {
         cartMap.put("productTime",saveCurrentTime);
         cartMap.put("totalPrice",totalPrice);
         cartMap.put("img_url",viewAllModel.getImg_url());
+        cartMap.put("size",size);
         firestore.collection("CurrentUser").document(auth.getCurrentUser().getUid())
                 .collection("Cart").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override

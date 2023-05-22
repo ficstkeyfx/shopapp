@@ -62,6 +62,12 @@
                     android:id="@+id/tvPrice_cart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
+                <TextView
+                    android:text="Size: 39"
+                    android:textSize="14dp"
+                    android:id="@+id/size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
                 <LinearLayout
                     android:paddingBottom="3dp"
                     android:orientation="horizontal"

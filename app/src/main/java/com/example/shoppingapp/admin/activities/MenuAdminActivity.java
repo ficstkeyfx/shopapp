@@ -15,10 +15,11 @@ import com.example.shoppingapp.admin.activities.addProduct.AddProduct;
 import com.example.shoppingapp.admin.activities.manageAccount.ManageAccountActivity;
 import com.example.shoppingapp.admin.activities.manageOrder.ManageOrderActivity;
 import com.example.shoppingapp.admin.activities.updateProduct.searchProduct;
+import com.example.shoppingapp.admin.activities.manageVoucher.manageVoucher;
 
 public class MenuAdminActivity extends AppCompatActivity {
 
-    Button manageAccount, addProduct, updateProduct, manageOrder, statistic;
+    Button manageAccount, addProduct, updateProduct, manageOrder, statistic, managerVoucher;
 
     TextView logout;
     @Override
@@ -32,7 +33,7 @@ public class MenuAdminActivity extends AppCompatActivity {
         manageOrder = findViewById(R.id.manageOrder);
         logout = findViewById(R.id.logout);
         statistic = findViewById(R.id.statistic);
-
+        managerVoucher = findViewById(R.id.managerVoucher);
         manageAccount.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -85,5 +86,11 @@ public class MenuAdminActivity extends AppCompatActivity {
             }
         });
 
+        managerVoucher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MenuAdminActivity.this, manageVoucher.class));
+            }
+        });
     }
 }

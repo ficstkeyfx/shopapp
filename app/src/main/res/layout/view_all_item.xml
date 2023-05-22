@@ -15,8 +15,8 @@
 
         <ImageView
             android:id="@+id/view_all_img"
-            android:layout_width="170dp"
-            android:layout_height="170dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             app:srcCompat="@drawable/grocery"
             android:scaleType="centerCrop"/>
 
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:text="Description"
-                android:maxLines="2"
+                android:maxLines="1"
                 android:ellipsize="end"/>
 
             <LinearLayout
@@ -98,13 +98,13 @@
                     android:textStyle="italic" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginRight="4dp"
-                app:srcCompat="@android:drawable/ic_menu_send" />
+<!--            <ImageView-->
+<!--                android:id="@+id/imageView3"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="right"-->
+<!--                android:layout_marginRight="4dp"-->
+<!--                app:srcCompat="@android:drawable/ic_menu_send" />-->
 
         </LinearLayout>
     </LinearLayout>

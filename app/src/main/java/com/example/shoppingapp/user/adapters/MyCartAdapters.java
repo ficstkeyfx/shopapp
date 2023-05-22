@@ -2,6 +2,7 @@ package com.example.shoppingapp.user.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -52,23 +54,47 @@ public class MyCartAdapters extends RecyclerView.Adapter<MyCartAdapters.ViewHold
         holder.cartPrice.setText("Giá: " + myCartModels.get(position).getProductPrice()+"000đ");
         holder.cartTotalPrice.setText(myCartModels.get(position).getTotalPrice()+"000đ");
         holder.cartTotalQuantity.setText("Số lượng: " + myCartModels.get(position).getTotalQuantity());
+        holder.size.setText("Size: " + myCartModels.get(position).getSize());
+
 
         holder.deleteItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firestore.collection("CurrentUser").document(auth.getCurrentUser().getUid())
-                        .collection("Cart")
-                        .document(myCartModels.get(position).getDocumentId()).delete()
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()){
-                                    myCartModels.remove(myCartModels.get(position));
-                                    notifyDataSetChanged();
-                                    Toast.makeText(context,"Đã xóa sản phẩm ra khỏi giỏ hàng",Toast.LENGTH_SHORT).show();
-                                }else Toast.makeText(context,"Lỗi: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+                builder1.setMessage("Bạn có muốn xóa sản phẩm khỏi giỏ hàng.");
+                builder1.setCancelable(true);
+
+                builder1.setPositiveButton(
+                        "Đồng ý",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                firestore.collection("CurrentUser").document(auth.getCurrentUser().getUid())
+                                        .collection("Cart")
+                                        .document(myCartModels.get(position).getDocumentId()).delete()
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if(task.isSuccessful()){
+                                                    myCartModels.remove(myCartModels.get(position));
+                                                    notifyDataSetChanged();
+                                                    Toast.makeText(context,"Đã xóa sản phẩm ra khỏi giỏ hàng",Toast.LENGTH_SHORT).show();
+                                                }else Toast.makeText(context,"Lỗi: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                notifyDataSetChanged();
+                                dialog.cancel();
                             }
                         });
+                builder1.setNegativeButton(
+                        "Hủy bỏ",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
             }
         });
 
@@ -81,7 +107,7 @@ public class MyCartAdapters extends RecyclerView.Adapter<MyCartAdapters.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView cartName, cartTotalQuantity, cartPrice, cartTotalPrice;
-        TextView cartDate, cartTime;
+        TextView cartDate, cartTime, size;
         ImageView cartImg;
         ImageView deleteItem;
 
@@ -95,6 +121,7 @@ public class MyCartAdapters extends RecyclerView.Adapter<MyCartAdapters.ViewHold
             cartDate = itemView.findViewById(R.id.tvDate);
             cartTime = itemView.findViewById(R.id.tvTime);
             cartImg = itemView.findViewById(R.id.img_cart);
+            size = itemView.findViewById(R.id.size);
 
         }
     }

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".admin.activities.manageVoucher.manageVoucher">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/black"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:id="@+id/goBack"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/muiten" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="25dp"
+                android:gravity="center"
+                android:text="QUẢN LÝ MÃ GIẢM GIÁ"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="50dp"
+            android:id="@+id/LL1"
+            android:background="@drawable/border">
+            <LinearLayout
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:background="#FF0000"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/icon"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SHOES"
+                        android:layout_marginTop="5dp"
+                        android:textSize="12dp"
+                        android:textColor="@color/white"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Giảm "
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:id="@+id/reduce"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Đơn tối thiểu"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/minimum"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Số lượng: "
+                    android:textColor="#FF0000"
+                    android:layout_marginTop="5dp"
+                    android:textSize="12dp"
+                    android:id="@+id/quantity"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ngày hết hạn: "
+                    android:textColor="#FF0000"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="5dp"
+                    android:drawableStart="@drawable/baseline_access_time_24"
+                    android:textSize="12dp"
+                    android:id="@+id/date"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="30dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Số tiền được giảm"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="50dp"/>
+                    <EditText
+                        android:id="@+id/txtReduce"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/editext_background"
+                        android:drawableLeft="@drawable/baseline_attach_money_1"
+                        android:drawablePadding="10dp"
+                        android:elevation="3dp"
+                        android:minHeight="48dp"
+                        android:padding="13dp"
+                        android:textColor="#888887"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginRight="50dp"
+                        app:layout_constraintWidth_percent=".8"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Điều kiện"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="50dp"/>
+                    <EditText
+                        android:id="@+id/txtMinimum"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/editext_background"
+                        android:drawableLeft="@drawable/baseline_priority_high_24"
+                        android:drawablePadding="10dp"
+                        android:elevation="3dp"
+                        android:minHeight="48dp"
+                        android:padding="13dp"
+                        android:textColor="#888887"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginRight="50dp"
+                        app:layout_constraintWidth_percent=".8"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Số lượng"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="50dp"/>
+                    <EditText
+                        android:id="@+id/txtQuantity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/editext_background"
+                        android:drawableLeft="@drawable/baseline_production_quantity_limits_24"
+                        android:drawablePadding="10dp"
+                        android:elevation="3dp"
+                        android:minHeight="48dp"
+                        android:padding="13dp"
+                        android:textColor="#888887"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginRight="50dp"
+                        app:layout_constraintWidth_percent=".8"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ngày hết hạn"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="50dp"/>
+                    <TextView
+                        android:id="@+id/txtDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/editext_background"
+                        android:drawableLeft="@drawable/baseline_access_time_1"
+                        android:drawablePadding="10dp"
+                        android:elevation="3dp"
+                        android:minHeight="48dp"
+                        android:padding="13dp"
+                        android:textColor="#888887"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginRight="50dp"
+                        app:layout_constraintWidth_percent=".8"/>
+
+                    <DatePicker
+                        android:layout_gravity="center"
+                        android:id="@+id/datePicker"
+                        android:layout_width="wrap_content"
+                        android:layout_marginRight="50dp"
+                        android:layout_marginLeft="50dp"
+                        android:calendarViewShown="true"
+                        android:spinnersShown="false"
+                        android:layout_weight="4"
+                        android:layout_height="match_parent"
+                        android:visibility="gone"/>
+
+                </LinearLayout>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Thêm"
+                    android:id="@+id/add"
+                    android:layout_marginTop="50dp"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

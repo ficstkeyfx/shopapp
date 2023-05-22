@@ -16,7 +16,7 @@
             android:layout_marginRight="5dp"
             android:layout_gravity="center_vertical"
             android:id="@+id/img_account"
-            android:src="@drawable/ic_null_new_product"
+            android:src="@drawable/avatar"
             android:scaleType="centerCrop"
             android:layout_width="70dp"
             android:layout_height="70dp"/>

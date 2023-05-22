@@ -24,9 +24,9 @@
         tools:layout="@layout/fragment_category" />
     <fragment
         android:id="@+id/nav_offers"
-        android:name="com.example.shoppingapp.user.OffersFragment"
-        android:label="@string/offers"
-        tools:layout="@layout/fragment_offers" />
+        android:name="com.example.shoppingapp.user.ui.chat.ChatFragment"
+        android:label="@string/chat"
+        tools:layout="@layout/fragment_chat" />
     <fragment
         android:id="@+id/nav_new_products"
         android:name="com.example.shoppingapp.user.ui.newproducts.NewProductsFragment"

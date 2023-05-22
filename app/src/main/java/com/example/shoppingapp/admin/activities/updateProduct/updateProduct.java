@@ -2,8 +2,10 @@ package com.example.shoppingapp.admin.activities.updateProduct;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +14,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -30,10 +35,12 @@ public class updateProduct extends AppCompatActivity {
     ImageView img, goback;
     EditText name, type, decrip, price;
     Button save;
-    String id ;
+    String id_ ;
     FirebaseFirestore fireStore;
     String idProduct, urlImg;
     FirebaseStorage storage;
+    ScrollView layout;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +55,13 @@ public class updateProduct extends AppCompatActivity {
         price = findViewById(R.id.price);
         save = findViewById(R.id.save_btn);
         fireStore = FirebaseFirestore.getInstance();
+
+        layout = findViewById(R.id.layout);
+        progressBar = findViewById(R.id.progressbar);
+
+        layout.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+
         Intent intent = getIntent();
         String nameProduct = intent.getStringExtra("key_1");
 
@@ -66,7 +80,7 @@ public class updateProduct extends AppCompatActivity {
                     String nameP = doc.getString("name");
                     if (nameProduct.equalsIgnoreCase(nameP))
                     {
-                        id = doc.getId();
+                        id_ =  doc.getId();
                         name.setText(nameP);
                         String typeP = doc.getString("type");
                         type.setText(typeP);
@@ -77,6 +91,8 @@ public class updateProduct extends AppCompatActivity {
                         String priceP = doc.get("price").toString();
                         price.setText(priceP);
                     }
+                    layout.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.GONE);
                 }
             }
         });
@@ -103,15 +119,37 @@ public class updateProduct extends AppCompatActivity {
                     Toast.makeText(updateProduct.this, "Mô tả sản phẩm trống", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                fireStore.collection("AllProducts").document(id).update("name", name.getText().toString());
-                fireStore.collection("AllProducts").document(id).update("price",Integer.parseInt(price.getText().toString()));
-                fireStore.collection("AllProducts").document(id).update("type", type.getText().toString());
-                fireStore.collection("AllProducts").document(id).update("description", decrip.getText().toString());
-                if(urlImg!=null){
-                    fireStore.collection("AllProducts").document(id).update("img_url", urlImg);
-                }
-                Toast.makeText(updateProduct.this, "Cập nhật sản phẩm thành công", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(updateProduct.this, searchProduct.class));
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(save.getContext());
+                builder1.setMessage("Bạn chắc chắn muốn cập nhật sản phẩm này.");
+                builder1.setCancelable(true);
+
+                builder1.setPositiveButton(
+                        "Đồng ý",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                fireStore.collection("AllProducts").document(id_).update("name", name.getText().toString());
+                                fireStore.collection("AllProducts").document(id_).update("price",Integer.parseInt(price.getText().toString()));
+                                fireStore.collection("AllProducts").document(id_).update("type", type.getText().toString());
+                                fireStore.collection("AllProducts").document(id_).update("description", decrip.getText().toString());
+                                if(urlImg!=null){
+                                    fireStore.collection("AllProducts").document(id_).update("img_url", urlImg);
+                                }
+                                Toast.makeText(updateProduct.this, "Cập nhật sản phẩm thành công", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(updateProduct.this, searchProduct.class));
+                                dialog.cancel();
+                            }
+                        });
+
+                builder1.setNegativeButton(
+                        "Hủy bỏ",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
             }
         });
 

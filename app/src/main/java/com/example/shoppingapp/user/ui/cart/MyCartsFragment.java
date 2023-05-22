@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -33,6 +34,7 @@ import android.widget.Toast;
 import com.example.shoppingapp.R;
 import com.example.shoppingapp.user.activities.HomeActivity;
 import com.example.shoppingapp.user.activities.PayActivity;
+import com.example.shoppingapp.user.adapters.MapAdapter;
 import com.example.shoppingapp.user.adapters.MyCartAdapters;
 import com.example.shoppingapp.user.models.MyCartModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -80,8 +82,6 @@ public class MyCartsFragment extends Fragment implements OnMapReadyCallback ,Loc
     EditText address;
 
     Button buynow;
-
-
     // gg map
     LocationManager locationManager;
     String[] locationPermission;
@@ -111,7 +111,6 @@ public class MyCartsFragment extends Fragment implements OnMapReadyCallback ,Loc
         buynow = root.findViewById(R.id.btnBuyNow);
         address = root.findViewById(R.id.edtAddress);
         imgGetAddres = root.findViewById(R.id.imgGetAddress);
-
         progressBar.setVisibility(View.VISIBLE);
         relativeLayout.setVisibility(View.GONE);
 
@@ -158,6 +157,8 @@ public class MyCartsFragment extends Fragment implements OnMapReadyCallback ,Loc
             {
                 String nameChange = snapshot.getValue().toString();
                 userName.setText("Họ và tên:          " + nameChange);
+                progressBar.setVisibility(View.GONE);
+                relativeLayout.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -184,11 +185,15 @@ public class MyCartsFragment extends Fragment implements OnMapReadyCallback ,Loc
             }
         });
 
-        progressBar.setVisibility(View.GONE);
 
         buynow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (myCartModels.isEmpty())
+                {
+                    Toast.makeText(getActivity(),"Bạn không có hàng để mua",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if(address.getText()!=null&&address.getText().length()>0){
                     Intent intent = new Intent(getContext(), PayActivity.class);
                     intent.putExtra("itemList", (Serializable) myCartModels);
@@ -214,35 +219,31 @@ public class MyCartsFragment extends Fragment implements OnMapReadyCallback ,Loc
 
         SupportMapFragment supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.fragMaps);
 
-
-
         imgGetAddres.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                startActivity(new Intent(getActivity(), MapsActivity.class));
-//                if (checkLocationPermission()) {
-//
-//                    System.out.println("ok9k");
-//                    detectLocation();
-//                } else {
-//                    //không cho phép
-//                    System.out.println("okk");
-//                    requestLocationPermission();
-//                }
                 String addressUser = address.getText().toString();
                 List<Address> addressList = null;
-                if (!addressUser.isEmpty() || !addressUser.equals("")) {
+                if (!addressUser.isEmpty() || !addressUser.equals(""))
+                {
                     Geocoder geocoder  = new Geocoder(getActivity());
                     try {
                         addressList = geocoder.getFromLocationName(addressUser ,1);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                    Address add = (addressList.isEmpty() ? null : addressList.get(0));
+                    if (add != null )
+                    {
+                        LatLng latLng = new LatLng(add.getLatitude(), add.getLongitude());
+                        Map.addMarker(new MarkerOptions().position(latLng).title(addressUser));
+                        Map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
+                    }
+                    else
+                    {
+                        Toast.makeText(getActivity(), "Bạn chưa nhập đúng địa chỉ",Toast.LENGTH_SHORT).show();
+                    }
 
-                    Address add = addressList.get(0);
-                    LatLng latLng = new LatLng(add.getLatitude(), add.getLongitude());
-                    Map.addMarker(new MarkerOptions().position(latLng).title(addressUser));
-                    Map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
                 }
             }
         });

@@ -1,5 +1,6 @@
 package com.example.shoppingapp.admin.adapter;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.bumptech.glide.Glide;
 import com.example.shoppingapp.R;
@@ -73,28 +76,99 @@ public class ManageOrderListViewAdapter extends BaseAdapter
         ((TextView) viewProduct.findViewById(R.id.productQuantity)).setText("Số lượng: " + orderPeople.getProductQuantity());
         ((TextView) viewProduct.findViewById(R.id.TotalPrice)).setText("Tổng tiền thanh toán: " + orderPeople.getTotalPrice() + "000đ");
 
-        if(orderPeople.getStatus() == null||orderPeople.getStatus().equals("0")||orderPeople.getStatus()==""){
+        if(orderPeople.getStatus() == null||orderPeople.getStatus().equals("0")||orderPeople.getStatus().equals("")){
             ((TextView) viewProduct.findViewById(R.id.statusOrder)).setText("Trạng thái: Đang chờ xác nhận");
             ((TextView) viewProduct.findViewById(R.id.statusOrder)).setTextColor(Color.BLUE);
+            accept.setEnabled(true);
         }else if(orderPeople.getStatus().equals("1")){
             ((TextView) viewProduct.findViewById(R.id.statusOrder)).setText("Trạng thái: Đang vận chuyển");
             ((TextView) viewProduct.findViewById(R.id.statusOrder)).setTextColor(Color.GREEN);
-        }else {
+            accept.setEnabled(false);
+        }else if(orderPeople.getStatus().equals("2")){
             System.out.println(orderPeople.getStatus());
             ((TextView) viewProduct.findViewById(R.id.statusOrder)).setText("Trạng thái: Đã giao hàng");
             ((TextView) viewProduct.findViewById(R.id.statusOrder)).setTextColor(Color.RED);
+            accept.setEnabled(false);
+        }else {
+            ((TextView) viewProduct.findViewById(R.id.statusOrder)).setText("Trạng thái: Hủy bỏ");
+            ((TextView) viewProduct.findViewById(R.id.statusOrder)).setTextColor(Color.RED);
+            accept.setEnabled(false);
         }
 
+        viewProduct.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(viewProduct.getContext());
+                builder1.setMessage("Xác nhận đơn hàng đã vận chuyển hoặc hủy bỏ đơn hàng.");
+                builder1.setCancelable(true);
 
-        Glide.with(viewProduct).load(orderPeople.getAvatar()).into(avatar);
+                builder1.setPositiveButton(
+                        "Đã giao",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                firestore.collection("CurrentUser").document(orderPeople.getKey()).collection("Order")
+                                        .document(orderPeople.getProductID()).update("status",2);
+                                orderPeople.setStatus("2");
+                                accept.setEnabled(false);
+                                notifyDataSetChanged();
+                                dialog.cancel();
+                            }
+                        });
+
+                builder1.setNegativeButton(
+                        "Hủy bỏ",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                firestore.collection("CurrentUser").document(orderPeople.getKey()).collection("Order")
+                                        .document(orderPeople.getProductID()).update("status",3);
+                                orderPeople.setStatus("3");
+                                accept.setEnabled(false);
+                                notifyDataSetChanged();
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+                return false;
+            }
+        });
+
+
+        if(orderPeople.getAvatar()!=null&&!orderPeople.getAvatar().equals(""))  Glide.with(viewProduct).load(orderPeople.getAvatar()).into(avatar);
         Glide.with(viewProduct).load(orderPeople.getProductAva()).into(productAva);
 
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firestore.collection("CurrentUser").document(orderPeople.getKey()).collection("Order")
-                        .document(orderPeople.getProductID()).update("status",1);
-                viewProduct.refreshDrawableState();
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(accept.getContext());
+                builder1.setMessage("Bạn chắc chắn xác nhận đơn hàng và chuyển cho bên vận chuyển.");
+                builder1.setCancelable(true);
+
+                builder1.setPositiveButton(
+                        "Đồng ý",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                firestore.collection("CurrentUser").document(orderPeople.getKey()).collection("Order")
+                                        .document(orderPeople.getProductID()).update("status",1);
+                                orderPeople.setStatus("1");
+                                accept.setEnabled(false);
+                                notifyDataSetChanged();
+                                dialog.cancel();
+                            }
+                        });
+
+                builder1.setNegativeButton(
+                        "Hủy bỏ",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+
             }
         });
 

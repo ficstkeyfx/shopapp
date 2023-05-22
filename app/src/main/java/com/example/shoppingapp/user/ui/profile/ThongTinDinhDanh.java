@@ -1,8 +1,10 @@
 package com.example.shoppingapp.user.ui.profile;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -78,9 +80,30 @@ public class ThongTinDinhDanh extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                updateInformation();
-                Toast.makeText(ThongTinDinhDanh.this,"Cập nhật thành công",Toast.LENGTH_SHORT).show();
-                finish();
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(save.getContext());
+                builder1.setMessage("Bạn có chắc chắn muốn cập nhật thông tin.");
+                builder1.setCancelable(true);
+
+                builder1.setPositiveButton(
+                        "Đồng ý",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                updateInformation();
+                                Toast.makeText(ThongTinDinhDanh.this,"Cập nhật thành công",Toast.LENGTH_SHORT).show();
+                                finish();
+                                dialog.cancel();
+                            }
+                        });
+                builder1.setNegativeButton(
+                        "Hủy bỏ",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+
             }
         });
 
@@ -89,9 +112,7 @@ public class ThongTinDinhDanh extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                startActivity(new Intent(ThongTinDinhDanh.this, HomeActivity.class));
                 finish();
-                //startActivity(new Intent(ThongTinDinhDanh.this, HomeActivity.class));
             }
         });
     }

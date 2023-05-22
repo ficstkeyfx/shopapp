@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,6 +33,7 @@ import java.util.List;
 public class MyOrdersFragment extends Fragment {
 
     RecyclerView rcOrder ;
+    ProgressBar progressBar;
     MyOrderAdapter myOrderAdapter ;
     List<MyOrderModel> myOrders ;
     FirebaseFirestore db ;
@@ -77,6 +79,10 @@ public class MyOrdersFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rcOrder =view.findViewById(R.id.rcOrder) ;
+
+        progressBar = view.findViewById(R.id.progressbar);
+        rcOrder.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
         db =FirebaseFirestore.getInstance();
         auth=FirebaseAuth.getInstance();
 
@@ -99,6 +105,8 @@ public class MyOrdersFragment extends Fragment {
                 }
 
                 myOrderAdapter.notifyDataSetChanged();
+                rcOrder.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
             }
         });
 

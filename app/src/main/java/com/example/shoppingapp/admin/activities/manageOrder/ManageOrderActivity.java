@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.example.shoppingapp.R;
 import com.example.shoppingapp.admin.adapter.ManageOrderListViewAdapter;
@@ -38,6 +39,7 @@ public class ManageOrderActivity extends AppCompatActivity {
     Storage storage;
     FirebaseFirestore fireStore;
     ImageView goBack;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,11 @@ public class ManageOrderActivity extends AppCompatActivity {
 
         goBack = findViewById(R.id.goBack);
         lstView = findViewById(R.id.view_order);
+        progressBar = findViewById(R.id.progressbar);
+
+        lstView.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+
         auth = FirebaseAuth.getInstance();
         fireStore = FirebaseFirestore.getInstance();
         database = FirebaseDatabase.getInstance();
@@ -98,22 +105,17 @@ public class ManageOrderActivity extends AppCompatActivity {
                                     order.setProductAva(Uri.parse(documentSnapshot.getString("img_url")));
                                     if(documentSnapshot.get("status")!=null)
                                         order.setStatus(String.valueOf(documentSnapshot.get("status")));
-//                                    System.out.println(order.getAddress());
                                     list.add(order);
                                     ManageOrderListViewAdapter orderListViewAdapter = new ManageOrderListViewAdapter(list);
-
                                     lstView.setAdapter(orderListViewAdapter);
                                 }
-                                for(ManageOrderPeopleModel order1: list){
-                                    System.out.println(key + order1.getAddress());
-                                }
+
                             }
                         }
                     });
                 }
-                //System.out.println(list.get(0).getAddress());
-
-
+                lstView.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override

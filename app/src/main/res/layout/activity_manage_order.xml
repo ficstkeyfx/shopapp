@@ -7,25 +7,28 @@
     tools:context=".admin.activities.manageOrder.ManageOrderActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout11"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@color/black"
         android:orientation="horizontal"
-        tools:ignore="MissingConstraints"
-        android:background="@color/black">
+        tools:ignore="MissingConstraints">
+
         <ImageView
             android:id="@+id/goBack"
             android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:src="@drawable/muiten"/>
+            android:src="@drawable/muiten" />
+
         <TextView
-            android:layout_marginEnd="25dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginEnd="25dp"
+            android:gravity="center"
             android:text="QUẢN LÝ ĐƠN HÀNG"
             android:textColor="@color/white"
-            android:gravity="center"
             android:textSize="25dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
     </LinearLayout>
 
     <ListView
@@ -36,5 +39,13 @@
 
     </ListView>
 
-
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/view_order"
+        app:layout_constraintEnd_toEndOf="@+id/view_order"
+        app:layout_constraintStart_toStartOf="@+id/view_order"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout11"
+        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,12 +30,18 @@ public class CategoryFragment extends Fragment {
     NavCategoryAdapters navcategoryAdapter;
     List<NavCategoryModel> navCategoryList ;
     FirebaseFirestore db ;
+    ProgressBar progressBar;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_category,container,false);
         rcNavCategory = root.findViewById(R.id.rc_cat_nav);
+        progressBar = root.findViewById(R.id.progressbar);
+
+        rcNavCategory.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+
         navCategoryList = new ArrayList<>() ;
         navcategoryAdapter = new NavCategoryAdapters(getContext(),navCategoryList);
         rcNavCategory.setLayoutManager(new LinearLayoutManager(getActivity() ,LinearLayoutManager.VERTICAL,false));
@@ -50,6 +57,8 @@ public class CategoryFragment extends Fragment {
                         navCategoryList.add(navCategory);
                     }
                     navcategoryAdapter.notifyDataSetChanged();
+                    rcNavCategory.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.GONE);
                 }else {
                     Toast.makeText(getActivity(), "Lỗi", Toast.LENGTH_SHORT).show();
                 }
