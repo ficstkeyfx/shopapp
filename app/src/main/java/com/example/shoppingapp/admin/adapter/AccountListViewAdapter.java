@@ -75,10 +75,13 @@ public class AccountListViewAdapter extends BaseAdapter
         TextView name = viewProduct.findViewById(R.id.account_name);
         CircleImageView img = viewProduct.findViewById(R.id.img_account);
         ImageButton delete = viewProduct.findViewById(R.id.delete_account);
-
+        TextView lastOnline = viewProduct.findViewById(R.id.lastOnline);
+        lastOnline.setText("Hoạt động gần nhất: " + acc.getLastOnline());
         email.setText(acc.getEmail());
         name.setText(acc.getName());
         if(acc.getUrl_img()!=null&&!acc.getUrl_img().equals("")) Glide.with(viewProduct).load(acc.getUrl_img()).into(img);
+
+
 
         delete.setOnClickListener(new View.OnClickListener()
         {

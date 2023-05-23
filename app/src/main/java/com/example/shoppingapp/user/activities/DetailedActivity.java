@@ -34,6 +34,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class DetailedActivity extends AppCompatActivity {
 
@@ -298,10 +299,10 @@ public class DetailedActivity extends AppCompatActivity {
     private void addedToCart(int size) {
         String saveCurrentDate, saveCurrentTime;
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yy");
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yy", Locale.ENGLISH);
         saveCurrentDate = currentDate.format(calendar.getTime());
 
-        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm a");
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm a", Locale.ENGLISH);
         saveCurrentTime = currentTime.format(calendar.getTime());
 
         final HashMap<String,Object> cartMap = new HashMap<>();

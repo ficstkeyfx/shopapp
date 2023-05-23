@@ -1,6 +1,6 @@
-package com.example.shoppingapp.zalo;
+package com.example.shoppingapp.user.zalo;
 
-import com.example.shoppingapp.zalo.Helper.Helpers;
+import com.example.shoppingapp.user.zalo.Helper.Helpers;
 
 import org.json.JSONObject;
 

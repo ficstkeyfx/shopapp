@@ -49,36 +49,41 @@
 
                     <TextView
                         android:id="@+id/ten"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:gravity="center_vertical"
                         android:minWidth="48dp"
                         android:minHeight="48dp"
+                        android:text="Tên"
                         android:textSize="20dp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/avatar"
                         tools:ignore="TextSizeCheck" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/sdt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:text="SDT"
+                        android:gravity="center_vertical"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        tools:ignore="TextSizeCheck" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Đổi mật khẩu"
+                        android:textColor="#FF0000"
+                        android:textSize="15dp"
+                        android:id="@+id/changPass"
+                        android:layout_gravity="right"/>
 
-                        <TextView
-                            android:id="@+id/sdt"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="20dp"
-                            android:gravity="center_vertical"
-                            android:textSize="20dp"
-                            android:textStyle="bold"
-                            tools:ignore="TextSizeCheck" />
 
-
-                    </LinearLayout>
                 </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout

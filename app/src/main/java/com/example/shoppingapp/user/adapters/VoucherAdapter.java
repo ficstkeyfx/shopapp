@@ -93,6 +93,7 @@ public class VoucherAdapter extends BaseAdapter
             {
                 Intent intent = new Intent(viewProduct.getContext(), PayActivity.class);
                 intent.putExtra("discount", voucherModel.getDiscount());
+                PayActivity.updateVoucher(String.valueOf(voucherModel.getDiscount()));
                 viewProduct.getContext().startActivity(intent);
             }
         });

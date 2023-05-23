@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.shoppingapp.R;
+import com.example.shoppingapp.admin.activities.CSKH.CSKH_Activity;
 import com.example.shoppingapp.admin.activities.statistic.StatisticActivity;
 import com.example.shoppingapp.user.activities.LoginActivity;
 import com.example.shoppingapp.admin.activities.addProduct.AddProduct;
@@ -19,7 +20,7 @@ import com.example.shoppingapp.admin.activities.manageVoucher.manageVoucher;
 
 public class MenuAdminActivity extends AppCompatActivity {
 
-    Button manageAccount, addProduct, updateProduct, manageOrder, statistic, managerVoucher;
+    Button manageAccount, addProduct, updateProduct, manageOrder, statistic, managerVoucher, chat;
 
     TextView logout;
     @Override
@@ -34,6 +35,15 @@ public class MenuAdminActivity extends AppCompatActivity {
         logout = findViewById(R.id.logout);
         statistic = findViewById(R.id.statistic);
         managerVoucher = findViewById(R.id.managerVoucher);
+        chat = findViewById(R.id.chat);
+
+        chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MenuAdminActivity.this, CSKH_Activity.class));
+            }
+        });
+
         manageAccount.setOnClickListener(new View.OnClickListener()
         {
             @Override

@@ -72,10 +72,13 @@ public class ChatAdapter extends BaseAdapter
         View viewProduct;
         if (convertView == null)
         {
-            viewProduct = View.inflate(parent.getContext(), R.layout.chat_item, null);
+            if(listChat.get(position).getName().equals("Admin"))
+            {
+                viewProduct = View.inflate(parent.getContext(), R.layout.activity_admin_chat, null);
+            }
+            else viewProduct = View.inflate(parent.getContext(), R.layout.chat_item, null);
         }
         else viewProduct = convertView;
-
         //Bind sữ liệu phần tử vào View
         ChatModel chatModel = (ChatModel) getItem(position);
         TextView time = viewProduct.findViewById(R.id.time);

@@ -58,9 +58,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
-                    android:text=""
+                    android:text="Hoạt động gần nhất: "
                     android:textSize="14dp"
-                    android:id="@+id/tvPrice_cart"
+                    android:textColor="#FF0000"
+                    android:id="@+id/lastOnline"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>

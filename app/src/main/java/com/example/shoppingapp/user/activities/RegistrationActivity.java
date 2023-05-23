@@ -126,13 +126,13 @@ public class RegistrationActivity extends AppCompatActivity {
                             });
                             progressBar.setVisibility(View.GONE);
                             Toast.makeText(RegistrationActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
-
+                            auth.signOut();
                             startActivity(new Intent(RegistrationActivity.this,LoginActivity.class));
                         }else {
-                            Toast.makeText(RegistrationActivity.this, "Lỗi: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-
+                            Toast.makeText(RegistrationActivity.this, "Lỗi hệ thống, đăng ký thất bại ", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+
     }
 }

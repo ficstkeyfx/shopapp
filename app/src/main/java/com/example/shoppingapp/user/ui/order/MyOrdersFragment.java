@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shoppingapp.R;
 import com.example.shoppingapp.user.adapters.MyOrderAdapter;
+import com.example.shoppingapp.user.models.ChatModel;
 import com.example.shoppingapp.user.models.MyOrderModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -22,8 +23,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -88,7 +94,7 @@ public class MyOrdersFragment extends Fragment {
 
 
         rcOrder.setLayoutManager(new LinearLayoutManager(getContext() ,LinearLayoutManager.VERTICAL,false));
-        myOrders =new ArrayList<>() ;
+        myOrders = new ArrayList<>() ;
         myOrderAdapter = new MyOrderAdapter(getContext(),myOrders);
         rcOrder.setAdapter(myOrderAdapter);
 
@@ -102,6 +108,21 @@ public class MyOrdersFragment extends Fragment {
                         myOrder.setOrder_ID(id);
                         myOrders.add(myOrder);
                     }
+                    Collections.sort(myOrders, new Comparator<MyOrderModel>() {
+                        @Override
+                        public int compare(MyOrderModel o1, MyOrderModel o2) {
+                            SimpleDateFormat currentDate = new SimpleDateFormat("HH:mm a dd/MM/yy", Locale.ENGLISH);
+                            System.out.println(o1.getProductTime() + " " + o1.getProductDate());
+                            try {
+                                if(currentDate.parse(o1.getProductTime() + " " + o1.getProductDate()).before(currentDate.parse(o2.getProductTime() + " " + o2.getProductDate()))){
+                                    return 1;
+                                }else return -1;
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            return 0;
+                        }
+                    });
                 }
 
                 myOrderAdapter.notifyDataSetChanged();

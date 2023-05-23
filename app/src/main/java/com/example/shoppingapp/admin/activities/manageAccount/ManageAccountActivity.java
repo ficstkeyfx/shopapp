@@ -61,11 +61,19 @@ public class ManageAccountActivity extends AppCompatActivity {
                     System.out.println(snapshot.child("email").getValue());
                     String email = snapshot.child("email").getValue().toString();
                     String name = snapshot.child("name").getValue().toString();
+                    String lastOnline = "";
+                    if (snapshot.child("lastOnline").exists() && snapshot.child("lastOnline").getValue() != null )
+                    {
+                         lastOnline = snapshot.child("lastOnline").getValue().toString();
+                    }
+                    else
+                        lastOnline = "";
+                    System.out.println(lastOnline);
                     if(snapshot.child("avatar").getValue()!=null) {
                         String url = snapshot.child("avatar").getValue().toString();
-                        lst.add(new ManageAccountModel(email, name, url));
+                        lst.add(new ManageAccountModel(email, name, url, lastOnline));
                     }
-                    else lst.add(new ManageAccountModel(email,name));
+                    else lst.add(new ManageAccountModel(email,name, lastOnline));
                 }
 
                 accountListViewAdapter = new AccountListViewAdapter(lst);

@@ -11,39 +11,37 @@
         android:id="@+id/lstView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout12"
         android:layout_marginBottom="50dp"
         tools:ignore="MissingConstraints" />
 
-
-    <LinearLayout
-        android:id="@+id/linearLayout12"
+    <EditText
+        android:id="@+id/msg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:background="@drawable/editext_background"
+        android:drawablePadding="10dp"
+        android:elevation="3dp"
+        android:hint="Nhập tin nhắn"
+        android:minHeight="48dp"
+        android:padding="13dp"
+        android:textSize="15dp"
+        android:layout_marginRight="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintEnd_toStartOf="@+id/send_"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
 
-        <EditText
-            android:id="@+id/msg"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/editext_background"
-            android:drawablePadding="10dp"
-            android:elevation="3dp"
-            android:hint="Nhập tin nhắn"
-            android:minHeight="48dp"
-            android:padding="13dp"
-            android:textSize="15dp" />
-
-        <ImageView
-            android:id="@+id/send_"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:src="@drawable/baseline_send_24" />
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/send_"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:src="@drawable/baseline_send_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lstView"
+        tools:ignore="MissingConstraints" />
 
     <ProgressBar
         android:id="@+id/progressbar"

@@ -5,17 +5,28 @@ public class ManageAccountModel
     String email;
     String name;
     String url_img;
+    String lastOnline;
 
-    public ManageAccountModel(String email, String name, String url_img) {
+    public ManageAccountModel(String email, String name, String url_img, String lastOnline) {
         this.email = email;
         this.name = name;
         this.url_img = url_img;
+        this.lastOnline = lastOnline;
+    }
+
+    public ManageAccountModel(String email, String name, String lastOnline) {
+        this.email = email;
+
+        this.lastOnline = lastOnline;
 
     }
 
-    public ManageAccountModel(String email, String name) {
-        this.email = email;
-        this.name = name;
+    public String getLastOnline() {
+        return lastOnline;
+    }
+
+    public void setLastOnline(String lastOnline) {
+        this.lastOnline = lastOnline;
     }
 
     public String getEmail() {

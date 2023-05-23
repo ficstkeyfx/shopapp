@@ -19,6 +19,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,6 +67,8 @@ import java.util.Locale;
 
 public class MyCartsFragment extends Fragment implements OnMapReadyCallback ,LocationListener{
 
+    static View root;
+
     FirebaseFirestore firestore;
     FirebaseAuth auth;
     FirebaseDatabase database;
@@ -92,11 +96,16 @@ public class MyCartsFragment extends Fragment implements OnMapReadyCallback ,Loc
 
     int price=0;
 
+    public static void updateView(int price) {
+        if(price == 0) ((TextView) root.findViewById(R.id.cart_total)).setText("Tổng tiền:          " + String.valueOf(price) + "đ");
+        else ((TextView) root.findViewById(R.id.cart_total)).setText("Tổng tiền:          " + String.valueOf(price) + "000đ");
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View root = inflater.inflate(R.layout.fragment_my_carts, container, false);
+        root = inflater.inflate(R.layout.fragment_my_carts, container, false);
 
         firestore = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
@@ -185,6 +194,8 @@ public class MyCartsFragment extends Fragment implements OnMapReadyCallback ,Loc
             }
         });
 
+        buynow.setEnabled(false);
+
 
         buynow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -214,6 +225,25 @@ public class MyCartsFragment extends Fragment implements OnMapReadyCallback ,Loc
             }
         });
 
+        address.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                buynow.setEnabled(false);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
+
         //GetAddress
         locationPermission = new String[]{Manifest.permission.ACCESS_FINE_LOCATION};
 
@@ -238,9 +268,11 @@ public class MyCartsFragment extends Fragment implements OnMapReadyCallback ,Loc
                         LatLng latLng = new LatLng(add.getLatitude(), add.getLongitude());
                         Map.addMarker(new MarkerOptions().position(latLng).title(addressUser));
                         Map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
+                        buynow.setEnabled(true);
                     }
                     else
                     {
+                        buynow.setEnabled(false);
                         Toast.makeText(getActivity(), "Bạn chưa nhập đúng địa chỉ",Toast.LENGTH_SHORT).show();
                     }
 

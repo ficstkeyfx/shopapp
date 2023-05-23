@@ -30,6 +30,15 @@
             android:name=".user.activities.VoucherActivity"
             android:exported="false" />
         <activity
+            android:name=".admin.activities.CSKH.CSKH_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.activities.CSKH.Detail_CSKH_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".user.ui.profile.ChangePassActivity"
+            android:exported="false" />
+        <activity
             android:name=".admin.activities.manageVoucher.manageVoucher"
             android:exported="false" />
         <activity

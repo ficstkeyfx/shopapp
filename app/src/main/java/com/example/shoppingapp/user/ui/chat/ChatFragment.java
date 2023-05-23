@@ -35,7 +35,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 public class ChatFragment extends Fragment {
     ListView lstView;
@@ -72,7 +75,7 @@ public class ChatFragment extends Fragment {
         chatAdapter = new ChatAdapter(lstChat);
         lstView.setAdapter(chatAdapter);
 
-        firebaseFirestore.collection("CSKH").document(id).collection("Chat").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        firebaseFirestore.collection("AdminChat").document(id).collection("Chat").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for(DocumentSnapshot documentSnapshot:task.getResult().getDocuments()) {
@@ -81,7 +84,7 @@ public class ChatFragment extends Fragment {
                     Collections.sort(lstChat, new Comparator<ChatModel>() {
                         @Override
                         public int compare(ChatModel o1, ChatModel o2) {
-                            SimpleDateFormat currentDate = new SimpleDateFormat("HH:mm a dd/MM/yy");
+                            SimpleDateFormat currentDate = new SimpleDateFormat("HH:mm a dd/MM/yy", Locale.ENGLISH);
                             try {
                                 if(currentDate.parse(o1.getTime()).before(currentDate.parse(o2.getTime()))){
                                     return -1;
@@ -94,6 +97,21 @@ public class ChatFragment extends Fragment {
                     });
                     chatAdapter.notifyDataSetChanged();
                 }
+                Collections.sort(lstChat, new Comparator<ChatModel>() {
+                    @Override
+                    public int compare(ChatModel o1, ChatModel o2) {
+                        SimpleDateFormat currentDate = new SimpleDateFormat("HH:mm a dd/MM/yy", Locale.ENGLISH);
+                        try {
+                            if(currentDate.parse(o1.getTime()).before(currentDate.parse(o2.getTime()))){
+                                return -1;
+                            }else return 1;
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        return 0;
+                    }
+                });
+                chatAdapter.notifyDataSetChanged();
                 progressBar.setVisibility(View.GONE);
                 lstView.setVisibility(View.VISIBLE);
                 msg.setVisibility(View.VISIBLE);
@@ -107,7 +125,7 @@ public class ChatFragment extends Fragment {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (msg.getText().toString().equals("") || msg.getText() == null)
+                if (msg.getText().toString().trim().equals("") || msg.getText() == null)
                 {
 
                     Toast.makeText(getActivity(), "Bạn chưa nhập tin nhắn", Toast.LENGTH_SHORT).show();
@@ -132,36 +150,36 @@ public class ChatFragment extends Fragment {
 
                             String saveCurrentDate, saveCurrentTime;
                             Calendar calendar = Calendar.getInstance();
-                            SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yy");
+                            SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yy", Locale.ENGLISH);
                             saveCurrentDate = currentDate.format(calendar.getTime());
 
-                            SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm a");
+                            SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm a", Locale.ENGLISH);
                             saveCurrentTime = currentTime.format(calendar.getTime());
                             newChatModel.setTime(saveCurrentTime + " " + saveCurrentDate);
 
                             newChatModel.setMsg(msg.getText().toString());
-
-                            firebaseFirestore.collection("CSKH").document(id).collection("Chat").add(newChatModel);
+                            firebaseFirestore.collection("AdminChat").document(id).collection("Chat").add(newChatModel);
+                            Map<String, Object> stat = new HashMap<>();
+                            stat.put("ID",id);
+                            firebaseFirestore.collection("AdminChat").document(id).set(stat);
                             lstChat.add(newChatModel);
 
-                            Collections.sort(lstChat, new Comparator<ChatModel>() {
-                                @Override
-                                public int compare(ChatModel o1, ChatModel o2) {
-
-                                    String a1[] = o1.getTime().split(" ");
-                                    String a2[] = o2.getTime().split(" ");
-                                    SimpleDateFormat currentDate = new SimpleDateFormat("HH:mm a dd/MM/yy");
-                                    try {
-                                        if(currentDate.parse(o1.getTime()).before(currentDate.parse(o2.getTime()))){
-                                            return -1;
-                                        }else return 1;
-                                    } catch (ParseException e) {
-                                        e.printStackTrace();
-                                    }
-
-                                    return 0;
-                                }
-                            });
+//                            Collections.sort(lstChat, new Comparator<ChatModel>() {
+//                                @Override
+//                                public int compare(ChatModel o1, ChatModel o2) {
+//
+//                                    SimpleDateFormat currentDate = new SimpleDateFormat("HH:mm a dd/MM/yy");
+//                                    try {
+//                                        if(currentDate.parse(o1.getTime()).before(currentDate.parse(o2.getTime()))){
+//                                            return -1;
+//                                        }else return 1;
+//                                    } catch (ParseException e) {
+//                                        e.printStackTrace();
+//                                    }
+//
+//                                    return 0;
+//                                }
+//                            });
 
                             chatAdapter.notifyDataSetChanged();
                             lstView.setSelection(lstView.getAdapter().getCount()-1);

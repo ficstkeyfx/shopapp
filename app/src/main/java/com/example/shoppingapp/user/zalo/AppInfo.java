@@ -1,4 +1,4 @@
-package com.example.shoppingapp.zalo;
+package com.example.shoppingapp.user.zalo;
 
 public class AppInfo {
     public static final int APP_ID = 2553;

@@ -104,6 +104,16 @@
                 android:text="THỐNG KÊ"
                 android:textSize="17dp" />
 
+            <Button
+                android:id="@+id/chat"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginBottom="50dp"
+                android:text="CHĂM SÓC KHÁCH HÀNG"
+                android:textSize="17dp" />
+
         </LinearLayout>
     </ScrollView>
 

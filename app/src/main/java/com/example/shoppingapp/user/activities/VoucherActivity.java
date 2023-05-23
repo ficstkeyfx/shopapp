@@ -33,6 +33,9 @@ public class VoucherActivity extends AppCompatActivity {
     VoucherAdapter voucherAdapter;
 
     FirebaseFirestore firebaseFirestore;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +75,7 @@ public class VoucherActivity extends AppCompatActivity {
                 for(DocumentSnapshot documentSnapshot:task.getResult().getDocuments()){
                     VoucherModel voucherModel = documentSnapshot.toObject(VoucherModel.class);
                     int minimum = Integer.parseInt(getIntent().getStringExtra("minimum"));
-                    if (voucherModel.getMinimum() <= minimum)
+                    if (Integer.parseInt(voucherModel.getMinimum() + "000") <= minimum)
                     {
                         lstVoucher.add(voucherModel);
                     }

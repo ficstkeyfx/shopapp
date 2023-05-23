@@ -1,8 +1,8 @@
-package com.example.shoppingapp.zalo.Helper;
+package com.example.shoppingapp.user.zalo.Helper;
 
 import android.annotation.SuppressLint;
 
-import com.example.shoppingapp.zalo.Helper.HMac.HMacUtil;
+import com.example.shoppingapp.user.zalo.Helper.HMac.HMacUtil;
 
 import org.jetbrains.annotations.NotNull;
 

@@ -39,7 +39,7 @@ public class ProfileFragment extends Fragment
     FirebaseDatabase database;
     FirebaseStorage storage;
     FirebaseAuth auth;
-    TextView ten, name, gender, birth, CCCD, ngayCap, noiCap, ngayHetHan, email, address, job, position, phone, sdt;
+    TextView ten, name, gender, birth, CCCD, ngayCap, noiCap, ngayHetHan, email, address, job, position, phone, sdt, changePass;
     ScrollView scrollView;
     ProgressBar progressBar;
     CircleImageView avatar;
@@ -60,7 +60,7 @@ public class ProfileFragment extends Fragment
         database = FirebaseDatabase.getInstance();
         storage = FirebaseStorage.getInstance();
         auth = FirebaseAuth.getInstance();
-
+        changePass = root.findViewById(R.id.changPass);
         email = root.findViewById(R.id.email);
         sdt = root.findViewById(R.id.sdt);
         phone = root.findViewById(R.id.phone);
@@ -105,6 +105,15 @@ public class ProfileFragment extends Fragment
 
                             }
                         });
+
+        changePass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ChangePassActivity.class);
+                intent.putExtra("ID", auth.getCurrentUser().getUid());
+                startActivity(intent);
+            }
+        });
 
         nameChange.addValueEventListener(new ValueEventListener()
         {

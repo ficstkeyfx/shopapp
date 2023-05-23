@@ -1,4 +1,4 @@
-package com.example.shoppingapp.zalo;
+package com.example.shoppingapp.user.zalo;
 
 import android.util.Log;
 

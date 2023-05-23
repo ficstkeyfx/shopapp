@@ -48,7 +48,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class LoginActivity extends AppCompatActivity {
     int RC_SIGN_IN = 01;
@@ -241,6 +244,13 @@ public class LoginActivity extends AppCompatActivity {
                         if (auth.getCurrentUser().isEmailVerified()) {
                             progressBar.setVisibility(View.GONE);
                             Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                            String saveCurrentDate, saveCurrentTime;
+                            Calendar calendar = Calendar.getInstance();
+                            SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yy" , Locale.ENGLISH);
+                            saveCurrentDate = currentDate.format(calendar.getTime());
+                            SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm a", Locale.ENGLISH);
+                            saveCurrentTime = currentTime.format(calendar.getTime());
+                            database.getReference().child("Users").child(auth.getCurrentUser().getUid()).child("lastOnline").setValue(saveCurrentTime + " " + saveCurrentDate);
                             startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                         } else {
                             Toast.makeText(LoginActivity.this, "Vui lòng xác thực email!!!", Toast.LENGTH_SHORT).show();

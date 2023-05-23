@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.shoppingapp.R;
 import com.example.shoppingapp.user.models.MyCartModel;
+import com.example.shoppingapp.user.ui.cart.MyCartsFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -77,6 +78,11 @@ public class MyCartAdapters extends RecyclerView.Adapter<MyCartAdapters.ViewHold
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if(task.isSuccessful()){
                                                     myCartModels.remove(myCartModels.get(position));
+                                                    int price = 0;
+                                                    for(MyCartModel model:myCartModels){
+                                                        price += model.getTotalPrice();
+                                                    }
+                                                    MyCartsFragment.updateView(price);
                                                     notifyDataSetChanged();
                                                     Toast.makeText(context,"Đã xóa sản phẩm ra khỏi giỏ hàng",Toast.LENGTH_SHORT).show();
                                                 }else Toast.makeText(context,"Lỗi: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -84,6 +90,9 @@ public class MyCartAdapters extends RecyclerView.Adapter<MyCartAdapters.ViewHold
                                         });
                                 notifyDataSetChanged();
                                 dialog.cancel();
+
+
+
                             }
                         });
                 builder1.setNegativeButton(
