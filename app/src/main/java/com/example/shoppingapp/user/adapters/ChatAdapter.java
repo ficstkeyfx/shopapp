@@ -70,7 +70,7 @@ public class ChatAdapter extends BaseAdapter
         //Nếu null cần tạo mới
 
         View viewProduct;
-        if (convertView == null)
+//        if (convertView == null)
         {
             if(listChat.get(position).getName().equals("Admin"))
             {
@@ -78,7 +78,7 @@ public class ChatAdapter extends BaseAdapter
             }
             else viewProduct = View.inflate(parent.getContext(), R.layout.chat_item, null);
         }
-        else viewProduct = convertView;
+//        else viewProduct = convertView;
         //Bind sữ liệu phần tử vào View
         ChatModel chatModel = (ChatModel) getItem(position);
         TextView time = viewProduct.findViewById(R.id.time);

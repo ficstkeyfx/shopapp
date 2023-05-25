@@ -102,8 +102,9 @@ public class MyOrdersFragment extends Fragment {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if(value!=null){
+                    myOrders.clear();
                     for(DocumentSnapshot documentSnapshot :value.getDocuments()){
-                        String id =documentSnapshot.getId();
+                        String id = documentSnapshot.getId();
                         MyOrderModel myOrder =documentSnapshot.toObject(MyOrderModel.class);
                         myOrder.setOrder_ID(id);
                         myOrders.add(myOrder);

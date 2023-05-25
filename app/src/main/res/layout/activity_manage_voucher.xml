@@ -141,6 +141,7 @@
                         android:drawableLeft="@drawable/baseline_attach_money_1"
                         android:drawablePadding="10dp"
                         android:elevation="3dp"
+                        android:inputType="number"
                         android:minHeight="48dp"
                         android:padding="13dp"
                         android:textColor="#888887"
@@ -171,6 +172,7 @@
                         android:elevation="3dp"
                         android:minHeight="48dp"
                         android:padding="13dp"
+                        android:inputType="number"
                         android:textColor="#888887"
                         android:layout_marginLeft="50dp"
                         android:layout_marginRight="50dp"
@@ -200,6 +202,7 @@
                         android:minHeight="48dp"
                         android:padding="13dp"
                         android:textColor="#888887"
+                        android:inputType="number"
                         android:layout_marginLeft="50dp"
                         android:layout_marginRight="50dp"
                         app:layout_constraintWidth_percent=".8"/>

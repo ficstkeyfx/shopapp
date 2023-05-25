@@ -8,10 +8,19 @@ public class ManageOrderPeopleModel
     String productID;
     String name, address, phone, productName, productTime, productPrice, productQuantity, TotalPrice, status;
     Uri avatar, productAva;
+    int size;
     long ID;
     public ManageOrderPeopleModel()
     {
 
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
     }
 
     public String getKey() {

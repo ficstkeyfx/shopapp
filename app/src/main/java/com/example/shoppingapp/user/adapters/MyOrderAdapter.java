@@ -44,15 +44,19 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
         holder.tvAddress.setText("Địa chỉ: "+myOrder.getAddress());
         holder.tvBillTotal.setText("Thanh toán: "+myOrder.getTotalPrice()+"000đ");
         holder.tvName.setText(myOrder.getProductName());
+        holder.tvSize.setText("Size: " + String.valueOf(myOrder.getSize()));
 
         if(myOrder.getStatus() ==0){
             holder.tvStatus.setTextColor(Color.BLUE);
             holder.tvStatus.setText("Đang chờ xác nhận");
-
         }else if(myOrder.getStatus() == 1){
             holder.tvStatus.setText("Đang vận chuyển");
-        }else {
+        }else if(myOrder.getStatus() == 2){
             holder.tvStatus.setText("Đã nhận hàng");
+            holder.tvStatus.setTextColor(Color.RED);
+        }else {
+            holder.tvStatus.setText("Đã hủy");
+            holder.tvStatus.setTextColor(Color.GRAY);
         }
     }
     @Override
@@ -61,7 +65,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvOrderId, tvQuan_order,tvDateOrder ,tvAddress,tvBillTotal,tvStatus, tvName ;
+        TextView tvOrderId, tvQuan_order,tvDateOrder ,tvAddress,tvBillTotal,tvStatus, tvName, tvSize ;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tvOrderName);
@@ -71,6 +75,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
             tvAddress=itemView.findViewById(R.id.tvAddress_order);
             tvBillTotal =itemView.findViewById(R.id.tv_payorder);
             tvStatus =itemView.findViewById(R.id.tvStatus);
+            tvSize = itemView.findViewById(R.id.tvSize);
         }
     }
 }

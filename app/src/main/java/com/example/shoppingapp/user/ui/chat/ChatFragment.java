@@ -3,6 +3,7 @@ package com.example.shoppingapp.user.ui.chat;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -25,8 +26,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.ParseException;
@@ -50,6 +54,7 @@ public class ChatFragment extends Fragment {
     List<ChatModel> lstChat;
     FirebaseDatabase firebaseDatabase;
     ProgressBar progressBar;
+    String ava;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,52 +79,123 @@ public class ChatFragment extends Fragment {
         lstChat = new ArrayList<>();
         chatAdapter = new ChatAdapter(lstChat);
         lstView.setAdapter(chatAdapter);
+        chatAdapter.notifyDataSetChanged();
+        if(lstView.getAdapter().getCount() == 0) {
+            progressBar.setVisibility(View.GONE);
+            lstView.setVisibility(View.VISIBLE);
+            msg.setVisibility(View.VISIBLE);
+            send.setVisibility(View.VISIBLE);
+        }
 
-        firebaseFirestore.collection("AdminChat").document(id).collection("Chat").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//        firebaseFirestore.collection("AdminChat").document(id).collection("Chat").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                for(DocumentSnapshot documentSnapshot:task.getResult().getDocuments()) {
+//                    ChatModel chatModel = documentSnapshot.toObject(ChatModel.class);
+//                    lstChat.add(chatModel);
+//                    Collections.sort(lstChat, new Comparator<ChatModel>() {
+//                        @Override
+//                        public int compare(ChatModel o1, ChatModel o2) {
+//                            SimpleDateFormat currentDate = new SimpleDateFormat("HH:mm a dd/MM/yy", Locale.ENGLISH);
+//                            try {
+//                                if(currentDate.parse(o1.getTime()).before(currentDate.parse(o2.getTime()))){
+//                                    return -1;
+//                                }else return 1;
+//                            } catch (ParseException e) {
+//                                e.printStackTrace();
+//                            }
+//                            return 0;
+//                        }
+//                    });
+//                    chatAdapter.notifyDataSetChanged();
+//                }
+//                Collections.sort(lstChat, new Comparator<ChatModel>() {
+//                    @Override
+//                    public int compare(ChatModel o1, ChatModel o2) {
+//                        SimpleDateFormat currentDate = new SimpleDateFormat("HH:mm a dd/MM/yy", Locale.ENGLISH);
+//                        try {
+//                            if(currentDate.parse(o1.getTime()).before(currentDate.parse(o2.getTime()))){
+//                                return -1;
+//                            }else return 1;
+//                        } catch (ParseException e) {
+//                            e.printStackTrace();
+//                        }
+//                        return 0;
+//                    }
+//                });
+//                chatAdapter.notifyDataSetChanged();
+//                progressBar.setVisibility(View.GONE);
+//                lstView.setVisibility(View.VISIBLE);
+//                msg.setVisibility(View.VISIBLE);
+//                send.setVisibility(View.VISIBLE);
+//                lstView.setSelection(lstView.getAdapter().getCount()-1);
+//            }
+//        });
+        firebaseDatabase.getReference().child("Users").child(id).child("avatar").addValueEventListener(new ValueEventListener() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                for(DocumentSnapshot documentSnapshot:task.getResult().getDocuments()) {
-                    ChatModel chatModel = documentSnapshot.toObject(ChatModel.class);
-                    lstChat.add(chatModel);
-                    Collections.sort(lstChat, new Comparator<ChatModel>() {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ava = (String) snapshot.getValue();
+                if(ava != null)
+                    firebaseFirestore.collection("AdminChat").document(id).collection("Chat").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
-                        public int compare(ChatModel o1, ChatModel o2) {
-                            SimpleDateFormat currentDate = new SimpleDateFormat("HH:mm a dd/MM/yy", Locale.ENGLISH);
-                            try {
-                                if(currentDate.parse(o1.getTime()).before(currentDate.parse(o2.getTime()))){
-                                    return -1;
-                                }else return 1;
-                            } catch (ParseException e) {
-                                e.printStackTrace();
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            for(DocumentSnapshot documentSnapshot: task.getResult().getDocuments()){
+                                if(!documentSnapshot.get("name").equals("Admin")){
+                                    firebaseFirestore.collection("AdminChat").document(id).collection("Chat").document(documentSnapshot.getId()).update("avatar",ava);
+                                }
+                                System.out.println(task.getResult().getDocuments().size());
                             }
-                            return 0;
                         }
                     });
-                    chatAdapter.notifyDataSetChanged();
-                }
-                Collections.sort(lstChat, new Comparator<ChatModel>() {
-                    @Override
-                    public int compare(ChatModel o1, ChatModel o2) {
-                        SimpleDateFormat currentDate = new SimpleDateFormat("HH:mm a dd/MM/yy", Locale.ENGLISH);
-                        try {
-                            if(currentDate.parse(o1.getTime()).before(currentDate.parse(o2.getTime()))){
-                                return -1;
-                            }else return 1;
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                        return 0;
-                    }
-                });
-                chatAdapter.notifyDataSetChanged();
-                progressBar.setVisibility(View.GONE);
-                lstView.setVisibility(View.VISIBLE);
-                msg.setVisibility(View.VISIBLE);
-                send.setVisibility(View.VISIBLE);
-                lstView.setSelection(lstView.getAdapter().getCount()-1);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
+        firebaseFirestore.collection("AdminChat").document(id).collection("Chat").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
+                for (DocumentChange dc : value.getDocumentChanges())
+                {
+                    DocumentSnapshot document = dc.getDocument();
+                    switch (dc.getType()) {
+                        case ADDED:
+                            System.out.println(document.getId());
+                            ChatModel chatModel = document.toObject(ChatModel.class);
+                            lstChat.add(chatModel);
+                            Collections.sort(lstChat, new Comparator<ChatModel>() {
+                                @Override
+                                public int compare(ChatModel o1, ChatModel o2) {
+                                    SimpleDateFormat currentDate = new SimpleDateFormat("HH:mm a dd/MM/yy", Locale.ENGLISH);
+                                    try {
+                                        if(currentDate.parse(o1.getTime()).before(currentDate.parse(o2.getTime()))){
+                                            return -1;
+                                        }else return 1;
+                                    } catch (ParseException e) {
+                                        e.printStackTrace();
+                                    }
+                                    return 0;
+                                }
+                            });
+                            chatAdapter.notifyDataSetChanged();
+                            progressBar.setVisibility(View.GONE);
+                            lstView.setVisibility(View.VISIBLE);
+                            msg.setVisibility(View.VISIBLE);
+                            send.setVisibility(View.VISIBLE);
+                            lstView.setSelection(lstView.getAdapter().getCount()-1);
+                            break;
+                        case MODIFIED:
+                            break;
+                        case REMOVED:
 
+                            break;
+                    }
+                }
+
+            }
+        });
 
 
         send.setOnClickListener(new View.OnClickListener() {
@@ -127,7 +203,6 @@ public class ChatFragment extends Fragment {
             public void onClick(View v) {
                 if (msg.getText().toString().trim().equals("") || msg.getText() == null)
                 {
-
                     Toast.makeText(getActivity(), "Bạn chưa nhập tin nhắn", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -162,7 +237,7 @@ public class ChatFragment extends Fragment {
                             Map<String, Object> stat = new HashMap<>();
                             stat.put("ID",id);
                             firebaseFirestore.collection("AdminChat").document(id).set(stat);
-                            lstChat.add(newChatModel);
+//                            lstChat.add(newChatModel);
 
 //                            Collections.sort(lstChat, new Comparator<ChatModel>() {
 //                                @Override

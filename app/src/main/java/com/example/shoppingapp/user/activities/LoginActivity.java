@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 import static android.provider.ContactsContract.Intents.Insert.EMAIL;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,18 +12,23 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.shoppingapp.R;
 import com.example.shoppingapp.admin.activities.MenuAdminActivity;
 import com.example.shoppingapp.user.models.UserModel;
+import com.example.shoppingapp.user.util.PasswordHash;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -38,6 +44,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.safetynet.SafetyNet;
+import com.google.android.gms.safetynet.SafetyNetApi;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -46,32 +57,51 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks {
     int RC_SIGN_IN = 01;
     Button signIn;
     TextView signUp;
     EditText email,password;
     ProgressBar progressBar;
-    SignInButton ggBtn;
-    LoginButton fbBtn;
+    LinearLayout ggBtn, phoneBtn;
     CallbackManager callbackManager;
     GoogleSignInClient mGoogleSignInClient;
     FirebaseAuth auth;
     FirebaseDatabase database;
+    CheckBox checkBox;
+    GoogleApiClient googleApiClient;
+    boolean captcha = false;
+    String SiteKey = "6LehhDgmAAAAAEW6UI7k0w8l9s5tjfgPz8XYfER4";
 
     TextView forgotPassword;
 
+//    <com.google.android.gms.common.SignInButton
+//    android:id="@+id/gg_btn"
+//    android:layout_width="wrap_content"
+//    android:layout_height="40dp"/>
+
+//    <com.facebook.login.widget.LoginButton
+//    xmlns:fb="http://schemas.android.com/apk/res-auto"
+//    android:id="@+id/fb_btn"
+//    android:layout_width="35dp"
+//    android:layout_height="wrap_content"
+//    android:gravity="center"/>
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_login);
+        checkBox = findViewById(R.id.checkBox);
 
         signIn = findViewById(R.id.login_btn);
         signUp = findViewById(R.id.sign_up);
@@ -80,11 +110,6 @@ public class LoginActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressbar);
 
         ggBtn = findViewById(R.id.gg_btn);
-        ggBtn.setSize(2);
-
-
-        fbBtn = findViewById(R.id.fb_btn);
-        fbBtn.setText("");
 
         forgotPassword=findViewById(R.id.forgot_password);
 
@@ -105,15 +130,6 @@ public class LoginActivity extends AppCompatActivity {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        // Facebook
-        FacebookSdk.sdkInitialize(this.getApplicationContext());
-        AppEventsLogger.activateApp(this);
-        fbBtn.setReadPermissions(Arrays.asList(EMAIL, "public_profile"));
-        AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        if(accessToken != null && !accessToken.isExpired()) {
-            handleFacebookAccessToken(accessToken);
-        }
-        
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,10 +137,48 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        // captcha
+
+        googleApiClient = new GoogleApiClient.Builder(this).addApi(SafetyNet.API)
+                .addConnectionCallbacks(LoginActivity.this).build();
+        googleApiClient.connect();
+        checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(checkBox.isChecked()){
+                    checkBox.setChecked(false);
+                    SafetyNet.SafetyNetApi.verifyWithRecaptcha(googleApiClient, SiteKey)
+                            .setResultCallback(new ResultCallback<SafetyNetApi.RecaptchaTokenResult>() {
+                                @Override
+                                public void onResult(@NonNull SafetyNetApi.RecaptchaTokenResult recaptchaTokenResult) {
+                                    Status status = recaptchaTokenResult.getStatus();
+                                    System.out.println(status.isSuccess());
+                                    if(status != null && status.isSuccess()) {
+                                        Toast.makeText(LoginActivity.this,"Xác nhận thành công",Toast.LENGTH_SHORT).show();
+                                        captcha = true;
+                                        checkBox.setChecked(true);
+                                        checkBox.setTextColor(Color.BLUE);
+                                    }else{
+                                        Toast.makeText(LoginActivity.this,"Xác nhận không thành công",Toast.LENGTH_SHORT).show();
+                                        checkBox.setTextColor(Color.RED);
+                                    }
+                                }
+                            });
+                }else {
+                    captcha = false;
+                    checkBox.setTextColor(Color.BLACK);
+                }
+
+            }
+        });
+
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginUser();
+                if(!captcha){
+                    Toast.makeText(LoginActivity.this,"Hãy xác nhận captcha trước",Toast.LENGTH_SHORT).show();
+                }else loginUser();
+
                 progressBar.setVisibility(View.VISIBLE);
             }
         });
@@ -144,17 +198,17 @@ public class LoginActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         String userEmail= emailBox.getText().toString();
                         if(TextUtils.isEmpty(userEmail)&&!Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()){
-                            Toast.makeText(LoginActivity.this, "Enter your registered email id", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Nhập địa chỉ email", Toast.LENGTH_SHORT).show();
                             return;
                         }
                         auth.sendPasswordResetEmail(userEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){
-                                    Toast.makeText(LoginActivity.this, "Check your email", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this, "Kiểm tra email của bạn", Toast.LENGTH_SHORT).show();
                                     dialog.dismiss();
                                 }else{
-                                    Toast.makeText(LoginActivity.this, "Unable to send, failed", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this, "L", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
@@ -188,31 +242,6 @@ public class LoginActivity extends AppCompatActivity {
                 startActivityForResult(signInIntent, RC_SIGN_IN);
             }
         });
-
-        fbBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList(EMAIL, "public_profile"));
-
-            }
-        });
-
-        fbBtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                handleFacebookAccessToken(loginResult.getAccessToken());
-            }
-
-            @Override
-            public void onCancel() {
-                // App code
-            }
-
-            @Override
-            public void onError(FacebookException exception) {
-                // App code
-            }
-        });
     }
 
     private void loginUser() {
@@ -229,7 +258,8 @@ public class LoginActivity extends AppCompatActivity {
         if(userPassword.length()<6){
             Toast.makeText(this, "Mật khẩu phải có ít nhất 6 ký tự", Toast.LENGTH_SHORT).show();
         }
-        auth.signInWithEmailAndPassword(userEmail,userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        String hashPass = PasswordHash.encryptThisString(userPassword);
+        auth.signInWithEmailAndPassword(userEmail,hashPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
@@ -239,6 +269,7 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "Bạn là admin", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(LoginActivity.this, MenuAdminActivity.class));
                     }
+
                     else
                     {
                         if (auth.getCurrentUser().isEmailVerified()) {
@@ -253,14 +284,49 @@ public class LoginActivity extends AppCompatActivity {
                             database.getReference().child("Users").child(auth.getCurrentUser().getUid()).child("lastOnline").setValue(saveCurrentTime + " " + saveCurrentDate);
                             startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                         } else {
-                            Toast.makeText(LoginActivity.this, "Vui lòng xác thực email!!!", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(LoginActivity.this, "Vui lòng xác thực email!!!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }else {
-                    Toast.makeText(LoginActivity.this, "Lỗi: " + task.getException(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(LoginActivity.this, "Tài khoản hoặc mật khẩu chưa đúng", Toast.LENGTH_SHORT).show();
+                    auth.signInWithEmailAndPassword(userEmail,userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                if (userEmail.equals("shopapp216@gmail.com"))
+                                {
+                                    progressBar.setVisibility(View.GONE);
+                                    Toast.makeText(LoginActivity.this, "Bạn là admin", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(LoginActivity.this, MenuAdminActivity.class));
+                                }
+
+                                else
+                                {
+                                    if (auth.getCurrentUser().isEmailVerified()) {
+                                        progressBar.setVisibility(View.GONE);
+                                        Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                                        String saveCurrentDate, saveCurrentTime;
+                                        Calendar calendar = Calendar.getInstance();
+                                        SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yy" , Locale.ENGLISH);
+                                        saveCurrentDate = currentDate.format(calendar.getTime());
+                                        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm a", Locale.ENGLISH);
+                                        saveCurrentTime = currentTime.format(calendar.getTime());
+                                        database.getReference().child("Users").child(auth.getCurrentUser().getUid()).child("lastOnline").setValue(saveCurrentTime + " " + saveCurrentDate);
+                                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                                    } else {
+                                        Toast.makeText(LoginActivity.this, "Vui lòng xác thực email!!!", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }else {
+                                Toast.makeText(LoginActivity.this, "Tài khoản hoặc mật khẩu chưa đúng", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                 }
             }
         });
+
+
     }
 
     private void updateUI(GoogleSignInAccount account) {
@@ -275,11 +341,29 @@ public class LoginActivity extends AppCompatActivity {
                         userModel.setEmail(user.getEmail());
                         userModel.setName(user.getDisplayName());
                         userModel.setAvatar(user.getPhotoUrl().toString());
-                        database.getReference().child("Users").child(user.getUid()).setValue(userModel);
+                        database.getReference().child("Users").child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (!snapshot.child("name").exists())
+                                {
+                                    database.getReference().child("Users").child(user.getUid()).setValue(userModel);
+                                }
+                                String saveCurrentDate, saveCurrentTime;
+                                Calendar calendar = Calendar.getInstance();
+                                SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yy" , Locale.ENGLISH);
+                                saveCurrentDate = currentDate.format(calendar.getTime());
+                                SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm a", Locale.ENGLISH);
+                                saveCurrentTime = currentTime.format(calendar.getTime());
+                                database.getReference().child("Users").child(auth.getCurrentUser().getUid()).child("lastOnline").setValue(saveCurrentTime + " " + saveCurrentDate);
+                                progressBar.setVisibility(View.GONE);
+                                Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
 
-                        progressBar.setVisibility(View.GONE);
-                        Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                            }
+                        });
                     } else {
                         Toast.makeText(LoginActivity.this, "Lỗi: " + task.getException(), Toast.LENGTH_SHORT).show();
                     }
@@ -302,28 +386,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void handleFacebookAccessToken(AccessToken accessToken) {
-        AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
-        auth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()) {
-                    FirebaseUser user = auth.getCurrentUser();
-                    UserModel userModel = new UserModel();
-                    userModel.setEmail(user.getEmail());
-                    userModel.setName(user.getDisplayName());
-                    userModel.setAvatar(user.getPhotoUrl().toString());
-                    database.getReference().child("Users").child(user.getUid()).setValue(userModel);
-
-                    progressBar.setVisibility(View.GONE);
-                    Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-                } else {
-                    Toast.makeText(LoginActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -336,5 +398,15 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             callbackManager.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
     }
 }

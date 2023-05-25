@@ -2,6 +2,7 @@ package com.example.shoppingapp.user.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,12 +26,14 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
     FirebaseFirestore firestore;
     FirebaseAuth auth;
+    int discount = 0;
 
     Button finish;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_place_oder);
 
         firestore = FirebaseFirestore.getInstance();
@@ -39,10 +42,13 @@ public class PlaceOrderActivity extends AppCompatActivity {
         finish = findViewById(R.id.btnFinish);
 
         List<MyCartModel> myCartModelList = (ArrayList<MyCartModel>) getIntent().getSerializableExtra("itemList");
+        if (getIntent().getStringExtra("discount")!=null)
+            discount = Integer.parseInt(getIntent().getStringExtra("discount"));
         String address = getIntent().getStringExtra("address");
 
         if(myCartModelList != null && myCartModelList.size()>0){
             for(MyCartModel model: myCartModelList){
+                model.setTotalPrice(model.getTotalPrice() - discount*Integer.parseInt(model.getTotalQuantity()));
                 final HashMap<String,Object> cartMap = new HashMap<>();
                 cartMap.put("productName",model.getProductName());
                 cartMap.put("productPrice",model.getProductPrice());
@@ -52,6 +58,8 @@ public class PlaceOrderActivity extends AppCompatActivity {
                 cartMap.put("totalPrice",model.getTotalPrice()+"");
                 cartMap.put("img_url",model.getImg_url());
                 cartMap.put("address",address);
+                cartMap.put("status",0);
+                cartMap.put("size",model.getSize());
                 firestore.collection("CurrentUser").document(auth.getCurrentUser().getUid())
                         .collection("Order").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                             @Override

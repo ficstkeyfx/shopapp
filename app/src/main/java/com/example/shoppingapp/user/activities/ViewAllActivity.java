@@ -2,6 +2,7 @@ package com.example.shoppingapp.user.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,6 +38,7 @@ public class ViewAllActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_view_all);
 
         progressBar = findViewById(R.id.progressbar);
@@ -57,23 +59,6 @@ public class ViewAllActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(viewAllAdapters);
 
-        // Getting fruits
-        if(type != null && type.equalsIgnoreCase("fruit")){
-            firebaseFirestore.collection("AllProducts").whereEqualTo("type","fruit").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    for(DocumentSnapshot documentSnapshot:task.getResult().getDocuments()){
-                        ViewAllModel viewAllModel = documentSnapshot.toObject(ViewAllModel.class);
-                        viewAllModelList.add(viewAllModel);
-                        viewAllAdapters.notifyDataSetChanged();
-                    }
-                    progressBar.setVisibility(View.GONE);
-                    recyclerView.setVisibility(View.VISIBLE);
-                }
-
-            });
-        }
-        // Getting vegetable
         if(type != null && type.equalsIgnoreCase("adidas")){
             firebaseFirestore.collection("AllProducts").whereEqualTo("type","adidas").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
@@ -88,7 +73,6 @@ public class ViewAllActivity extends AppCompatActivity {
                 }
             });
         }
-        // Getting milk
         if(type != null && type.equalsIgnoreCase("nike")){
             firebaseFirestore.collection("AllProducts").whereEqualTo("type","nike").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
@@ -103,7 +87,6 @@ public class ViewAllActivity extends AppCompatActivity {
                 }
             });
         }
-        // Getting egg
         if(type != null && type.equalsIgnoreCase("converse")){
             firebaseFirestore.collection("AllProducts").whereEqualTo("type","converse").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
@@ -119,7 +102,6 @@ public class ViewAllActivity extends AppCompatActivity {
 
             });
         }
-        // Getting fish
         if(type != null && type.equalsIgnoreCase("new balance")){
             firebaseFirestore.collection("AllProducts").whereEqualTo("type","new balance").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
@@ -134,7 +116,6 @@ public class ViewAllActivity extends AppCompatActivity {
                 }
             });
         }
-        // Getting fish
         if(type != null && type.equalsIgnoreCase("gucci")){
             firebaseFirestore.collection("AllProducts").whereEqualTo("type","gucci").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override

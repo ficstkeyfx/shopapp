@@ -1,6 +1,7 @@
 package com.example.shoppingapp.admin.activities.manageVoucher;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,8 +22,10 @@ import com.example.shoppingapp.admin.activities.addProduct.AddProduct;
 import com.example.shoppingapp.user.models.VoucherModel;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class manageVoucher extends AppCompatActivity {
     TextView reduce, minimum, quantity, date, txtDate;
@@ -35,6 +38,7 @@ public class manageVoucher extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_manage_voucher);
 
         reduce = findViewById(R.id.reduce);
@@ -163,6 +167,41 @@ public class manageVoucher extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (TextUtils.isEmpty(txtReduce.getText()))
+                {
+                    Toast.makeText(manageVoucher.this, "Bạn chưa nhập số tiền giảm", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(txtMinimum.getText()))
+                {
+                    Toast.makeText(manageVoucher.this, "Bạn chưa nhập điều kiện voucher", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(txtQuantity.getText()))
+                {
+                    Toast.makeText(manageVoucher.this, "Bạn chưa nhập số lượng", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(txtDate.getText()))
+                {
+                    Toast.makeText(manageVoucher.this, "Bạn chưa nhập số tiền giảm", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                String nowDate;
+                Calendar calendar = Calendar.getInstance();
+                SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+                nowDate = currentDate.format(calendar.getTime());
+                try {
+                    if (currentDate.parse(txtDate.getText().toString()).before(currentDate.parse(nowDate)))
+                    {
+                        Toast.makeText(manageVoucher.this, "Bạn nhập ngày hết hạn chưa đúng", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+
                 firebaseFirestore.collection("Voucher").add(new VoucherModel(Integer.parseInt(txtReduce.getText().toString()),
                                                 Integer.parseInt(txtMinimum.getText().toString()),
                                                 Integer.parseInt(txtQuantity.getText().toString()),

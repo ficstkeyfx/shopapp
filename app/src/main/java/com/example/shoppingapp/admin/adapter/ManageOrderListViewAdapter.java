@@ -76,6 +76,8 @@ public class ManageOrderListViewAdapter extends BaseAdapter
         ((TextView) viewProduct.findViewById(R.id.productQuantity)).setText("Số lượng: " + orderPeople.getProductQuantity());
         ((TextView) viewProduct.findViewById(R.id.TotalPrice)).setText("Tổng tiền thanh toán: " + orderPeople.getTotalPrice() + "000đ");
 
+        ((TextView) viewProduct.findViewById(R.id.size)).setText("Size: " + orderPeople.getSize());
+
         if(orderPeople.getStatus() == null||orderPeople.getStatus().equals("0")||orderPeople.getStatus().equals("")){
             ((TextView) viewProduct.findViewById(R.id.statusOrder)).setText("Trạng thái: Đang chờ xác nhận");
             ((TextView) viewProduct.findViewById(R.id.statusOrder)).setTextColor(Color.BLUE);
@@ -91,7 +93,7 @@ public class ManageOrderListViewAdapter extends BaseAdapter
             accept.setEnabled(false);
         }else {
             ((TextView) viewProduct.findViewById(R.id.statusOrder)).setText("Trạng thái: Hủy bỏ");
-            ((TextView) viewProduct.findViewById(R.id.statusOrder)).setTextColor(Color.RED);
+            ((TextView) viewProduct.findViewById(R.id.statusOrder)).setTextColor(Color.GRAY);
             accept.setEnabled(false);
         }
 
@@ -109,6 +111,7 @@ public class ManageOrderListViewAdapter extends BaseAdapter
                                 firestore.collection("CurrentUser").document(orderPeople.getKey()).collection("Order")
                                         .document(orderPeople.getProductID()).update("status",2);
                                 orderPeople.setStatus("2");
+                                listAccount.remove(orderPeople);
                                 accept.setEnabled(false);
                                 notifyDataSetChanged();
                                 dialog.cancel();
@@ -122,6 +125,7 @@ public class ManageOrderListViewAdapter extends BaseAdapter
                                 firestore.collection("CurrentUser").document(orderPeople.getKey()).collection("Order")
                                         .document(orderPeople.getProductID()).update("status",3);
                                 orderPeople.setStatus("3");
+                                listAccount.remove(orderPeople);
                                 accept.setEnabled(false);
                                 notifyDataSetChanged();
                                 dialog.cancel();
@@ -153,7 +157,8 @@ public class ManageOrderListViewAdapter extends BaseAdapter
                                         .document(orderPeople.getProductID()).update("status",1);
                                 orderPeople.setStatus("1");
                                 accept.setEnabled(false);
-                                notifyDataSetChanged();
+                                listAccount.remove(orderPeople);
+                                //notifyDataSetChanged();
                                 dialog.cancel();
                             }
                         });

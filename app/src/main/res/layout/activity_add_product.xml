@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".admin.activities.addProduct.AddProduct"
-    android:background="@drawable/addsp">
+    tools:context=".admin.activities.addProduct.AddProduct">
 
     <LinearLayout
     android:layout_width="match_parent"
@@ -42,7 +41,7 @@
                 android:id="@+id/img"
                 android:layout_width="150sp"
                 android:layout_height="150sp"
-                android:src="@drawable/grocery"
+                android:src="@drawable/icon"
                 android:layout_gravity="center"/>
 
             <EditText
@@ -121,19 +120,20 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_marginTop="30sp"
+                android:layout_marginBottom="100sp"
                 android:layout_gravity="center_horizontal">
                 <Button
-                    android:layout_width="100sp"
-                    android:layout_height="50sp"
-                    android:text="lƯU"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="THÊM"
                     android:textStyle="bold"
                     android:id="@+id/save_btn"
                     android:layout_marginEnd="20sp"/>
 
                 <Button
-                    android:layout_width="100sp"
-                    android:layout_height="50sp"
-                    android:text="XOÁ"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="LÀM MỚI"
                     android:textStyle="bold"
                     android:id="@+id/clear_btn" />
             </LinearLayout>

@@ -3,10 +3,12 @@ package com.example.shoppingapp.user.ui.profile;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,6 +31,11 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.auth.User;
 import com.google.firebase.ktx.Firebase;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 public class ThongTinDinhDanh extends AppCompatActivity {
 
     EditText name, gender, birth, CCCD, ngayCap, noiCap, ngayHetHan, phone;
@@ -41,6 +48,7 @@ public class ThongTinDinhDanh extends AppCompatActivity {
     {
 
         super.onCreate(savedInstanceState);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_thong_tin_dinh_danh);
 
         database = FirebaseDatabase.getInstance();
@@ -59,13 +67,21 @@ public class ThongTinDinhDanh extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 UserModel userModel = snapshot.getValue(UserModel.class);
-                name.setText(userModel.getName());
+                if (!userModel.getName().equals("Chưa cập nhật"))
+                    name.setText(userModel.getName());
+                if (!userModel.getPhone().equals("Chưa cập nhật"))
                 phone.setText(userModel.getPhone());
+                if (!userModel.getGender().equals("Chưa cập nhật"))
                 gender.setText(userModel.getGender());
+                if (!userModel.getBirth().equals("Chưa cập nhật"))
                 birth.setText(userModel.getBirth());
+                if (!userModel.getCCCD().equals("Chưa cập nhật"))
                 CCCD.setText(userModel.getCCCD());
+                if (!userModel.getNgayCap().equals("Chưa cập nhật"))
                 ngayCap.setText(userModel.getNgayCap());
+                if (!userModel.getNoiCap().equals("Chưa cập nhật"))
                 noiCap.setText(userModel.getNoiCap());
+                if (!userModel.getNgayHetHan().equals("Chưa cập nhật"))
                 ngayHetHan.setText(userModel.getNgayHetHan());
             }
 
@@ -80,6 +96,55 @@ public class ThongTinDinhDanh extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
+                if(gender.getText().toString()!=null)
+                    if(!gender.getText().toString().toLowerCase().equals("nam")&&!gender.getText().toString().toLowerCase().equals("nữ")){
+                        Toast.makeText(ThongTinDinhDanh.this,"Giới tính phải là nam hoặc nữ", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                if(TextUtils.isEmpty(birth.getText().toString()))
+                    try{
+                        Calendar calendar = Calendar.getInstance();
+                        Date currentDate = calendar.getTime();
+                        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+                        Date date = format.parse(birth.getText().toString());
+                        if(date.after(currentDate)){
+                            Toast.makeText(ThongTinDinhDanh.this,"Ngày sinh không hợp lệ", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }catch (Exception e){
+                        Toast.makeText(ThongTinDinhDanh.this,"Ngày sinh không hợp lệ, định dạng ngày/tháng/năm", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                if(!TextUtils.isEmpty(ngayCap.getText().toString()))
+                    try{
+                        Calendar calendar = Calendar.getInstance();
+                        Date currentDate = calendar.getTime();
+                        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+                        Date date = format.parse(ngayCap.getText().toString());
+                        Date date_birth = format.parse(birth.getText().toString());
+                        if(date.after(currentDate)||date.before(date_birth)){
+                            Toast.makeText(ThongTinDinhDanh.this,"Ngày cấp giấy tờ không hợp lệ", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }catch (Exception e){
+                        Toast.makeText(ThongTinDinhDanh.this,"Ngày cấp giấy tờ không hợp lệ, định dạng ngày/tháng/năm", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                if(!TextUtils.isEmpty(ngayHetHan.getText().toString()))
+                    try{
+                        Calendar calendar = Calendar.getInstance();
+                        Date currentDate = calendar.getTime();
+                        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+                        Date date = format.parse(ngayCap.getText().toString());
+                        Date date_hh = format.parse(ngayHetHan.getText().toString());
+                        if(date.after(date_hh)){
+                            Toast.makeText(ThongTinDinhDanh.this,"Ngày hết hạn giấy tờ không hợp lệ", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }catch (Exception e){
+                        Toast.makeText(ThongTinDinhDanh.this,"Ngày hết hạn giấy tờ không hợp lệ, định dạng ngày/tháng/năm", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(save.getContext());
                 builder1.setMessage("Bạn có chắc chắn muốn cập nhật thông tin.");
                 builder1.setCancelable(true);
@@ -121,28 +186,28 @@ public class ThongTinDinhDanh extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String id = user.getUid();
         String Name = name.getText().toString();
-        if (Name == null)
+        if (TextUtils.isEmpty(name.getText()))
             Name = "Chưa cập nhật";
         String Gender = gender.getText().toString();
-        if (Gender == null)
+        if (TextUtils.isEmpty(gender.getText()))
             Gender = "Chưa cập nhật";
         String Birth = birth.getText().toString();
-        if (Birth == null)
+        if (TextUtils.isEmpty(birth.getText()))
             Birth = "Chưa cập nhật";
         String CMND = CCCD.getText().toString();
-        if (CMND == null)
+        if (TextUtils.isEmpty(CCCD.getText()))
             CMND = "Chưa cập nhật";
         String NgayCap = ngayCap.getText().toString();
-        if (NgayCap == null)
+        if (TextUtils.isEmpty(ngayCap.getText()))
             NgayCap = "Chưa cập nhật";
         String NoiCap = noiCap.getText().toString();
-        if (NoiCap == null)
+        if (TextUtils.isEmpty(noiCap.getText()))
             NoiCap = "Chưa cập nhật";
         String NgayHetHan = ngayHetHan.getText().toString();
-        if (NgayHetHan == null)
+        if (TextUtils.isEmpty(ngayHetHan.getText()))
             NgayHetHan = "Chưa cập nhật";
         String Phone = phone.getText().toString();
-        if (Phone == null)
+        if (TextUtils.isEmpty(phone.getText()))
             Phone = "Chưa cập nhật";
 
         database.getReference().child("Users").child(id).child("name").setValue(Name);

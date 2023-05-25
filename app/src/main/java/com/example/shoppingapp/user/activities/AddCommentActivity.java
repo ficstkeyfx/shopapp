@@ -2,6 +2,7 @@ package com.example.shoppingapp.user.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,6 +33,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import org.checkerframework.checker.units.qual.C;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 public class AddCommentActivity extends AppCompatActivity {
     ImageView avatar, back;
     TextView name;
@@ -45,6 +50,7 @@ public class AddCommentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_add_comment);
         firestore = FirebaseFirestore.getInstance();
         database = FirebaseDatabase.getInstance();
@@ -104,8 +110,14 @@ public class AddCommentActivity extends AppCompatActivity {
                 }
                 float ratingStar = rating.getRating();
                 commentModel.setRating(ratingStar);
-                String date = "" + java.time.LocalDate.now();
-                commentModel.setDate(date);
+                String saveCurrentDate, saveCurrentTime;
+                Calendar calendar = Calendar.getInstance();
+                SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yy", Locale.ENGLISH);
+                saveCurrentDate = currentDate.format(calendar.getTime());
+
+                SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm a", Locale.ENGLISH);
+                saveCurrentTime = currentTime.format(calendar.getTime());
+                commentModel.setDate(saveCurrentTime + " " + saveCurrentDate);
                 commentModel.setComment(String.valueOf(cmt.getText()));
                 firestore.collection("AllProducts").document(id).collection("Comments").add(commentModel);
                 Toast.makeText(AddCommentActivity.this, "Đánh giá sản phẩm thành công", Toast.LENGTH_SHORT).show();

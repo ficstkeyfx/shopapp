@@ -41,8 +41,8 @@
         android:id="@+id/Scrollview"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/lnbtn"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/lnbtn"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolBar"
         tools:layout_constraintLeft_toLeftOf="parent">
@@ -51,7 +51,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="8dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@+id/ln">
 
             <ImageView
                 android:id="@+id/detailed_img"
@@ -260,14 +261,16 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginTop="10dp"
+
                     android:layout_gravity="right">
+
                     <TextView
+                        android:id="@+id/binhLuan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
-                        android:text="Đánh giá"
-                        android:id="@+id/binhLuan"
-
+                        android:layout_weight="4"
+                        android:text="Đánh giá (0)"
                         android:textColor="@color/purple_700"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -276,19 +279,21 @@
                         android:id="@+id/addComment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="200dp"
                         android:src="@drawable/baseline_add_comment_24" />
                 </LinearLayout>
                 <ListView
-                    android:layout_marginTop="10dp"
+                    android:id="@+id/lstComment"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:id="@+id/lstComment"/>
+                    android:layout_height="300dp"
+                    android:layout_marginBottom="10dp"/>
+
 
             </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
+
+
         <LinearLayout
             android:id="@+id/lnbtn"
             android:layout_width="match_parent"

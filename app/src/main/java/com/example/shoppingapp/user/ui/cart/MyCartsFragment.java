@@ -41,6 +41,7 @@ import com.example.shoppingapp.user.adapters.MyCartAdapters;
 import com.example.shoppingapp.user.models.MyCartModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -94,9 +95,11 @@ public class MyCartsFragment extends Fragment implements OnMapReadyCallback ,Loc
     GoogleMap Map ;
     private HomeActivity activity;
 
-    int price=0;
+    static int price=0;
+    int type = 0;
 
-    public static void updateView(int price) {
+    public static void updateView(int _price) {
+        price = _price;
         if(price == 0) ((TextView) root.findViewById(R.id.cart_total)).setText("Tổng tiền:          " + String.valueOf(price) + "đ");
         else ((TextView) root.findViewById(R.id.cart_total)).setText("Tổng tiền:          " + String.valueOf(price) + "000đ");
     }
@@ -105,6 +108,7 @@ public class MyCartsFragment extends Fragment implements OnMapReadyCallback ,Loc
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        price = 0;
         root = inflater.inflate(R.layout.fragment_my_carts, container, false);
 
         firestore = FirebaseFirestore.getInstance();
@@ -194,15 +198,24 @@ public class MyCartsFragment extends Fragment implements OnMapReadyCallback ,Loc
             }
         });
 
-        buynow.setEnabled(false);
 
 
         buynow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (userSdt.getText().equals("Số điện thoại:   Chưa cập nhật"))
+                {
+                    Toast.makeText(getActivity(),"Vui lòng cập nhật số điện thoại ở thông tin tài khoản",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (myCartModels.isEmpty())
                 {
                     Toast.makeText(getActivity(),"Bạn không có hàng để mua",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (type == 0)
+                {
+                    Toast.makeText(getActivity(),"Vui lòng xác định vị trí trước khi mua",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(address.getText()!=null&&address.getText().length()>0){
@@ -233,7 +246,7 @@ public class MyCartsFragment extends Fragment implements OnMapReadyCallback ,Loc
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                buynow.setEnabled(false);
+
             }
 
             @Override
@@ -268,12 +281,12 @@ public class MyCartsFragment extends Fragment implements OnMapReadyCallback ,Loc
                         LatLng latLng = new LatLng(add.getLatitude(), add.getLongitude());
                         Map.addMarker(new MarkerOptions().position(latLng).title(addressUser));
                         Map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
-                        buynow.setEnabled(true);
+                        type = 1;
                     }
                     else
                     {
-                        buynow.setEnabled(false);
                         Toast.makeText(getActivity(), "Bạn chưa nhập đúng địa chỉ",Toast.LENGTH_SHORT).show();
+                        type = 0;
                     }
 
                 }

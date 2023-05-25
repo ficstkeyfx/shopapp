@@ -5,8 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".user.activities.LoginActivity"
-    tools:ignore="ExtraText">
+    tools:ignore="ExtraText"><![CDATA[
     android:background = "@color/white">
+
+    ]]>
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="I am not a robot"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/login_btn"
+        app:layout_constraintEnd_toStartOf="@+id/forgot_password"
+        app:layout_constraintHorizontal_bias="0.328"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
     <ImageView
         android:id="@+id/log_img"
@@ -46,6 +61,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="40dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email_log"
         app:passwordToggleEnabled="true"
@@ -60,10 +77,10 @@
             android:drawablePadding="6dp"
             android:hint="Password"
             android:inputType="textPassword"
-            android:textColor="#888887"
-            android:paddingBottom="12dp"
             android:paddingTop="12dp"
-            android:textSize="18sp"/>
+            android:paddingBottom="12dp"
+            android:textColor="#888887"
+            android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -132,15 +149,7 @@
         app:layout_constraintTop_toBottomOf="@+id/question"
         app:layout_constraintVertical_bias="0.1"></ProgressBar>
 
-    <TextView
-        android:id="@+id/signIndiff"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="or sign in with"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/question"></TextView>
+
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -151,30 +160,29 @@
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signIndiff"
         app:layout_constraintVertical_bias="0.811"
         tools:layout_editor_absoluteX="0dp">
 
+
         <LinearLayout
-            android:layout_marginRight="20dp"
-            android:layout_width="100dp"
-            android:layout_height="32dp"
-            android:gravity = "center"
-            android:background="#1877F2"
-            >
-            <com.facebook.login.widget.LoginButton
-                xmlns:fb="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/fb_btn"
-                android:layout_width="35dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/border"
+            android:id="@+id/gg_btn">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@mipmap/google_logo"/>
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                />
+                android:text="Đăng nhập bằng gmail"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp"/>
         </LinearLayout>
 
 
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/gg_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"/>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

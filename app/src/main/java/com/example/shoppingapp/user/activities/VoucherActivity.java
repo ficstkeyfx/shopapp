@@ -2,11 +2,13 @@ package com.example.shoppingapp.user.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.shoppingapp.R;
@@ -34,14 +36,17 @@ public class VoucherActivity extends AppCompatActivity {
 
     FirebaseFirestore firebaseFirestore;
 
+    ImageView goBack;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_voucher);
-
         lstView = findViewById(R.id.lstView);
+        goBack = findViewById(R.id.goBack);
         firebaseFirestore = FirebaseFirestore.getInstance();
 
 
@@ -83,6 +88,13 @@ public class VoucherActivity extends AppCompatActivity {
                 voucherAdapter = new VoucherAdapter(lstVoucher);
                 lstView.setAdapter(voucherAdapter);
 
+            }
+        });
+
+        goBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 //        lstView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

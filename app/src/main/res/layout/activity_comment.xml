@@ -33,7 +33,7 @@
                 android:orientation="horizontal">
                 <RatingBar
                     android:id="@+id/rating"
-                    android:isIndicator="false"
+                    android:isIndicator="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

@@ -159,17 +159,18 @@
         </ScrollView>
 
         <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnBuyNow"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom"
-        android:background="@drawable/bg_button_red"
-        android:padding="10dp"
-        android:text="Mua Ngay"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="16sp" />
+            android:id="@+id/btnBuyNow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:background="@drawable/bg_button_red"
+            android:padding="10dp"
+            android:state_enabled="false"
+            android:text="Mua Ngay"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
     </RelativeLayout>
 
     <ProgressBar

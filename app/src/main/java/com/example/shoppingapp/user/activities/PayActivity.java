@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -56,11 +57,20 @@ public class PayActivity extends AppCompatActivity {
     FirebaseAuth auth;
     String current;
 
+    static String dis, mini;
+    static int quanti;
     static String price;
 
-    public static void updateVoucher(String _voucher){
-        price = String.valueOf(Integer.parseInt(price) - Integer.parseInt(_voucher+"000")) ;
-        priceConfirm.setText("Tổng thanh toán:          "+ price + "đ");
+    public static void updateVoucher(String _voucher, String mini_, String _quant){
+        int count = 0;
+        for(MyCartModel model: mycarts) {
+            count += Integer.parseInt(model.getTotalQuantity());
+        }
+        String new_price = String.valueOf(Integer.parseInt(price) - Integer.parseInt(_voucher+"000")*count);
+        priceConfirm.setText("Tổng thanh toán:          "+ new_price + "đ");
+        dis  = _voucher;
+        mini = mini_;
+        quanti = Integer.parseInt(_quant);
         voucher.setVisibility(View.VISIBLE);
         voucher.setText("-" + _voucher + "k");
     }
@@ -68,6 +78,7 @@ public class PayActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_pay);
 
         goBack = findViewById(R.id.goBack);
@@ -123,7 +134,7 @@ public class PayActivity extends AppCompatActivity {
         goBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(PayActivity.this, MyCartsFragment.class));
+                finish();
             }
         });
 
@@ -137,6 +148,24 @@ public class PayActivity extends AppCompatActivity {
                 Intent intent = new Intent(PayActivity.this, PlaceOrderActivity.class);
                 intent.putExtra("itemList", getIntent().getSerializableExtra("itemList"));
                 intent.putExtra("address", getIntent().getStringExtra("address"));
+                if (dis!=null && mini!=null)
+                {
+                    System.out.println(dis + " --------" + mini);
+                    firebaseFirestore.collection("Voucher").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            for (DocumentSnapshot documentSnapshot:task.getResult().getDocuments())
+                            {
+                                if (documentSnapshot.get("discount").toString().equals(dis) && documentSnapshot.get("minimum").toString().equals(mini))
+                                {
+                                    String id = documentSnapshot.getId();
+                                    firebaseFirestore.collection("Voucher").document(id).update("quantity",quanti - 1);
+                                    voucher.setVisibility(View.GONE);
+                                }
+                            }
+                        }
+                    });
+                }
                 for (MyCartModel model: mycarts)
                 {
                     firebaseFirestore.collection("CurrentUser").document(auth.getCurrentUser().getUid()).collection("Cart").document(model.getDocumentId()).delete();
@@ -152,7 +181,11 @@ public class PayActivity extends AppCompatActivity {
                         .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                stat.put(current,task.getResult().getLong(current)+((ArrayList<MyCartModel>) getIntent().getSerializableExtra("itemList")).size());
+                                Long res = task.getResult().getLong(current);
+                                for(MyCartModel model:(ArrayList<MyCartModel>) getIntent().getSerializableExtra("itemList")){
+                                    res += Integer.parseInt(model.getTotalQuantity());
+                                }
+                                stat.put(current,res);
                                 firebaseFirestore.collection("Statistics")
                                         .document("SoldProducts")
                                         .collection("Count")
@@ -174,19 +207,19 @@ public class PayActivity extends AppCompatActivity {
                                 int gucci = 0;
                                 for(MyCartModel model:(ArrayList<MyCartModel>) getIntent().getSerializableExtra("itemList")){
                                     if(model.getProductType().equals("adidas")) {
-                                        adidas++;
+                                        adidas+=Integer.parseInt(model.getTotalQuantity());
                                     }
                                     if(model.getProductType().equals("nike")) {
-                                        nike++;
+                                        nike+=Integer.parseInt(model.getTotalQuantity());
                                     }
                                     if(model.getProductType().equals("converse")) {
-                                        converse++;
+                                        converse+=Integer.parseInt(model.getTotalQuantity());
                                     }
-                                    if(model.getProductType().equals("newbalance")) {
-                                        newbalance++;
+                                    if(model.getProductType().equals("new balance")) {
+                                        newbalance+=Integer.parseInt(model.getTotalQuantity());
                                     }
                                     if(model.getProductType().equals("gucci")) {
-                                        gucci++;
+                                        gucci+=Integer.parseInt(model.getTotalQuantity());
                                     }
                                 }
                                 stat_type.put("adidas",task.getResult().getLong("adidas")+adidas);
@@ -210,7 +243,7 @@ public class PayActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                 int revenue = 0;
                                 for(MyCartModel model: (ArrayList<MyCartModel>) getIntent().getSerializableExtra("itemList")){
-                                    revenue += model.getProductPrice();
+                                    revenue += model.getTotalPrice();
                                 }
                                 revenue_month.put(current,task.getResult().getLong(current) + revenue);
                                 firebaseFirestore.collection("Statistics")
@@ -234,19 +267,19 @@ public class PayActivity extends AppCompatActivity {
                                 int gucci = 0;
                                 for(MyCartModel model:(ArrayList<MyCartModel>) getIntent().getSerializableExtra("itemList")){
                                     if(model.getProductType().equals("adidas")) {
-                                        adidas += model.getProductPrice();
+                                        adidas += model.getTotalPrice();
                                     }
                                     if(model.getProductType().equals("nike")) {
-                                        nike += model.getProductPrice();
+                                        nike += model.getTotalPrice();
                                     }
                                     if(model.getProductType().equals("converse")) {
-                                        converse += model.getProductPrice();
+                                        converse += model.getTotalPrice();
                                     }
-                                    if(model.getProductType().equals("newbalance")) {
-                                        newbalance += model.getProductPrice();
+                                    if(model.getProductType().equals("new balance")) {
+                                        newbalance += model.getTotalPrice();
                                     }
                                     if(model.getProductType().equals("gucci")) {
-                                        gucci += model.getProductPrice();
+                                        gucci += model.getTotalPrice();
                                     }
                                 }
                                 revenue_type.put("adidas",task.getResult().getLong("adidas")+adidas);
@@ -261,7 +294,7 @@ public class PayActivity extends AppCompatActivity {
                                         .update(revenue_type);
                             }
                         });
-
+                intent.putExtra("discount",dis);
                 startActivity(intent);
             }
         });
@@ -293,6 +326,27 @@ public class PayActivity extends AppCompatActivity {
                         intent.putExtra("itemList", getIntent().getSerializableExtra("itemList"));
                         intent.putExtra("address", getIntent().getStringExtra("address"));
 
+                        if (dis!=null && mini!=null)
+                        {
+                            System.out.println(dis + " --------" + mini);
+                            firebaseFirestore.collection("Voucher").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    for (DocumentSnapshot documentSnapshot:task.getResult().getDocuments())
+                                    {
+                                        if (documentSnapshot.get("discount").toString().equals(dis) && documentSnapshot.get("minimum").toString().equals(mini))
+                                        {
+                                            String id = documentSnapshot.getId();
+                                            firebaseFirestore.collection("Voucher").document(id).update("quantity",quanti - 1);
+                                            voucher.setVisibility(View.GONE);
+                                        }
+                                    }
+                                }
+                            });
+                        }
+
+
+
                         Map<String, Object> stat = new HashMap<>();
                         Map<String, Object> stat_type = new HashMap<>();
                         Map<String, Object> revenue_month = new HashMap<>();
@@ -304,7 +358,11 @@ public class PayActivity extends AppCompatActivity {
                                 .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                        stat.put(current,task.getResult().getLong(current)+((ArrayList<MyCartModel>) getIntent().getSerializableExtra("itemList")).size());
+                                        Long res = task.getResult().getLong(current);
+                                        for(MyCartModel model:(ArrayList<MyCartModel>) getIntent().getSerializableExtra("itemList")){
+                                            res += Integer.parseInt(model.getTotalQuantity());
+                                        }
+                                        stat.put(current,res);
                                         firebaseFirestore.collection("Statistics")
                                                 .document("SoldProducts")
                                                 .collection("Count")
@@ -326,19 +384,19 @@ public class PayActivity extends AppCompatActivity {
                                         int gucci = 0;
                                         for(MyCartModel model:(ArrayList<MyCartModel>) getIntent().getSerializableExtra("itemList")){
                                             if(model.getProductType().equals("adidas")) {
-                                                adidas++;
+                                                adidas+=Integer.parseInt(model.getTotalQuantity());
                                             }
                                             if(model.getProductType().equals("nike")) {
-                                                nike++;
+                                                nike+=Integer.parseInt(model.getTotalQuantity());
                                             }
                                             if(model.getProductType().equals("converse")) {
-                                                converse++;
+                                                converse+=Integer.parseInt(model.getTotalQuantity());
                                             }
-                                            if(model.getProductType().equals("newbalance")) {
-                                                newbalance++;
+                                            if(model.getProductType().equals("new balance")) {
+                                                newbalance+=Integer.parseInt(model.getTotalQuantity());
                                             }
                                             if(model.getProductType().equals("gucci")) {
-                                                gucci++;
+                                                gucci+=Integer.parseInt(model.getTotalQuantity());
                                             }
                                         }
                                         stat_type.put("adidas",task.getResult().getLong("adidas")+adidas);
@@ -386,19 +444,19 @@ public class PayActivity extends AppCompatActivity {
                                         int gucci = 0;
                                         for(MyCartModel model:(ArrayList<MyCartModel>) getIntent().getSerializableExtra("itemList")){
                                             if(model.getProductType().equals("adidas")) {
-                                                adidas += model.getProductPrice();
+                                                adidas += model.getTotalPrice();
                                             }
                                             if(model.getProductType().equals("nike")) {
-                                                nike += model.getProductPrice();
+                                                nike += model.getTotalPrice();
                                             }
                                             if(model.getProductType().equals("converse")) {
-                                                converse += model.getProductPrice();
+                                                converse += model.getTotalPrice();
                                             }
-                                            if(model.getProductType().equals("newbalance")) {
-                                                newbalance += model.getProductPrice();
+                                            if(model.getProductType().equals("new balance")) {
+                                                newbalance += model.getTotalPrice();
                                             }
                                             if(model.getProductType().equals("gucci")) {
-                                                gucci += model.getProductPrice();
+                                                gucci += model.getTotalPrice();
                                             }
                                         }
                                         revenue_type.put("adidas",task.getResult().getLong("adidas")+adidas);
@@ -417,6 +475,7 @@ public class PayActivity extends AppCompatActivity {
                         {
                             firebaseFirestore.collection("CurrentUser").document(auth.getCurrentUser().getUid()).collection("Cart").document(model.getDocumentId()).delete();
                         }
+                        intent.putExtra("discount",dis);
                         startActivity(intent);
                     }
 

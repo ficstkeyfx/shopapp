@@ -3,6 +3,7 @@ package com.example.shoppingapp.admin.activities.addProduct;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -38,6 +39,7 @@ public class AddProduct extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_add_product);
 
         img = findViewById(R.id.img);
@@ -144,7 +146,7 @@ public class AddProduct extends AppCompatActivity {
                         "Đồng ý",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                fireStore.collection("AllProducts").add(new ViewAllModel(tenSp ,moTa, 5, urlImg, loaiSp, giaSp));
+                                fireStore.collection("AllProducts").add(new ViewAllModel(tenSp ,moTa, 5, urlImg, loaiSp, giaSp, "new"));
                                 Toast.makeText(AddProduct.this, "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
                                 dialog.cancel();
                             }

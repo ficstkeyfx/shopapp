@@ -86,14 +86,17 @@ public class VoucherAdapter extends BaseAdapter
         date.setText("Ngày hết hạn: " + voucherModel.getExpiration_date().toString());
 
 
-        viewProduct.setOnClickListener(new View.OnClickListener()
+
+        use.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
                 Intent intent = new Intent(viewProduct.getContext(), PayActivity.class);
                 intent.putExtra("discount", voucherModel.getDiscount());
-                PayActivity.updateVoucher(String.valueOf(voucherModel.getDiscount()));
+                intent.putExtra("minimum", voucherModel.getMinimum());
+                intent.putExtra("quantity", voucherModel.getQuantity());
+                PayActivity.updateVoucher(String.valueOf(voucherModel.getDiscount()), String.valueOf(voucherModel.getMinimum()),String.valueOf(voucherModel.getQuantity()));
                 viewProduct.getContext().startActivity(intent);
             }
         });

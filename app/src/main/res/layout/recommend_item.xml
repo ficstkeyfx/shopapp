@@ -53,8 +53,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                android:text="5.0"
-                android:layout_weight="1"/>
+                android:text="5.0" />
+            <TextView
+                android:id="@+id/pop_discount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="Discount 10% OFF"
+                android:textSize="15sp"
+                android:textColor="@color/purple_700"
+                android:textStyle="bold"
+                android:gravity="end" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

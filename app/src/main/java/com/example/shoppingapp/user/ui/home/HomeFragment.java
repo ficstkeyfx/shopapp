@@ -107,9 +107,9 @@ public class HomeFragment extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()){
                             for(QueryDocumentSnapshot document: task.getResult()){
-                                if(document.get("collection")!=null&&((String)document.get("collection")).equals("popular")){
-                                    ViewAllModel popularModel = document.toObject(ViewAllModel.class);
-                                    popularModelList.add(popularModel);
+                                if(Float.parseFloat(document.get("rating").toString()) >= 4.8){
+                                    ViewAllModel recommendModel = document.toObject(ViewAllModel.class);
+                                    popularModelList.add(recommendModel);
                                     popularAdapters.notifyDataSetChanged();
                                     progressBar.setVisibility(View.GONE);
                                     scrollView.setVisibility(View.VISIBLE);
@@ -150,10 +150,12 @@ public class HomeFragment extends Fragment {
                         if(task.isSuccessful()){
                             for(QueryDocumentSnapshot document: task.getResult()){
 
-                                if(Float.parseFloat(document.get("rating").toString()) >= 4.5){
+                                if(document.get("status")!=null&&((String)document.get("status")).equals("new")){
                                     ViewAllModel recommendModel = document.toObject(ViewAllModel.class);
                                     recommendModelList.add(recommendModel);
                                     recommendAdapters.notifyDataSetChanged();
+                                    progressBar.setVisibility(View.GONE);
+                                    scrollView.setVisibility(View.VISIBLE);
                                 }
                             }
                         }else {

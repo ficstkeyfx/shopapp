@@ -27,7 +27,7 @@
         android:drawableLeft="@drawable/ic_baseline_person_24"
         android:drawablePadding="10dp"
         android:elevation="3dp"
-        android:hint="Name"
+        android:hint="Tên"
         android:minHeight="48dp"
         android:padding="13dp"
         android:textColor="#888887"
@@ -35,6 +35,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reg_img"
         app:layout_constraintWidth_percent=".8" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="I am not a robot"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/login_btn"
+        app:layout_constraintEnd_toEndOf="@+id/login_btn"
+        app:layout_constraintHorizontal_bias="0.299"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
     <EditText
         android:id="@+id/email_reg"
@@ -64,7 +77,7 @@
         android:drawableLeft="@drawable/keylog"
         android:drawablePadding="10dp"
         android:elevation="3dp"
-        android:hint="Password"
+        android:hint="Mật khẩu"
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:padding="13dp"
@@ -84,17 +97,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/repassword_reg"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="50dp"/>
     <EditText
         android:id="@+id/repassword_reg"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:background="@drawable/editext_background"
         android:drawableLeft="@drawable/keylog"
         android:drawablePadding="10dp"
+        android:layout_marginTop="20dp"
         android:elevation="3dp"
-        android:hint="Password again"
+        android:hint="Nhập lại mật khẩu"
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:padding="13dp"

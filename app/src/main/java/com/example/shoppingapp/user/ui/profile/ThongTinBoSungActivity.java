@@ -1,11 +1,14 @@
 package com.example.shoppingapp.user.ui.profile;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,13 +17,17 @@ import android.widget.Toast;
 
 import com.example.shoppingapp.user.activities.HomeActivity;
 import com.example.shoppingapp.R;
+import com.example.shoppingapp.user.models.UserModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class ThongTinBoSungActivity extends AppCompatActivity
 {
-    EditText email, address, job, position;
+    EditText address, job, position;
 
     ImageView back;
     FirebaseDatabase database;
@@ -28,6 +35,7 @@ public class ThongTinBoSungActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_thong_tin_bo_sung);
 
         database = FirebaseDatabase.getInstance();
@@ -36,6 +44,25 @@ public class ThongTinBoSungActivity extends AppCompatActivity
         position = findViewById(R.id.position);
         back = findViewById(R.id.back);
         save = findViewById(R.id.save_btn);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        database.getReference().child("Users").child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                UserModel userModel = snapshot.getValue(UserModel.class);
+                if (!userModel.getJob().equals("Chưa cập nhật"))
+                    job.setText(userModel.getJob());
+                if (!userModel.getAddress().equals("Chưa cập nhật"))
+                    address.setText(userModel.getAddress());
+                if (!userModel.getPosition().equals("Chưa cập nhật"))
+                    position.setText(userModel.getPosition());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         save.setOnClickListener(new View.OnClickListener()
         {
@@ -84,20 +111,17 @@ public class ThongTinBoSungActivity extends AppCompatActivity
     {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String id = user.getUid();
-        String Email = email.getText().toString();
-        if (Email == null)
-            Email = "Chưa cập nhật";
         String Job = job.getText().toString();
-        if (Job == null)
+
+        if (TextUtils.isEmpty(job.getText()))
             Job = "Chưa cập nhật";
         String Address = address.getText().toString();
-        if (Address == null)
+        if (TextUtils.isEmpty(address.getText()))
             Address = "Chưa cập nhật";
         String Position = position.getText().toString();
-        if (Position == null)
+        if (TextUtils.isEmpty(position.getText()))
             Position = "Chưa cập nhật";
 
-        database.getReference().child("Users").child(id).child("email").setValue(Email);
         database.getReference().child("Users").child(id).child("job").setValue(Job);
         database.getReference().child("Users").child(id).child("address").setValue(Address);
         database.getReference().child("Users").child(id).child("position").setValue(Position);

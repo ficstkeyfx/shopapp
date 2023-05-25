@@ -6,6 +6,7 @@ public class ViewAllModel implements Serializable {
     float rating;
     String name,description,img_url,type;
     int price;
+    String status;
 
     public ViewAllModel() {
     }
@@ -17,6 +18,25 @@ public class ViewAllModel implements Serializable {
         this.img_url = img_url;
         this.price = price;
         this.type = type;
+    }
+
+    public ViewAllModel(String name, String description, float rating, String img_url,String type, int price, String status) {
+        this.name = name;
+        this.description = description;
+        this.rating = rating;
+        this.img_url = img_url;
+        this.price = price;
+        this.type = type;
+        this.status = status;
+    }
+
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getType() {

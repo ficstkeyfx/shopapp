@@ -2,6 +2,7 @@ package com.example.shoppingapp.admin.activities.updateProduct;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -41,6 +42,7 @@ public class searchProduct extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_search_product);
 
         goBack = findViewById(R.id.goBack);

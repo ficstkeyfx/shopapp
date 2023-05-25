@@ -11,7 +11,29 @@ public class MyOrderModel {
     private String totalQuantity;
     private List <MyCartModel> cartList ;
     private int status  ;
-    private String Order_ID  ;
+    private String Order_ID ;
+    private int size;
+
+    public MyOrderModel(String totalPrice, String productDate, String productTime, String productName, String address, String totalQuantity, List<MyCartModel> cartList, int status, String order_ID, int size) {
+        this.totalPrice = totalPrice;
+        this.productDate = productDate;
+        this.productTime = productTime;
+        this.productName = productName;
+        this.address = address;
+        this.totalQuantity = totalQuantity;
+        this.cartList = cartList;
+        this.status = status;
+        Order_ID = order_ID;
+        this.size = size;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
 
     public String getOrder_ID() {
         return Order_ID;
@@ -21,16 +43,7 @@ public class MyOrderModel {
         Order_ID = order_ID;
     }
 
-    public MyOrderModel(String totalPrice, String productDate,String productName, String productTime, String address,String totalQuantity, List<MyCartModel> cartList, int status) {
-        this.totalPrice = totalPrice;
-        this.productDate = productDate;
-        this.productTime = productTime;
-        this.address = address;
-        this.cartList = cartList;
-        this.status = status;
-        this.totalQuantity = totalQuantity;
-        this.productName = productName;
-    }
+
 
     public String getProductName() {
         return productName;
