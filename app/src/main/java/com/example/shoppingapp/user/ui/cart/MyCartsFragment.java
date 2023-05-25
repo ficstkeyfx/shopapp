@@ -66,7 +66,7 @@ import java.util.List;
 import java.util.Locale;
 
 
-public class MyCartsFragment extends Fragment implements OnMapReadyCallback ,LocationListener{
+public class MyCartsFragment extends Fragment implements OnMapReadyCallback {
 
     static View root;
 
@@ -107,7 +107,6 @@ public class MyCartsFragment extends Fragment implements OnMapReadyCallback ,Loc
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         price = 0;
         root = inflater.inflate(R.layout.fragment_my_carts, container, false);
 
@@ -294,112 +293,7 @@ public class MyCartsFragment extends Fragment implements OnMapReadyCallback ,Loc
         });
         supportMapFragment.getMapAsync(this);
 
-
-
         return root;
-    }
-
-    private void detectLocation() {
-        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        getCurrentAdress();
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-    }
-    private void requestLocationPermission() {
-        ActivityCompat.requestPermissions(getActivity(), locationPermission, REQUEST_CODE_LOCATION);
-    }
-
-    private boolean checkLocationPermission() {
-        boolean result = ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED;
-        return result;
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode){
-            case  REQUEST_CODE_LOCATION:{
-                if(grantResults.length>0){
-                    boolean locationAcepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    System.out.println(locationAcepted);
-                    if(locationAcepted){
-                        detectLocation();
-                    }else {
-                        Toast.makeText(getActivity(), "Không cho phép truy cập địa chỉ", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    @Override
-    public void onLocationChanged(@NonNull Location location) {
-        //location detected
-        latitude = location.getLatitude();
-        longtitude = location.getLongitude();
-        getCurrentAdress();
-
-
-    }
-    private void getCurrentAdress() {
-        System.out.println("Vaoooooooooooooooooooooo");
-        Geocoder geocoder ;
-        List<Address> addresses;
-        if(getContext()!=null){
-            geocoder = new Geocoder(getContext(), Locale.getDefault());
-            //Set postion
-            LatLng latLngUser = new LatLng(latitude ,longtitude);
-            MarkerOptions markerOptions = new MarkerOptions().position(latLngUser);
-            markerOptions.icon(BitmapDescriptorFactory.fromBitmap(
-                    BitmapFactory.decodeResource(getResources(),
-                            R.drawable.ic_marker)));
-
-            //add market
-            Map.addMarker(markerOptions);
-            //zoom
-            Map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngUser, 15 ));
-        }else{
-            Toast.makeText(getContext(),"Cannot",Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        try {
-            System.out.println(geocoder);
-            System.out.println(latitude);
-            System.out.println(longtitude);
-            addresses = geocoder.getFromLocation(latitude ,longtitude,1);
-            System.out.println(addresses);
-            String addresss = addresses.get(0).getAddressLine(0);
-            address.setText(addresss);
-
-        } catch (IOException e) {
-            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-        LocationListener.super.onStatusChanged(provider, status, extras);
-
-    }
-
-    @Override
-    public void onProviderEnabled(@NonNull String provider) {
-        LocationListener.super.onProviderEnabled(provider);
-    }
-
-    @Override
-    public void onProviderDisabled(@NonNull String provider) {
-        LocationListener.super.onProviderDisabled(provider);
-    }
-
-    @Override
-    public void onAttach(@NonNull Activity activity) {
-        super.onAttach(activity);
-        this.activity= (HomeActivity) activity;
-
     }
 
     @Override

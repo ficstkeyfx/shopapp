@@ -56,6 +56,7 @@ public class PayActivity extends AppCompatActivity {
     static String address;
     FirebaseAuth auth;
     String current;
+    static int giamgia = 0;
 
     static String dis, mini;
     static int quanti;
@@ -63,11 +64,12 @@ public class PayActivity extends AppCompatActivity {
 
     public static void updateVoucher(String _voucher, String mini_, String _quant){
         int count = 0;
+        giamgia = Integer.parseInt(_voucher);
         for(MyCartModel model: mycarts) {
             count += Integer.parseInt(model.getTotalQuantity());
         }
-        String new_price = String.valueOf(Integer.parseInt(price) - Integer.parseInt(_voucher+"000")*count);
-        priceConfirm.setText("Tổng thanh toán:          "+ new_price + "đ");
+        price = String.valueOf(Integer.parseInt(price) - Integer.parseInt(_voucher+"000")*count);
+        priceConfirm.setText("Tổng thanh toán:          "+ price + "đ");
         dis  = _voucher;
         mini = mini_;
         quanti = Integer.parseInt(_quant);
@@ -104,7 +106,16 @@ public class PayActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         ZaloPaySDK.init(2553, Environment.SANDBOX);
-
+        /*
+        Dòng 1: Đoạn mã này thiết lập chính sách luồng (thread policy) cho
+        luồng hiện tại bằng cách sử dụng StrictMode trong Android.
+        Chính sách này cho phép tất cả các hoạt động mạng được thực hiện
+        trên luồng chính (main thread).
+        Tuy nhiên, việc thực hiện các hoạt động mạng
+        trên luồng chính thường không được khuyến nghị vì có thể gây ra vấn đề ANR (Application Not Responding).
+        Dòng 2: Thiết lập chính sách luồng đã được xây dựng ở dòng trước.
+        Dòng 3: Khởi tạo ZaloPaySDK với một cấu hình cụ thể. Dòng này sử dụng môi trường sandbox (Environment.SANDBOX) và cung cấp một ID là 2553. Môi trường sandbox thường được sử dụng để kiểm thử và phát triển ứng dụng mà không ảnh hưởng đến môi trường sản phẩm thực tế
+         */
         nameConfirm.setText(getIntent().getStringExtra("name"));
         numberConfirm.setText(getIntent().getStringExtra("number"));
         addressConfirm.setText("Địa chỉ:            " + getIntent().getStringExtra("address"));
@@ -241,11 +252,11 @@ public class PayActivity extends AppCompatActivity {
                         .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                int revenue = 0;
-                                for(MyCartModel model: (ArrayList<MyCartModel>) getIntent().getSerializableExtra("itemList")){
-                                    revenue += model.getTotalPrice();
-                                }
-                                revenue_month.put(current,task.getResult().getLong(current) + revenue);
+//                                int revenue = 0;
+//                                for(MyCartModel model: (ArrayList<MyCartModel>) getIntent().getSerializableExtra("itemList")){
+//                                    revenue += model.getTotalPrice();
+//                                }
+                                revenue_month.put(current,task.getResult().getLong(current) + (Integer.parseInt(price)/1000));
                                 firebaseFirestore.collection("Statistics")
                                         .document("SoldProducts")
                                         .collection("Revenue")
@@ -267,19 +278,19 @@ public class PayActivity extends AppCompatActivity {
                                 int gucci = 0;
                                 for(MyCartModel model:(ArrayList<MyCartModel>) getIntent().getSerializableExtra("itemList")){
                                     if(model.getProductType().equals("adidas")) {
-                                        adidas += model.getTotalPrice();
+                                        adidas += model.getTotalPrice() - giamgia*Integer.parseInt(model.getTotalQuantity());
                                     }
                                     if(model.getProductType().equals("nike")) {
-                                        nike += model.getTotalPrice();
+                                        nike += model.getTotalPrice() - giamgia*Integer.parseInt(model.getTotalQuantity());
                                     }
                                     if(model.getProductType().equals("converse")) {
-                                        converse += model.getTotalPrice();
+                                        converse += model.getTotalPrice() - giamgia*Integer.parseInt(model.getTotalQuantity());
                                     }
                                     if(model.getProductType().equals("new balance")) {
-                                        newbalance += model.getTotalPrice();
+                                        newbalance += model.getTotalPrice()- giamgia*Integer.parseInt(model.getTotalQuantity());
                                     }
                                     if(model.getProductType().equals("gucci")) {
-                                        gucci += model.getTotalPrice();
+                                        gucci += model.getTotalPrice()- giamgia*Integer.parseInt(model.getTotalQuantity());
                                     }
                                 }
                                 revenue_type.put("adidas",task.getResult().getLong("adidas")+adidas);
@@ -313,6 +324,25 @@ public class PayActivity extends AppCompatActivity {
         CreateOrder orderApi = new CreateOrder();
 
         try {
+            /*
+            Dòng 4: Tạo một đối tượng JSONObject gọi orderApi.createOrder(price)
+            để tạo đơn hàng với giá trị price (giá trị này cần được khai báo trước đó).
+            Đây có thể là một cuộc gọi tới API của hệ thống để tạo đơn hàng.
+
+            Dòng 5: Truy cập vào trường "return_code" trong đối tượng JSONObject được trả về từ bước trước.
+            Trong trường hợp trường này có giá trị là "1", có nghĩa là đơn hàng đã được tạo thành công.
+
+            Dòng 6: Lấy giá trị của trường "zp_trans_token" từ đối tượng JSONObject.
+            Đây là mã thông báo thanh toán (token) được sử dụng để thực hiện thanh toán qua ZaloPaySDK.
+
+            Dòng 7: Sử dụng ZaloPaySDK để thực hiện thanh toán đơn hàng.
+            Dòng này gọi phương thức payOrder() của ZaloPaySDK và truyền vào các
+            tham số như sau: PayActivity.this (đối tượng Activity hiện tại),
+            token (mã thông báo thanh toán nhận được từ bước trước), "demozpdk://app"
+            (URL callback cho kết quả thanh toán), và một PayOrderListener để xử lý các
+            sự kiện liên quan đến thanh toán
+             */
+
             JSONObject data = orderApi.createOrder(price);
             String code = data.getString("return_code");
             if (code.equals("1")) {

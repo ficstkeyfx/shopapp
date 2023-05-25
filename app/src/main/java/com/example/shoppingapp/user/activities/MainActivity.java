@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
             if (auth.getCurrentUser().getEmail().equals("shopapp216@gmail.com"))
             {
                 startActivity(new Intent(MainActivity.this, MenuAdminActivity.class));
+                finish();
             }
 //
             else {
@@ -42,7 +43,10 @@ public class MainActivity extends AppCompatActivity {
                 database.getReference().child("Users").child(auth.getCurrentUser().getUid()).child("lastOnline").setValue(saveCurrentTime + " " + saveCurrentDate);
             }
 
-        }else startActivity(new Intent(MainActivity.this, LoginActivity.class));
+        }else {
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            finish();
+        }
 
     }
 }
