@@ -23,6 +23,7 @@ import com.example.shoppingapp.user.adapters.CommentAdapters;
 import com.example.shoppingapp.user.models.ChatModel;
 import com.example.shoppingapp.user.models.CommentModel;
 import com.example.shoppingapp.user.models.ViewAllModel;
+import com.example.shoppingapp.user.ui.home.HomeFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -164,7 +165,9 @@ public class DetailedActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DetailedActivity.this, HomeActivity.class));
+                Intent intent = new Intent(DetailedActivity.this, HomeActivity.class);
+                HomeFragment.updateView(viewAllModel);
+                startActivity(intent);
             }
         });
 

@@ -57,8 +57,85 @@ public class HomeFragment extends Fragment {
     CategoryAdapters categoryAdapters;
 
     // recommend
-    List<ViewAllModel> recommendModelList;
-    RecommendAdapters recommendAdapters;
+    static List<ViewAllModel> recommendModelList;
+    static RecommendAdapters recommendAdapters;
+
+    static String type;
+
+    public static void updateView(ViewAllModel viewAllModel){
+        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+        type = viewAllModel.getType();
+        recommendModelList.clear();
+        if(type != null && type.equalsIgnoreCase("adidas")){
+            firebaseFirestore.collection("AllProducts").whereEqualTo("type","adidas").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    recommendModelList.clear();
+                    for(DocumentSnapshot documentSnapshot:task.getResult().getDocuments()){
+                        ViewAllModel viewAllModel = documentSnapshot.toObject(ViewAllModel.class);
+                        recommendModelList.add(viewAllModel);
+                        recommendAdapters.notifyDataSetChanged();
+                    }
+                }
+            });
+        }
+        if(type != null && type.equalsIgnoreCase("nike")){
+            firebaseFirestore.collection("AllProducts").whereEqualTo("type","nike").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    recommendModelList.clear();
+                    for(DocumentSnapshot documentSnapshot:task.getResult().getDocuments()){
+                        ViewAllModel viewAllModel = documentSnapshot.toObject(ViewAllModel.class);
+                        recommendModelList.add(viewAllModel);
+                        recommendAdapters.notifyDataSetChanged();
+                    }
+                }
+            });
+        }
+        if(type != null && type.equalsIgnoreCase("converse")){
+            firebaseFirestore.collection("AllProducts").whereEqualTo("type","converse").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    recommendModelList.clear();
+                    for(DocumentSnapshot documentSnapshot:task.getResult().getDocuments()){
+                        ViewAllModel viewAllModel = documentSnapshot.toObject(ViewAllModel.class);
+                        recommendModelList.add(viewAllModel);
+                        recommendAdapters.notifyDataSetChanged();
+                    }
+                }
+
+            });
+        }
+        if(type != null && type.equalsIgnoreCase("new balance")){
+            recommendModelList.clear();
+            firebaseFirestore.collection("AllProducts").whereEqualTo("type","new balance").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    for(DocumentSnapshot documentSnapshot:task.getResult().getDocuments()){
+                        ViewAllModel viewAllModel = documentSnapshot.toObject(ViewAllModel.class);
+                        recommendModelList.add(viewAllModel);
+                        recommendAdapters.notifyDataSetChanged();
+                    }
+                }
+            });
+        }
+        if(type != null && type.equalsIgnoreCase("gucci")){
+            recommendModelList.clear();
+            firebaseFirestore.collection("AllProducts").whereEqualTo("type","gucci").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    for(DocumentSnapshot documentSnapshot:task.getResult().getDocuments()){
+                        ViewAllModel viewAllModel = documentSnapshot.toObject(ViewAllModel.class);
+                        recommendModelList.add(viewAllModel);
+                        recommendAdapters.notifyDataSetChanged();
+                    }
+                    int n = task.getResult().getDocuments().size();
+                    System.out.println(n);
+                }
+
+            });
+        }
+    }
 
     FirebaseFirestore db;
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -142,27 +219,28 @@ public class HomeFragment extends Fragment {
                 });
 
         // recommend
-        db.collection("AllProducts")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            for(QueryDocumentSnapshot document: task.getResult()){
+        if(type==null)
+            db.collection("AllProducts")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()){
+                                for(QueryDocumentSnapshot document: task.getResult()){
 
-                                if(document.get("status")!=null&&((String)document.get("status")).equals("new")){
-                                    ViewAllModel recommendModel = document.toObject(ViewAllModel.class);
-                                    recommendModelList.add(recommendModel);
-                                    recommendAdapters.notifyDataSetChanged();
-                                    progressBar.setVisibility(View.GONE);
-                                    scrollView.setVisibility(View.VISIBLE);
+                                    if(document.get("status")!=null&&((String)document.get("status")).equals("new")){
+                                        ViewAllModel recommendModel = document.toObject(ViewAllModel.class);
+                                        recommendModelList.add(recommendModel);
+                                        recommendAdapters.notifyDataSetChanged();
+                                        progressBar.setVisibility(View.GONE);
+                                        scrollView.setVisibility(View.VISIBLE);
+                                    }
                                 }
+                            }else {
+                                Toast.makeText(getActivity(), "Error: " + task.getException(), Toast.LENGTH_SHORT).show();
                             }
-                        }else {
-                            Toast.makeText(getActivity(), "Error: " + task.getException(), Toast.LENGTH_SHORT).show();
                         }
-                    }
-                });
+                    });
 
 
         /// Search View
